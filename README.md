@@ -28,6 +28,16 @@ php artisan migrate --seed --step # Run database migration and seed files
 
 - View application process and request; [http://application-domain/telescope](http://application-domain/telescope) (this only works on local environment)
 
+- Generate Entity Relation Diagram
+```shell
+# Make sure to install graphviz before running the genrate command
+# Linux 
+sudo apt install graphviz -y
+# Mac
+brew install graphviz
+# Generate Command
+php artisan generate:erd ./storage/diagram.svg --format=svg # Only on development/local
+```
 - Run a foreground cronjob for scheduled commands.
 ```shell
 php artisan schedule:run
