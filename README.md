@@ -2,7 +2,10 @@
 
 Below is a table information of the technologies used in development of this project.
 
-Documentation: [PostMan](https://documenter.getpostman.com/view/3633314/Tzm5Fver)
+Documentation: [PostMan](https://documenter.getpostman.com/view/3633314/Tzm5Fver) <br />
+User Story: [Google Doc](https://docs.google.com/document/u/0/d/1JQ0tQeahNDf8cBveXeAWcvXREu4RQl-LwDEWxlxl8RY/mobilebasic) <br /> 
+Design: [Figma](https://www.figma.com/file/IVAQPGLg8nXfJsQRNHXAaM/Curacel?node-id=984%3A1194) <br />
+
 
 | Technology | Version |
 ------------- | --------------
