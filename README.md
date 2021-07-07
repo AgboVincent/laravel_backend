@@ -2,6 +2,8 @@
 
 Below is a table information of the technologies used in development of this project.
 
+Documentation: [PostMan](https://documenter.getpostman.com/view/3633314/Tzm5Fver)
+
 | Technology | Version |
 ------------- | --------------
 | PHP Version | ^8.0 |
