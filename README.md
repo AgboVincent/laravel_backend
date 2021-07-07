@@ -34,3 +34,8 @@ php artisan schedule:run
 ```shell
 php artisan queue:work
 ```
+
+- PHPStan Code Check
+```shell
+composer error-check
+```
