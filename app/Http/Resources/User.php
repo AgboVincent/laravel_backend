@@ -22,8 +22,12 @@ class User extends JsonResource
      */
     public function toArray($request)
     {
-        return $this->resource->only([
+        $data = $this->resource->only([
             'id', 'first_name', 'last_name', 'email', 'policy_number', 'policy_status', 'created_at', 'updated_at'
         ]);
+
+        $data['addresses'] = Address::collection($this->resource->load(['addresses'])->addresses);
+
+        return $data;
     }
 }

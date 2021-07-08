@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameCarsTableToVehicle extends Migration
+class CreateCompaniesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class RenameCarsTableToVehicle extends Migration
      */
     public function up()
     {
-        Schema::table('cars', function (Blueprint $table) {
-            $table->rename('vehicles');
+        Schema::create('companies', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 190)->unique();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class RenameCarsTableToVehicle extends Migration
      */
     public function down()
     {
-        Schema::table('vehicles', function (Blueprint $table) {
-            $table->rename('cars');
-        });
+        Schema::dropIfExists('companies');
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -23,6 +23,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $remember_token
  * @property string $policy_number
  * @property Vehicle $vehicle
+ * @property Address[] $addresses
  * @property Carbon $email_verified_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -33,9 +34,6 @@ class User extends Authenticatable
     use Notifiable;
     use HasApiTokens;
 
-    const POLICY_STATUS_ACTIVE = 'active';
-    const POLICY_STATUS_EXPIRED = 'expired';
-
     protected $guarded = [];
 
     protected $hidden = ['password', 'remember_token'];
@@ -44,8 +42,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function vehicles(): HasMany
+    public function vehicles(): HasManyThrough
     {
-        return $this->hasMany(Vehicle::class);
+        return $this->hasManyThrough(
+            Vehicle::class,
+            Policy::class,
+            'user_id',
+            'policy_id',
+            'id',
+            'id'
+        );
+    }
+
+    public function policies(): HasMany
+    {
+        return $this->hasMany(Policy::class);
+    }
+
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(Address::class);
     }
 }
