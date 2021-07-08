@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Car;
+use App\Models\Vehicle;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -28,7 +28,7 @@ class UserFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (User $user) {
-            Car::factory()->createOne(['user_id' => $user->id]);
+            Vehicle::factory()->createOne(['user_id' => $user->id]);
         });
     }
 

@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Car;
+use App\Models\Vehicle;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CarFactory extends Factory
+class VehicleFactory extends Factory
 {
-    protected $model = Car::class;
+    protected $model = Vehicle::class;
 
     public function definition(): array
     {
@@ -18,7 +18,7 @@ class CarFactory extends Factory
             'manufacturer' => $this->faker->company(),
             'model' => $this->faker->text(10),
             'color' => $this->faker->colorName(),
-            'gear_type' => $this->faker->randomElement([Car::GEAR_TYPE_AUTO, Car::GEAR_TYPE_MANUEL]),
+            'gear_type' => $this->faker->randomElement([Vehicle::GEAR_TYPE_AUTO, Vehicle::GEAR_TYPE_MANUEL]),
             'year' => $this->faker->year()
         ];
     }

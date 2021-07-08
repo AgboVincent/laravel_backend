@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Car;
+use App\Models\Vehicle;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +21,7 @@ class CreateCarsTable extends Migration
             $table->string('manufacturer', 190)->index();
             $table->string('model', 100)->index();
             $table->string('color')->nullable();
-            $table->enum('gear_type', [Car::GEAR_TYPE_AUTO, Car::GEAR_TYPE_MANUEL])->default(Car::GEAR_TYPE_AUTO);
+            $table->enum('gear_type', [Vehicle::GEAR_TYPE_AUTO, Vehicle::GEAR_TYPE_MANUEL])->default(Vehicle::GEAR_TYPE_AUTO);
             $table->integer('year')->nullable();
             $table->timestamps();
         });

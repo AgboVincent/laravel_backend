@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,7 +22,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $password
  * @property string $remember_token
  * @property string $policy_number
- * @property Car $car
+ * @property Vehicle $vehicle
  * @property Carbon $email_verified_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -43,8 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function car(): HasOne
+    public function vehicles(): HasMany
     {
-        return $this->hasOne(Car::class);
+        return $this->hasMany(Vehicle::class);
     }
 }
