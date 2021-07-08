@@ -29,7 +29,7 @@ class Authenticate
             if (now()->greaterThanOrEqualTo(
                 $accessTokenInstance->created_at->addDays(config('auth.guards.api.expires'))
             )) {
-            return Output::error('Token Expired', Response::HTTP_UNAUTHORIZED);
+                return Output::error('Token Expired', Response::HTTP_UNAUTHORIZED);
             }
 
             Auth::shouldUse('sanctum');
