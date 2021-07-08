@@ -2,23 +2,42 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use App\Helpers\Output;
+use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Laravel\Sanctum\PersonalAccessToken;
 
-class Authenticate extends Middleware
+class Authenticate
 {
-    /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     *
-     * @param Request $request
-     * @return string | void
-     */
-    protected function redirectTo($request)
+    public function handle(Request $request, \Closure $next): JsonResponse
     {
-        if (!$request->expectsJson()) {
-            return route('login');
-        }
+        try {
+            $accessTokenInstance = PersonalAccessToken::findToken(
+                Crypt::decryptString($request->bearerToken())
+            );
 
-        return;
+            /**
+             * @var User $user
+             */
+            $user = $accessTokenInstance->tokenable;
+
+            // Check if token is expired
+            if (now()->greaterThanOrEqualTo(
+                $accessTokenInstance->created_at->addDays(config('auth.guards.api.expires'))
+            )) {
+                return Output::error('Token Expired', Response::HTTP_UNAUTHORIZED);
+            }
+
+            Auth::shouldUse('sanctum');
+            Auth::setUser($user);
+
+            return $next($request);
+        } catch (\Throwable | \Exception $exception) {
+            return Output::error('Invalid Token', Response::HTTP_UNAUTHORIZED);
+        }
     }
 }

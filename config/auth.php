@@ -45,6 +45,7 @@ return [
             'driver' => 'token',
             'provider' => 'users',
             'hash' => false,
+            'expires' => env('API_KEY_EXPIRY_DAYS', 15)
         ],
     ],
 
