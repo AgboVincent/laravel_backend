@@ -32,6 +32,9 @@ class User extends Authenticatable
     use Notifiable;
     use HasApiTokens;
 
+    const POLICY_STATUS_ACTIVE = 'active';
+    const POLICY_STATUS_EXPIRED = 'expired';
+
     protected $guarded = [];
 
     protected $hidden = ['password', 'remember_token'];

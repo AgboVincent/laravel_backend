@@ -23,7 +23,7 @@ class User extends JsonResource
     public function toArray($request)
     {
         return $this->resource->only([
-            'id', 'first_name', 'last_name', 'email', 'policy_number', 'created_at', 'updated_at'
+            'id', 'first_name', 'last_name', 'email', 'policy_number', 'policy_status', 'created_at', 'updated_at'
         ]);
     }
 }

@@ -17,6 +17,7 @@ class UserFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'policy_number' => $this->faker->unique()->numberBetween(100000000, 999999999),
+            'policy_status' => $this->faker->randomElement([User::POLICY_STATUS_EXPIRED, User::POLICY_STATUS_ACTIVE]),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
