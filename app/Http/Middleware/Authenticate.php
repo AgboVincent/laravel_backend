@@ -13,7 +13,7 @@ use Laravel\Sanctum\PersonalAccessToken;
 
 class Authenticate
 {
-    public function handle(Request $request, \Closure $next): JsonResponse
+    public function handle(Request $request, \Closure $next)
     {
         try {
             $accessTokenInstance = PersonalAccessToken::findToken(

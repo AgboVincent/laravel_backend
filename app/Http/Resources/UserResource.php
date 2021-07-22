@@ -6,7 +6,7 @@ use App\Models\User as UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class User extends JsonResource
+class UserResource extends JsonResource
 {
     public function __construct(UserModel $resource)
     {
@@ -23,7 +23,7 @@ class User extends JsonResource
     public function toArray($request)
     {
         $data = $this->resource->only([
-            'id', 'first_name', 'last_name', 'email', 'policy_number', 'policy_status', 'created_at', 'updated_at'
+            'id', 'first_name', 'last_name', 'email', 'created_at', 'updated_at'
         ]);
 
         $data['addresses'] = Address::collection($this->resource->load(['addresses'])->addresses);

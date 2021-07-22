@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Crypt;
 
-class Login extends JsonResource
+class LoginResource extends JsonResource
 {
     public function __construct(UserModel $resource)
     {
@@ -26,7 +26,7 @@ class Login extends JsonResource
         $token = $this->resource->createToken('token_name');
 
         return [
-            'user' => new User($this->resource),
+            'user' => new UserResource($this->resource),
             'token' => Crypt::encryptString($token->plainTextToken),
             'expires_at' => now()->addDays(config('auth.guards.api.expires'))
         ];

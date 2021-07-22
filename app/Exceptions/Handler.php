@@ -2,7 +2,11 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\Output;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -13,7 +17,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        NotFoundException::class
     ];
 
     /**
@@ -26,6 +30,20 @@ class Handler extends ExceptionHandler
         'password',
         'password_confirmation',
     ];
+
+    public function render($request, Throwable $e)
+    {
+        if ($e instanceof ValidationException) return $this->handleValidationExceptions($request, $e);
+
+        return parent::render($request, $e);
+    }
+
+    public function handleValidationExceptions($request, ValidationException $exception): JsonResponse
+    {
+        return Output::send([
+            'error' => $exception->errors()
+        ], Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
 
     /**
      * Register the exception handling callbacks for the application.
