@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Exceptions\NotFoundException;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Carbon;
+use Znck\Eloquent\Traits\BelongsToThrough;
 
 /**
  * Class Claim
@@ -26,10 +28,13 @@ use Illuminate\Support\Carbon;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Accident $accident
+ * @method static self filter(...$args)
  */
 class Claim extends Model
 {
     use HasFactory;
+    use BelongsToThrough;
+    use Filterable;
 
     const STATUS_PENDING = 'pending';
     const STATUS_APPROVED = 'approved';
@@ -65,9 +70,9 @@ class Claim extends Model
         );
     }
 
-    public function user(): HasOneThrough
+    public function user(): \Znck\Eloquent\Relations\BelongsToThrough
     {
-        return $this->hasOneThrough(
+        return $this->belongsToThrough(
             User::class,
             Policy::class
         );

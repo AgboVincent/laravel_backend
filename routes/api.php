@@ -37,5 +37,6 @@ Route::prefix('admin')
         $admin->post('login', AdminLogin::class);
         $admin->middleware('auth:admin')->group(function (Router $auth) {
             $auth->get('profile', \App\Http\Controllers\Admin\Auth\Profile::class);
+            $auth->get('claims', \App\Http\Controllers\Admin\Claims\ListClaims::class);
         });
     });
