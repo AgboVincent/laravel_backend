@@ -22,6 +22,7 @@ In other to install, download composer at [https://getcomposer.org/download/](ht
 composer install # Install Project Dependencies
 cp .env.example .env # Copy environment config file and make sure to configure before next step
 php artisan migrate --seed --step # Run database migration and seed files
+php artisan storage:link --force # Link storage folder to public folder
 ```
 
 **The following are optional**
