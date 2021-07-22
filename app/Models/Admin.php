@@ -39,7 +39,7 @@ class Admin extends Model implements Authenticatable
         return 'id';
     }
 
-    public function getAuthIdentifier(): string
+    public function getAuthIdentifier(): int
     {
         return $this->id;
     }
@@ -49,18 +49,18 @@ class Admin extends Model implements Authenticatable
         return $this->password;
     }
 
-    public function getRememberToken()
+    public function getRememberToken(): string
     {
-        return;
+        return '';
     }
 
-    public function setRememberToken($value)
+    public function setRememberToken($value): string
     {
-        return;
+        return '';
     }
 
-    public function getRememberTokenName()
+    public function getRememberTokenName(): string
     {
-        return;
+        return '';
     }
 }
