@@ -25,7 +25,7 @@ use Illuminate\Support\Carbon;
  * @property ClaimItem[]|Collection $items
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property Accident accident
+ * @property Accident $accident
  */
 class Claim extends Model
 {
@@ -40,10 +40,10 @@ class Claim extends Model
     /**
      * @param mixed $value
      * @param null $field
-     * @return Model|self|null
+     * @return Model|Claim
      * @throws NotFoundException
      */
-    public function resolveRouteBinding($value, $field = null): self
+    public function resolveRouteBinding($value, $field = null): Model
     {
         $instance = parent::resolveRouteBinding($value, $field);
 
@@ -52,9 +52,6 @@ class Claim extends Model
         throw new NotFoundException('Claim Not Found');
     }
 
-    /**
-     * @return HasOne|Accident
-     */
     public function accident(): HasOne
     {
         return $this->hasOne(Accident::class);

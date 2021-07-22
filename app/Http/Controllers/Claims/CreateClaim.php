@@ -9,7 +9,6 @@ use App\Http\Requests\Claim\CreateRequest;
 use App\Http\Resources\ClaimResource;
 use App\Models\AccidentMedia;
 use App\Models\Claim;
-use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +26,9 @@ class CreateClaim extends Controller
 
         DB::beginTransaction();
 
+        /**
+         * @var Claim $claim
+         */
         $claim = $model->create([
             'policy_id' => $vehicle->policy_id,
             'status' => Claim::STATUS_PENDING
@@ -44,9 +46,11 @@ class CreateClaim extends Controller
         }
 
         collect($request->get('quotes'))
-            ->each(fn($quote) => $claim->items()->create(
-                array_merge(['accident_id' => $claim->id],$quote)
-            ));
+            ->each(function ($quote) use ($claim) {
+                $claim->items()->create(
+                    array_merge(['accident_id' => $claim->id], $quote)
+                );
+            });
 
         $accident->uploads()->create([
             'upload_id' => $request->input('documents.pictures.close_up'),

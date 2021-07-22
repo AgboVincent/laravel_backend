@@ -17,6 +17,7 @@ class NewFileUpload extends Controller
     public function __invoke(UploadRequest $request, Upload $model): JsonResponse
     {
         $filepath = Storage::putFile('uploads', $file = $request->file('file'));
+
         $model = $model->create([
             'size' => Storage::size($filepath),
             'mime' => Storage::mimeType($filepath),

@@ -30,3 +30,8 @@ Route::get('policies', UserPolicies::class)
 
 Route::post('uploads', NewFileUpload::class)
     ->middleware('auth');
+
+Route::prefix('admin')->middleware('admin')
+    ->group(function (Router $admin) {
+        $admin->post('login');
+    });

@@ -3,11 +3,17 @@
 namespace App\Http\Resources;
 
 use App\Models\Upload;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UploadResource extends JsonResource
 {
-    public function __construct(Upload $resource)
+    /**
+     * UploadResource constructor.
+     *
+     * @param Model|Upload $resource
+     */
+    public function __construct(Model $resource)
     {
         parent::__construct($resource);
         $this->resource = $resource;

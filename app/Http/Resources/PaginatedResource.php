@@ -9,7 +9,7 @@ class PaginatedResource extends JsonResource
 {
 
     /**
-     * @var $resource LengthAwarePaginator
+     * @var LengthAwarePaginator $resource
      */
     public $resource;
     private string $responseClass;
