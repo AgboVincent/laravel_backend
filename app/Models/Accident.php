@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
@@ -22,6 +21,8 @@ use Illuminate\Support\Carbon;
  * @property string $description
  * @property bool $involved_third_party
  * @property AccidentThirdParty|null $thirdParty
+ * @property Upload[] $uploads
+ * @property Upload[] $media
  * @property Carbon $occurred_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -31,6 +32,10 @@ class Accident extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'bool' => 'involved_third_party'
+    ];
 
     public function claim(): BelongsTo
     {
@@ -42,20 +47,23 @@ class Accident extends Model
         return $this->hasOne(AccidentThirdParty::class);
     }
 
-    public function media(): HasManyThrough
+    /**
+     * Media method alias.
+     *
+     * @return HasMany
+     */
+    public function uploads(): HasMany
     {
-        return $this->hasManyThrough(
-            Upload::class,
-            AccidentMedia::class,
-            'upload_id',
-            'id',
-            'id',
-            'accident_id'
-        );
+        return $this->media();
     }
 
-    public function quotes(): HasMany
+    public function media(): HasMany
     {
-        return $this->hasMany(Quote::class);
+        return $this->hasMany(AccidentMedia::class,);
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(ClaimItem::class);
     }
 }

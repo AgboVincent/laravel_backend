@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -23,7 +24,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $remember_token
  * @property string $policy_number
  * @property Vehicle $vehicle
- * @property Address[] $addresses
+ * @property Policy[]|Collection $policies
+ * @property Address[]|Collection $addresses
  * @property Carbon $email_verified_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -62,5 +64,13 @@ class User extends Authenticatable
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
+    }
+
+    public function claims(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+           Claim::class,
+           Policy::class
+        );
     }
 }

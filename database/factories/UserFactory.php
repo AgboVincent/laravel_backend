@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
+use App\Models\Policy;
 use App\Models\Vehicle;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -16,9 +18,8 @@ class UserFactory extends Factory
         return [
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
-            'policy_number' => $this->faker->unique()->numberBetween(100000000, 999999999),
-            'policy_status' => $this->faker->randomElement([User::POLICY_STATUS_EXPIRED, User::POLICY_STATUS_ACTIVE]),
             'email' => $this->faker->unique()->safeEmail(),
+            'company_id' => Company::factory(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
@@ -28,7 +29,7 @@ class UserFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (User $user) {
-            Vehicle::factory()->createOne(['user_id' => $user->id]);
+            Policy::factory()->createOne(['user_id' => $user->id]);
         });
     }
 

@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Policy;
 use App\Models\Vehicle;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class VehicleFactory extends Factory
@@ -13,9 +13,12 @@ class VehicleFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
-            'number' => '0000000' . $this->faker->numberBetween(9000, 9999),
+            'policy_id' => Policy::factory(),
+            'registration_number' => time() . $this->faker->numberBetween(100, 999),
+            'chassis_number' => time() . $this->faker->numberBetween(100, 999),
+            'engine_number' => time() . $this->faker->numberBetween(100, 999),
             'manufacturer' => $this->faker->company(),
+            'estimate' => 800000,
             'model' => $this->faker->text(10),
             'color' => $this->faker->colorName(),
             'gear_type' => $this->faker->randomElement([Vehicle::GEAR_TYPE_AUTO, Vehicle::GEAR_TYPE_MANUEL]),
