@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Auth\Login as AdminLogin;
 use App\Http\Controllers\Authentication\Login;
 use App\Http\Controllers\Claims\All;
 use App\Http\Controllers\Claims\CreateClaim;
@@ -31,7 +32,10 @@ Route::get('policies', UserPolicies::class)
 Route::post('uploads', NewFileUpload::class)
     ->middleware('auth');
 
-Route::prefix('admin')->middleware('admin')
+Route::prefix('admin')
     ->group(function (Router $admin) {
-        $admin->post('login');
+        $admin->post('login', AdminLogin::class);
+        $admin->middleware('auth:admin')->group(function (Router $auth) {
+            $auth->get('profile', \App\Http\Controllers\Admin\Auth\Profile::class);
+        });
     });
