@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Password;
 
 use App\Helpers\Output;
 use App\Http\Controllers\Controller;
-use App\Models\PasswordReset;
 use App\Models\User;
-use App\Notifications\Password\RequestNotification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Throwable;
@@ -20,10 +18,10 @@ class ResetRequest extends Controller
          */
         $requestedUser = User::query()->where('email', $request->get('email'))->first();
 
-//        try {
+        try {
             $requestedUser->createPasswordResetToken();
-//        } catch (Throwable $exception) {
-//        }
+        } catch (Throwable $exception) {
+        }
 
         return Output::success('Password Reset Mail Sent');
     }

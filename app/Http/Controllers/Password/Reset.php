@@ -25,7 +25,7 @@ class Reset extends Controller
         $token = PasswordReset::query()->where('token', $request->get('token'))
             ->first();
 
-        if (!$token) throw new NotFoundException('Invalid Reset Token');
+        if ($token == null) throw new NotFoundException('Invalid Reset Token');
 
         if ($token->created_at->addMinutes(60)->greaterThan(now())) throw new NotFoundException('Token Expired');
 

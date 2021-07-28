@@ -20,8 +20,8 @@ class PasswordReset extends Model
 
     protected $primaryKey = 'email';
 
-    public function setUpdatedAt($value)
+    public function setUpdatedAt($value): PasswordReset
     {
-        return;
+        return $this;
     }
 }
