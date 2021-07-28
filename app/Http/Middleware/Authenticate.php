@@ -16,7 +16,7 @@ use Throwable;
 
 class Authenticate
 {
-    public function handle(Request $request, Closure $next, $role = 'user')
+    public function handle(Request $request, Closure $next, $type = 'user')
     {
 
         try {
@@ -25,12 +25,27 @@ class Authenticate
             );
 
             /**
-             * @var User|Admin $user
+             * @var User $user
              */
             $user = $accessTokenInstance->tokenable;
 
-            if ($role === 'admin' && $accessTokenInstance->tokenable_type !== Admin::class) {
-                return Output::error('Invalid Token: Administrator User Only Allowed', Response::HTTP_UNAUTHORIZED);
+            switch ($type) {
+                case User::TYPE_BROKER:
+                    if ($user->type !== User::TYPE_BROKER)
+                        return Output::error('Invalid Token: Broker Only Allowed', Response::HTTP_UNAUTHORIZED);
+                    break;
+                case 'admin':
+                    if ($user->type !== User::TYPE_BROKER && $user->type !== User::TYPE_INSURANCE)
+                        return Output::error('Invalid Token: Only Broker or Insurer Allowed', Response::HTTP_UNAUTHORIZED);
+                    break;
+                case User::TYPE_POLICY_HOLDER:
+                    if ($user->type !== User::TYPE_POLICY_HOLDER)
+                        return Output::error('Invalid Token: User Only Allowed', Response::HTTP_UNAUTHORIZED);
+                    break;
+                case 'insurance':
+                    if ($user->type !== User::TYPE_INSURANCE)
+                        return Output::error('Invalid Token: Administrator Only Allowed', Response::HTTP_UNAUTHORIZED);
+                    break;
             }
 
             // Check if token is expired

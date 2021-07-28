@@ -19,7 +19,7 @@ class CreateRequest extends FormRequest
         $rules = [
             'vehicle_number' => ['required', new UserVehicleExists()],
             'date_time' => 'required|date|before:tomorrow',
-            'accident_type' => 'required',
+            'accident_type' => 'required|exists:accident_types,id',
             'description' => 'required|min:5',
             'involved_third_party' => 'sometimes|nullable|bool',
             'documents' => 'required|array',

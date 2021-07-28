@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
@@ -29,12 +30,18 @@ use Laravel\Sanctum\HasApiTokens;
  * @property Carbon $email_verified_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property string $type
  */
 class User extends Authenticatable
 {
     use HasFactory;
     use Notifiable;
     use HasApiTokens;
+
+    const TYPE_INSURANCE = 'insurance';
+    const TYPE_POLICY_HOLDER = 'user';
+    const TYPE_USER = 'user';
+    const TYPE_BROKER = 'broker';
 
     protected $guarded = [];
 
@@ -69,8 +76,22 @@ class User extends Authenticatable
     public function claims(): HasManyThrough
     {
         return $this->hasManyThrough(
-           Claim::class,
-           Policy::class
+            Claim::class,
+            Policy::class
         );
+    }
+
+    public function createPasswordResetToken(): string
+    {
+        $token = Str::random(32);
+        PasswordReset::query()->create([
+            'email' => $this->email,
+            'token' => $token,
+            'created_at' => now()
+        ]);
+
+        $this->sendPasswordResetNotification($token);
+
+        return $token;
     }
 }

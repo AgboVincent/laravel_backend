@@ -10,14 +10,16 @@ class AccidentResource extends JsonResource
     public function __construct(Accident $resource)
     {
         parent::__construct($resource);
-        $this->resource = $resource;
+        $this->resource = $resource->load('type');
     }
 
     public function toArray($request): array
     {
         $data = $this->resource->only([
-            'id', 'description', 'occurred_at', 'type', 'involved_third_party'
+            'id', 'description', 'occurred_at', 'involved_third_party'
         ]);
+
+        $data['type'] = new AccidentTypeResource($this->resource->type);
 
         $data['documents'] = AccidentMediaResource::collection($this->resource->media);
 

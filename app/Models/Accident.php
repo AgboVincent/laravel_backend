@@ -17,12 +17,13 @@ use Illuminate\Support\Carbon;
  *
  * @property int $id
  * @property int $claim_id
- * @property string $type
+ * @property int $accident_type_id
  * @property string $description
  * @property bool $involved_third_party
  * @property AccidentThirdParty|null $thirdParty
  * @property Upload[] $uploads
  * @property Upload[] $media
+ * @property AccidentType $type
  * @property Carbon $occurred_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -65,5 +66,10 @@ class Accident extends Model
     public function items(): HasMany
     {
         return $this->hasMany(ClaimItem::class);
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(AccidentType::class,'accident_type_id');
     }
 }

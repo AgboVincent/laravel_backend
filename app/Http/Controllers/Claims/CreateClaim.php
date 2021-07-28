@@ -36,7 +36,7 @@ class CreateClaim extends Controller
 
         $accident = $claim->accident()->create([
             'occurred_at' => $request->get('date_time'),
-            'type' => $request->get('accident_type'),
+            'accident_type_id' => $request->get('accident_type'),
             'description' => $request->get('description'),
             'involved_third_party' => (bool)$request->get('involved_third_party')
         ]);
