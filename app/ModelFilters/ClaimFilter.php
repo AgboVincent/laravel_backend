@@ -13,6 +13,6 @@ class ClaimFilter extends ModelFilter
 
     public function status(string $status)
     {
-        return $this->where('status', $status);
+        return $this->where('claims.status', $status);
     }
 }

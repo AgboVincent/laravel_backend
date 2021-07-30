@@ -42,11 +42,7 @@ class Company extends Model
     {
         return $this->hasManyThrough(
             Claim::class,
-            Policy::class,
-            'company_id',
-            'policy_id',
-            'id',
-            'company_id',
+            Policy::class
         );
     }
 }

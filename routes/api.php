@@ -32,6 +32,7 @@ Route::group([
     $claims->post('', CreateClaim::class);
     $claims->get('', All::class);
     $claims->get('{claim}', SingleClaimInfo::class);
+    $claims->get('{claim}/comments', \App\Http\Controllers\Claims\Comments\ListComments::class);
 });
 
 Route::get('policies', UserPolicies::class)
@@ -44,5 +45,6 @@ Route::prefix('admin')
     ->group(function (Router $admin) {
         $admin->middleware('auth:admin')->group(function (Router $auth) {
             $auth->get('claims', \App\Http\Controllers\Admin\Claims\ListClaims::class);
+            $auth->post('claims/{claim}/comments', \App\Http\Controllers\Claims\Comments\AddComment::class);
         });
     });

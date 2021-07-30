@@ -14,9 +14,9 @@ class VehicleFactory extends Factory
     {
         return [
             'policy_id' => Policy::factory(),
-            'registration_number' => time() . $this->faker->numberBetween(100, 999),
-            'chassis_number' => time() . $this->faker->numberBetween(100, 999),
-            'engine_number' => time() . $this->faker->numberBetween(100, 999),
+            'registration_number' => time() . $this->faker->unique(true)->numberBetween(100, 999),
+            'chassis_number' => time() . $this->faker->unique(true)->numberBetween(100, 999),
+            'engine_number' => time() . $this->faker->unique(true)->numberBetween(100, 999),
             'manufacturer' => $this->faker->company(),
             'estimate' => 800000,
             'model' => $this->faker->text(10),

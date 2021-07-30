@@ -16,7 +16,7 @@ class PolicyFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'number' => time() . $this->faker->numberBetween(100, 999),
+            'number' => $this->faker->unique(true)->numberBetween(100000, 999999),
             'company_id' => Company::factory(),
             'expires_at' => now()->addMonths(2),
             'type' => $this->faker->randomElement([

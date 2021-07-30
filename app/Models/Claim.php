@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Carbon;
 use Znck\Eloquent\Traits\BelongsToThrough;
 
@@ -28,6 +28,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Accident $accident
+ * @property Comment[] $comments
  * @method static self filter(...$args)
  */
 class Claim extends Model
@@ -81,5 +82,10 @@ class Claim extends Model
     public function policy(): BelongsTo
     {
         return $this->belongsTo(Policy::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }
