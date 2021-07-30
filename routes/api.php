@@ -33,6 +33,7 @@ Route::group([
     $claims->get('', All::class);
     $claims->get('{claim}', SingleClaimInfo::class);
     $claims->get('{claim}/comments', \App\Http\Controllers\Claims\Comments\ListComments::class);
+    $claims->post('{claim}/comments', \App\Http\Controllers\Claims\Comments\AddComment::class);
 });
 
 Route::get('policies', UserPolicies::class)
