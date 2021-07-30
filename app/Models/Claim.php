@@ -22,6 +22,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  *
  * @property int $id
  * @property string $status
+ * @property int $policy_id
  * @property Policy $policy
  * @property User $user
  * @property ClaimItem[]|Collection $items

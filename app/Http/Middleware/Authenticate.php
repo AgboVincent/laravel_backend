@@ -38,10 +38,11 @@ class Authenticate
                     if ($user->type !== User::TYPE_BROKER && $user->type !== User::TYPE_INSURANCE)
                         return Output::error('Invalid Token: Only Broker or Insurer Allowed', Response::HTTP_UNAUTHORIZED);
                     break;
-                case User::TYPE_POLICY_HOLDER:
-                    if ($user->type !== User::TYPE_POLICY_HOLDER)
-                        return Output::error('Invalid Token: User Only Allowed', Response::HTTP_UNAUTHORIZED);
-                    break;
+                // Check not needed as user routes should also be accessible to other user types
+//                case User::TYPE_POLICY_HOLDER:
+//                    if ($user->type !== User::TYPE_POLICY_HOLDER)
+//                        return Output::error('Invalid Token: User Only Allowed', Response::HTTP_UNAUTHORIZED);
+//                    break;
                 case 'insurance':
                     if ($user->type !== User::TYPE_INSURANCE)
                         return Output::error('Invalid Token: Administrator Only Allowed', Response::HTTP_UNAUTHORIZED);

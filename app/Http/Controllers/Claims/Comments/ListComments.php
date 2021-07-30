@@ -15,7 +15,7 @@ class ListComments extends Controller
     {
         return Output::success(
             new PaginatedResource(
-                $claim->comments()->paginate(),
+                $claim->comments()->latest()->paginate(),
                 CommentResource::class
             )
         );
