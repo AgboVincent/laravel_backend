@@ -4,7 +4,6 @@ namespace App\Http\Requests\Claim;
 
 use App\Rules\UserVehicleExists;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Exists;
 
 class CreateRequest extends FormRequest
 {
@@ -36,7 +35,7 @@ class CreateRequest extends FormRequest
         ];
 
         if ($this->get('involved_third_party', false)) {
-            $rules = array_merge($rules, [
+            return array_merge($rules, [
                 'third_party' => 'required|array',
                 'third_party.full_name' => 'required|min:2',
                 'third_party.mobile' => 'required',

@@ -43,9 +43,13 @@ Route::post('uploads', NewFileUpload::class)
     ->middleware('auth');
 
 Route::prefix('admin')
-    ->group(function (Router $admin) {
-        $admin->middleware('auth:admin')->group(function (Router $auth) {
-            $auth->get('claims', \App\Http\Controllers\Admin\Claims\ListClaims::class);
-            $auth->post('claims/{claim}/comments', \App\Http\Controllers\Claims\Comments\AddComment::class);
+    ->group(function (Router $group) {
+        $group->middleware('auth:admin')->group(function (Router $admin) {
+            $admin->get('claims', \App\Http\Controllers\Admin\Claims\ListClaims::class);
+            $admin->post('claims/{claim}/comments', \App\Http\Controllers\Claims\Comments\AddComment::class);
+
         });
+        $group->patch('claims/{claim}', \App\Http\Controllers\Claims\ModifyClaim::class)
+            //todo: add middleware to prevent another broker/company from accessing other company's user claim.
+            ->middleware('auth:broker');
     });
