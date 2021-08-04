@@ -52,4 +52,6 @@ Route::prefix('admin')
         $group->patch('claims/{claim}', \App\Http\Controllers\Claims\ModifyClaim::class)
             //todo: add middleware to prevent another broker/company from accessing other company's user claim.
             ->middleware('auth:broker');
+        $group->patch('claims/{claim}/{claimItem}/approve', \App\Http\Controllers\Claims\Items\ApproveClaimItem::class)
+            ->middleware('auth:insurer');
     });

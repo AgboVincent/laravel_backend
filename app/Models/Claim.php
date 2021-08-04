@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Exceptions\NotFoundException;
+use App\Helpers\Auth;
+use App\Models\Traits\RouteBinding;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -37,6 +38,7 @@ class Claim extends Model
     use HasFactory;
     use BelongsToThrough;
     use Filterable;
+    use RouteBinding;
 
     const STATUS_PENDING = 'pending';
     const STATUS_APPROVED = 'approved';
@@ -44,19 +46,9 @@ class Claim extends Model
     const STATUS_DECLINED = 'declined';
     protected $guarded = [];
 
-    /**
-     * @param mixed $value
-     * @param null $field
-     * @return Model|Claim
-     * @throws NotFoundException
-     */
-    public function resolveRouteBinding($value, $field = null): Model
+    public function notFoundMessage(): string
     {
-        $instance = parent::resolveRouteBinding($value, $field);
-
-        if ($instance) return $instance;
-
-        throw new NotFoundException('Claim Not Found');
+        return 'Claim Not Found';
     }
 
     public function accident(): HasOne
@@ -83,6 +75,20 @@ class Claim extends Model
     public function policy(): BelongsTo
     {
         return $this->belongsTo(Policy::class);
+    }
+
+    /**
+     * Create a new comment on this claim.
+     *
+     * @param string $comment
+     * @return Comment|Model
+     */
+    public function comment(string $comment): Model
+    {
+        return $this->comments()->create([
+            'comment' => $comment,
+            'user_id' => Auth::user()->id
+        ]);
     }
 
     public function comments(): HasMany

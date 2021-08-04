@@ -6,6 +6,7 @@ use App\Models\Accident;
 use App\Models\AccidentThirdParty;
 use App\Models\AccidentType;
 use App\Models\Claim;
+use App\Models\ClaimItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AccidentFactory extends Factory
@@ -31,6 +32,8 @@ class AccidentFactory extends Factory
                     'accident_id' => $accident->id
                 ]);
             }
+
+            ClaimItem::factory($this->faker->randomDigit())->create(['accident_id' => $accident->id]);
         });
     }
 }
