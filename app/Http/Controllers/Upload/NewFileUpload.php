@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadRequest;
 use App\Http\Resources\UploadResource;
 use App\Models\Upload;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,9 @@ class NewFileUpload extends Controller
 {
     public function __invoke(UploadRequest $request, Upload $model): JsonResponse
     {
-        $filepath = Storage::putFile('uploads', $file = $request->file('file'));
+        $filepath = Storage::putFile('uploads', $file = $request->file('file'), [
+            'visibility' => Filesystem::VISIBILITY_PUBLIC
+        ]);
 
         $model = $model->create([
             'size' => Storage::size($filepath),
