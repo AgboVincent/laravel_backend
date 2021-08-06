@@ -15,7 +15,7 @@ class ListComments extends Controller
     {
         return Output::success(
             new PaginatedResource(
-                $claim->comments()->latest()->paginate(),
+                $claim->comments()->orderByRaw('created_at desc, id desc')->paginate(),
                 CommentResource::class
             )
         );
