@@ -23,6 +23,8 @@ class ApproveClaimItem extends Controller
             'Item ' . $claimItem->name . ' has been approved.'
         );
 
+        $claim->computeStatus();
+
         return Output::success(new ClaimItemResource($claimItem));
     }
 }

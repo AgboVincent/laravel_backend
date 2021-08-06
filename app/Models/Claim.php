@@ -56,14 +56,6 @@ class Claim extends Model
         return $this->hasOne(Accident::class);
     }
 
-    public function items(): HasManyThrough
-    {
-        return $this->hasManyThrough(
-            ClaimItem::class,
-            Accident::class
-        );
-    }
-
     public function user(): \Znck\Eloquent\Relations\BelongsToThrough
     {
         return $this->belongsToThrough(
@@ -94,5 +86,28 @@ class Claim extends Model
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function computeStatus()
+    {
+        if ($this->items()->where('status', ClaimItem::STATUS_REJECTED)->exists()) {
+            $status = $this::STATUS_DECLINED;
+        } elseif ($this->items()->whereIn('status', [ClaimItem::STATUS_PENDING, ClaimItem::STATUS_REJECTED])->doesntExist()) {
+            $status = $this::STATUS_APPROVED;
+        } else {
+            $status = $this::STATUS_PENDING;
+        }
+
+        $this->update([
+            'status' => $status
+        ]);
+    }
+
+    public function items(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            ClaimItem::class,
+            Accident::class
+        );
     }
 }

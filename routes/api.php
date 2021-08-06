@@ -54,4 +54,6 @@ Route::prefix('admin')
             ->middleware('auth:broker');
         $group->patch('claims/{claim}/{claimItem}/approve', \App\Http\Controllers\Claims\Items\ApproveClaimItem::class)
             ->middleware('auth:insurer');
+        $group->patch('claims/{claim}/{claimItem}/reject', \App\Http\Controllers\Claims\Items\RejectClaimItem::class)
+            ->middleware('auth:insurer');
     });
