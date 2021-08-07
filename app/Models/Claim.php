@@ -64,6 +64,14 @@ class Claim extends Model
         );
     }
 
+    public function company(): \Znck\Eloquent\Relations\BelongsToThrough
+    {
+        return $this->belongsToThrough(
+            Company::class,
+            Policy::class
+        );
+    }
+
     public function policy(): BelongsTo
     {
         return $this->belongsTo(Policy::class);
