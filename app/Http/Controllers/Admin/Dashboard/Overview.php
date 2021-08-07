@@ -16,7 +16,7 @@ class Overview extends Controller
         return Output::success([
             'total_claims' => Auth::user()->company->claims()->count(),
             'processed_claims' => Auth::user()->company->claims()->where('claims.status', Claim::STATUS_APPROVED)->count(),
-            'pending_claims' => Auth::user()->company->claims()->where('claims.status', Claim::STATUS_APPROVED)->count(),
+            'pending_claims' => Auth::user()->company->claims()->where('claims.status', Claim::STATUS_PENDING)->count(),
             'claims_value' => Auth::user()->company->claims()
                 ->join('accidents', 'accidents.claim_id', '=', 'claims.id')
                 ->join('claim_items', 'claim_items.accident_id', '=', 'accidents.id')
