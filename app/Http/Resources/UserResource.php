@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use App\Models\User as UserModel;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -14,16 +13,10 @@ class UserResource extends JsonResource
         $this->resource = $resource;
     }
 
-    /**
-     * Transform the resource into an array.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public function toArray($request)
+    public function toArray($request): array
     {
         $data = $this->resource->only([
-            'id', 'first_name', 'last_name', 'email', 'created_at', 'updated_at', 'type'
+            'id', 'first_name', 'last_name', 'email', 'created_at', 'updated_at', 'type', 'meta'
         ]);
 
         $data['addresses'] = Address::collection($this->resource->load(['addresses'])->addresses);

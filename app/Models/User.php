@@ -34,6 +34,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property string $type
+ * @property object $meta
  */
 class User extends Authenticatable
 {
@@ -53,6 +54,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'meta' => 'object'
     ];
 
     public function vehicles(): HasManyThrough

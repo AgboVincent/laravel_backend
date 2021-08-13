@@ -49,6 +49,7 @@ Route::prefix('admin')
             $admin->post('claims/{claim}/comments', \App\Http\Controllers\Claims\Comments\AddComment::class);
             $admin->get('claims/{claim}', \App\Http\Controllers\Admin\Claims\SingleClaim::class);
             $admin->get('overview', \App\Http\Controllers\Admin\Dashboard\Overview::class);
+            $admin->get('customers', \App\Http\Controllers\Admin\CustomerList::class);
         });
         $group->patch('claims/{claim}', \App\Http\Controllers\Claims\ModifyClaim::class)
             //todo: add middleware to prevent another broker/company from accessing other company's user claim.
