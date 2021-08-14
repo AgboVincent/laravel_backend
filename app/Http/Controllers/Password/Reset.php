@@ -27,7 +27,7 @@ class Reset extends Controller
 
         if ($token == null) throw new NotFoundException('Invalid Reset Token');
 
-        if ($token->created_at->addMinutes(60)->greaterThan(now())) throw new NotFoundException('Token Expired');
+        if ($token->created_at->addMinutes(60)->lessThan(now())) throw new NotFoundException('Token Expired');
 
         $user = User::query()->where('email', $token->email)->first();
 

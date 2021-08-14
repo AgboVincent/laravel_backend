@@ -14,11 +14,7 @@ class ClaimResource extends JsonResource
     public function __construct(Claim $resource)
     {
         parent::__construct($resource);
-        $this->resource = $resource
-            ->load([
-                'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
-                'items', 'user'
-            ]);
+        $this->resource = $resource;
     }
 
     public function toArray($request): array

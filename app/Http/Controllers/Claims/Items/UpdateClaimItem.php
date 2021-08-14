@@ -25,7 +25,10 @@ class UpdateClaimItem extends Controller
         }
 
         return Output::success(
-            new ClaimResource($claim)
+            new ClaimResource($claim->load([
+                'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
+                'items', 'user'
+            ]))
         );
     }
 }

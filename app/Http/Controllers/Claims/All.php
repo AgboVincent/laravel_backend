@@ -15,7 +15,12 @@ class All extends Controller
 {
     public function __invoke(Request $request, Claim $model): JsonResponse
     {
-        $claims = Auth::user()->claims()->latest()->paginate();
+        $claims = Auth::user()->claims()->latest()
+            ->with([
+                'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
+                'items', 'user'
+            ])
+            ->paginate();
 
         return Output::success(
             new PaginatedResource(

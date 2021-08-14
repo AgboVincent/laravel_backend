@@ -6,9 +6,16 @@ use EloquentFilter\ModelFilter;
 
 class ClaimFilter extends ModelFilter
 {
-    public function policy($policy)
+    public function query($query)
     {
-        return $this->related('policy', 'number', $policy);
+        return $this
+            ->join('accidents', 'accidents.claim_id', '=', 'claims.id')
+            ->where('description', 'LIKE', '%' . $query . '%')
+            ->orWhere('first_name', 'LIKE', '%' . $query . '%')
+            ->orWhere('last_name', 'LIKE', '%' . $query . '%')
+            ->orWhere('email', 'LIKE', '%' . $query . '%')
+            ->orWhere('policies.number', 'LIKE', '%' . $query . '%');
+
     }
 
     public function status(string $status)

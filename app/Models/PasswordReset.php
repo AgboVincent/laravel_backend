@@ -19,6 +19,7 @@ class PasswordReset extends Model
     protected $guarded = [];
 
     protected $primaryKey = 'email';
+    public $incrementing = false;
 
     public function setUpdatedAt($value): PasswordReset
     {

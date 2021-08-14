@@ -14,7 +14,10 @@ class SingleClaim extends Controller
     {
         return Output::success(
             new ClaimResource(
-                $claim
+                $claim->load([
+                    'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
+                    'items', 'user'
+                ])
             )
         );
     }
