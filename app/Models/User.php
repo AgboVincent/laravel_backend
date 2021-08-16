@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -90,6 +91,9 @@ class User extends Authenticatable
     public function createPasswordResetToken(): string
     {
         $token = Str::random(32);
+
+        ResetPassword::$createUrlCallback = fn() => config('app.front') . 'password/reset?token=' . $token;
+
         PasswordReset::query()->create([
             'email' => $this->email,
             'token' => $token,

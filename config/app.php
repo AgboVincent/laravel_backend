@@ -53,6 +53,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'front' => env('FRONT_URL', 'https://curacel.vercel.app/'),
 
     'asset_url' => env('ASSET_URL', null),
 

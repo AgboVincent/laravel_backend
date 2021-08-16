@@ -7,6 +7,7 @@ use App\Helpers\Output;
 use App\Http\Controllers\Controller;
 use App\Models\PasswordReset;
 use App\Models\User;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 
