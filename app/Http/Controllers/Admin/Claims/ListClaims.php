@@ -15,8 +15,7 @@ class ListClaims extends Controller
 {
     public function __invoke(Request $request): JsonResponse
     {
-        $query = Auth::user()->company->claims()->filter($request->all())
-            ->where('users.type', User::TYPE_POLICY_HOLDER);
+        $query = Auth::user()->company->claims()->filter($request->all());``
 
         if (Auth::user()->type === User::TYPE_BROKER) {
             $query = $query
