@@ -50,6 +50,7 @@ Route::prefix('admin')
             $admin->get('claims/{claim}', \App\Http\Controllers\Admin\Claims\SingleClaim::class);
             $admin->get('overview', \App\Http\Controllers\Admin\Dashboard\Overview::class);
             $admin->get('customers', \App\Http\Controllers\Admin\CustomerList::class);
+            $admin->get('policies', \App\Http\Controllers\Admin\Policies\AllPolicies::class);
         });
         $group->patch('claims/{claim}', \App\Http\Controllers\Claims\ModifyClaim::class)
             //todo: add middleware to prevent another broker/company from accessing other company's user claim.

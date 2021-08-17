@@ -18,6 +18,7 @@ class UserFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
+            'mobile' => '08123456789',
             'type' => $this->faker->randomElement([
                 User::TYPE_POLICY_HOLDER,
                 User::TYPE_BROKER,

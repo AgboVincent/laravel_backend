@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Admin;
 
+use App\Http\Resources\CompanyResource;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\VehicleResource;
 use App\Models\Policy;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -11,8 +14,7 @@ class PolicyResource extends JsonResource
     {
         parent::__construct($resource);
         $this->resource = $resource
-            //todo: remove ->load methods from resources, and migrate to class instance for better performance
-            ->load(['company', 'vehicle']);
+            ->load(['company', 'vehicle', 'user']);
     }
 
     public function toArray($request): array
@@ -22,6 +24,7 @@ class PolicyResource extends JsonResource
         ]);
 
         $data['company'] = new CompanyResource($this->resource->company);
+        $data['user'] = new UserResource($this->resource->user);
         $data['vehicle'] = new VehicleResource($this->resource->vehicle);
 
         return $data;
