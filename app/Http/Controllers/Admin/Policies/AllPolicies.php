@@ -25,7 +25,7 @@ class AllPolicies extends Controller
         }
 
         return Output::success(new PaginatedResource(
-            $query->paginate(),
+            $query->filter($request->all())->paginate(),
             PolicyResource::class
         ));
 

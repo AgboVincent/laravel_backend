@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,6 +31,7 @@ use Illuminate\Support\Carbon;
 class Policy extends Model
 {
     use HasFactory;
+    use Filterable;
 
     const TYPE_COMPREHENSIVE = 'comprehensive';
     const TYPE_THIRD_PARTY = 'third party';
