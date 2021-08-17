@@ -20,7 +20,7 @@ class ClaimResource extends JsonResource
     public function toArray($request): array
     {
         return collect($this->resource->only([
-            'id', 'status', 'status',
+            'id', 'status', 'status', 'involves_insurer',
             'created_at', 'updated_at'
         ]))
             ->put('user', new UserResource($this->resource->user))

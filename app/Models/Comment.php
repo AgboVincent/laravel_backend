@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @package App\Models
  * @mixin Builder
  * @property int $id
+ * @property bool $involves_insurer
  * @property int $claim_id
  * @property string $comment
  * @property User $author
@@ -30,7 +31,7 @@ class Comment extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function comment(): BelongsTo

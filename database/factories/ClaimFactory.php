@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Accident;
 use App\Models\Claim;
+use App\Models\Comment;
 use App\Models\Policy;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,6 +16,7 @@ class ClaimFactory extends Factory
     {
         return [
             'policy_id' => Policy::factory(),
+            'involves_insurer' => $this->faker->randomElement([true, false]),
             'status' => $this->faker->randomElement([
                 Claim::STATUS_PENDING,
                 Claim::STATUS_DECLINED,
@@ -29,6 +31,11 @@ class ClaimFactory extends Factory
         return $this->afterCreating(function (Claim $claim) {
             Accident::factory()->create([
                 'claim_id' => $claim->id
+            ]);
+
+            Comment::factory()->count(10)->create([
+                'claim_id' => $claim->id,
+                'involves_insurer' => $claim->involves_insurer
             ]);
         });
     }

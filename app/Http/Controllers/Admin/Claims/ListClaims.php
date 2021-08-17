@@ -15,17 +15,19 @@ class ListClaims extends Controller
 {
     public function __invoke(Request $request): JsonResponse
     {
-        $query = Auth::user()->company->claims()->filter($request->all());
+        $query = Auth::user()->company->claims();
 
         if (Auth::user()->type === User::TYPE_BROKER) {
             $query = $query
                 ->join('users', 'users.id', '=', 'policies.user_id')
                 ->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)', [Auth::user()->id, '$.broker_id']);
+        } else {
+            $query = $query->where('involves_insurer', true);
         }
 
         return Output::success(
             new PaginatedResource(
-                $query->with([
+                $query->filter($request->all())->with([
                     'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
                     'items', 'user'
                 ])->paginate(),

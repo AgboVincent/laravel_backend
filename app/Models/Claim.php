@@ -24,6 +24,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  * @property int $id
  * @property string $status
  * @property int $policy_id
+ * @property bool $involves_insurer
  * @property Policy $policy
  * @property User $user
  * @property ClaimItem[]|Collection $items
@@ -87,6 +88,7 @@ class Claim extends Model
     {
         return $this->comments()->create([
             'comment' => $comment,
+            'involves_insurer' => $this->involves_insurer,
             'user_id' => Auth::user()->id
         ]);
     }

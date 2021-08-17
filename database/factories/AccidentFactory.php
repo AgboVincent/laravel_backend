@@ -33,7 +33,7 @@ class AccidentFactory extends Factory
                 ]);
             }
 
-            ClaimItem::factory($this->faker->randomDigit())->create(['accident_id' => $accident->id]);
+            ClaimItem::factory($this->faker->randomDigitNotZero())->create(['accident_id' => $accident->id]);
         });
     }
 }
