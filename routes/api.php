@@ -19,9 +19,12 @@ Route::prefix('authentication')->group(function (Router $auth) {
     $auth->patch('password/request', Reset::class);
 });
 
-Route::get('profile', Profile::class)
-    ->middleware('auth')
-    ->name('profile');
+Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function (Router $profile) {
+    $profile->get('/', Profile::class)
+        ->name('profile');
+    $profile->patch('/', \App\Http\Controllers\Profile\Update::class);
+    $profile->patch('password', \App\Http\Controllers\Profile\PasswordUpdate::class);
+});
 
 Route::get('accident/types', \App\Http\Controllers\Claims\Accident\TypeList::class);
 
