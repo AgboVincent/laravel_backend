@@ -7,6 +7,7 @@ use App\Helpers\Output;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Claim\CreateRequest;
 use App\Http\Resources\ClaimResource;
+use App\Jobs\ProcessClaimImagesToML;
 use App\Models\AccidentMedia;
 use App\Models\Claim;
 use App\Models\Vehicle;
@@ -46,10 +47,14 @@ class CreateClaim extends Controller
         }
 
         collect($request->get('quotes'))
-            ->each(function ($quote) use ($claim) {
-                $claim->items()->create(
-                    array_merge(['accident_id' => $claim->id], $quote)
-                );
+            ->each(function ($quote) use ($accident) {
+                $accident->items()->create(
+                    [
+                        'accident_id' => $accident->id,
+                        'quote' => $quote['amount'],
+                        'name' => $quote['name'],
+                        'quantity' => $quote['quantity']
+                    ]);
             });
 
         $accident->uploads()->create([
@@ -72,7 +77,17 @@ class CreateClaim extends Controller
             'type' => AccidentMedia::TYPE_REAR
         ]);
 
+        collect($request->input('documents.pictures.others'))
+            ->each(function ($document) use ($accident) {
+                $accident->uploads()->create([
+                    'upload_id' => $document,
+                    'type' => AccidentMedia::TYPE_OTHER
+                ]);
+            });
+
         DB::commit();
+
+        dispatch(new ProcessClaimImagesToML($claim));
 
         return Output::success(new ClaimResource($claim));
     }

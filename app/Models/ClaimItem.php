@@ -18,6 +18,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  * @property int $id
  * @property int $accident_id
  * @property int $amount
+ * @property int $quote
  * @property string $name
  * @property int $quantity
  * @property string $status

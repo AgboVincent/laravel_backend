@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,8 +22,8 @@ use Illuminate\Support\Carbon;
  * @property string $description
  * @property bool $involved_third_party
  * @property AccidentThirdParty|null $thirdParty
- * @property Upload[] $uploads
- * @property Upload[] $media
+ * @property Upload[]|Collection $uploads
+ * @property Upload[]|Collection $media
  * @property AccidentType $type
  * @property Carbon $occurred_at
  * @property Carbon $created_at

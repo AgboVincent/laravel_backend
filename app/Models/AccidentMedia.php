@@ -31,6 +31,7 @@ class AccidentMedia extends Model
     const TYPE_FRONT = 'front';
     const TYPE_REAR = 'rear';
     const TYPE_VIDEO = 'video';
+    const TYPE_OTHER = 'other';
 
     protected $guarded = [];
 
