@@ -22,7 +22,7 @@ class ProcessClaimImagesToML implements ShouldQueue
     /**
      * @var Upload[]|Collection
      */
-    private array $images;
+    private $images;
 
     public function __construct(Claim $claim)
     {

@@ -76,8 +76,12 @@ class CreateClaim extends Controller
             'upload_id' => $request->input('documents.pictures.rear'),
             'type' => AccidentMedia::TYPE_REAR
         ]);
+        $accident->uploads()->create([
+            'upload_id' => $request->input('documents.video'),
+            'type' => AccidentMedia::TYPE_VIDEO
+        ]);
 
-        collect($request->input('documents.pictures.others'))
+        collect($request->input('documents.others'))
             ->each(function ($document) use ($accident) {
                 $accident->uploads()->create([
                     'upload_id' => $document,
