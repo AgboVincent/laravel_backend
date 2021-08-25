@@ -14,7 +14,7 @@ class PasswordUpdate extends Controller
     public function __invoke(\App\Http\Requests\Profile\PasswordUpdate $request): JsonResponse
     {
         Auth::user()->update([
-            'password' => Hash::make($request->get('password'))
+            'password' => Hash::make($request->get('new_password'))
         ]);
 
         return Output::success(true);

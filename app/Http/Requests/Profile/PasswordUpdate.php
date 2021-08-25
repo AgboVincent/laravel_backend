@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Profile;
 
+use App\Rules\ValidOldPassword;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PasswordUpdate extends FormRequest
@@ -14,7 +15,7 @@ class PasswordUpdate extends FormRequest
     public function rules(): array
     {
         return [
-            'current_password' => 'required',
+            'current_password' => ['required', new ValidOldPassword()],
             'new_password' => 'required|confirmed|min:6'
         ];
     }

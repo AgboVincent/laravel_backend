@@ -10,6 +10,7 @@ class PolicyFilter extends ModelFilter
     public function query($query)
     {
         return $this
+            ->join('users', 'users.id', '=', 'policies.user_id')
             ->where(function (Builder $builder) use ($query) {
                 return $builder
                     ->orWhere('users.first_name', 'LIKE', '%' . $query . '%')

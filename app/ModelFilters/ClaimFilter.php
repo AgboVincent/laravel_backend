@@ -10,10 +10,11 @@ class ClaimFilter extends ModelFilter
     {
         return $this
             ->join('accidents', 'accidents.claim_id', '=', 'claims.id')
+            ->join('users', 'users.id', '=', 'policies.user_id')
             ->where('description', 'LIKE', '%' . $query . '%')
-            ->orWhere('first_name', 'LIKE', '%' . $query . '%')
-            ->orWhere('last_name', 'LIKE', '%' . $query . '%')
-            ->orWhere('email', 'LIKE', '%' . $query . '%')
+            ->orWhere('users.first_name', 'LIKE', '%' . $query . '%')
+            ->orWhere('users.last_name', 'LIKE', '%' . $query . '%')
+            ->orWhere('users.email', 'LIKE', '%' . $query . '%')
             ->orWhere('policies.number', 'LIKE', '%' . $query . '%');
 
     }
