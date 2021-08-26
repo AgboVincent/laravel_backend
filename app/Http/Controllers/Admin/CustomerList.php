@@ -18,7 +18,8 @@ class CustomerList extends Controller
         $query = Auth::user()->company->users();
 
         if (Auth::user()->type === User::TYPE_BROKER) {
-            $query = $query->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)', [Auth::user()->id, '$.broker_id']);
+            $query = $query->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)', [Auth::user()->id, '$.broker_id'])
+                ->whereNotNull('meta');
         }
 
         return Output::success(

@@ -20,7 +20,8 @@ class ListClaims extends Controller
         if (Auth::user()->type === User::TYPE_BROKER) {
             $query = $query
                 ->join('users', 'users.id', '=', 'policies.user_id')
-                ->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)', [Auth::user()->id, '$.broker_id']);
+                ->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)', [Auth::user()->id, '$.broker_id'])
+                ->whereNotNull('meta');
         } else {
             $query = $query->where('involves_insurer', true);
         }
