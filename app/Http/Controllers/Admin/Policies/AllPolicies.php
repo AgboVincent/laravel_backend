@@ -21,7 +21,7 @@ class AllPolicies extends Controller
             $query = $query
                 ->join('users', 'users.id', '=', 'policies.user_id')
                 ->selectRaw('policies.*')
-                ->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(users.meta), ?, ?)', [Auth::user()->id, '$.broker_id'])
+                ->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(users.meta), ?, ?)', [(string)Auth::user()->id, '$.broker_id'])
                 ->whereNotNull('users.meta');
         }
 

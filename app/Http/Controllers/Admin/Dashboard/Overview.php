@@ -18,7 +18,7 @@ class Overview extends Controller
             $builder = Claim::query()
                 ->join('policies', 'policies.id', '=', 'claims.policy_id')
                 ->join('users', 'users.id', '=', 'policies.user_id')
-                ->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)', [Auth::user()->id, '$.broker_id'])
+                ->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)', [(string)Auth::user()->id, '$.broker_id'])
                 ->whereNotNull('meta');
         } else {
             $builder = Auth::user()->company->claims();
