@@ -16,6 +16,7 @@ class All extends Controller
     public function __invoke(Request $request, Claim $model): JsonResponse
     {
         $claims = Auth::user()->claims()->latest()
+            ->filter($request->all())
             ->with([
                 'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
                 'items', 'user'

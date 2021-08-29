@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
 /**
@@ -21,6 +22,7 @@ use Illuminate\Support\Carbon;
  * @property Claim[] $claims
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property User $admin
  */
 class Company extends Model
 {
@@ -44,5 +46,10 @@ class Company extends Model
             Claim::class,
             Policy::class
         );
+    }
+
+    public function admin(): HasOne
+    {
+        return $this->hasOne(User::class)->where('users.type', User::TYPE_INSURANCE);
     }
 }

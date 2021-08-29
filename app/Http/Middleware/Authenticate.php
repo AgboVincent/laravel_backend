@@ -27,7 +27,7 @@ class Authenticate
             /**
              * @var User $user
              */
-            $user = $accessTokenInstance->tokenable;
+            $user = $accessTokenInstance->tokenable->load(['bankAccount', 'addresses']);
 
             switch ($type) {
                 case User::TYPE_BROKER:

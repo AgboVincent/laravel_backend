@@ -12,7 +12,7 @@ class UserFactory extends Factory
 {
     protected $model = User::class;
 
-    public function definition()
+    public function definition(): array
     {
         return [
             'first_name' => $this->faker->firstName(),
@@ -31,10 +31,10 @@ class UserFactory extends Factory
         ];
     }
 
-    public function configure()
+    public function configure(): UserFactory
     {
         return $this->afterCreating(function (User $user) {
-            Policy::factory()->createOne(['user_id' => $user->id]);
+            Policy::factory()->createOne(['user_id' => $user->id, 'company_id' => $user->company->id]);
         });
     }
 }

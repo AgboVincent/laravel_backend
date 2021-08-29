@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -30,6 +31,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  * @property Vehicle $vehicle
  * @property Policy[]|Collection $policies
  * @property Company $company
+ * @property BankAccount $bankAccount
  * @property Address[]|Collection $addresses
  * @property Carbon $email_verified_at
  * @property Carbon $created_at
@@ -108,5 +110,10 @@ class User extends Authenticatable
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function bankAccount(): HasOne
+    {
+        return $this->hasOne(BankAccount::class);
     }
 }

@@ -30,7 +30,7 @@ class CreateRequest extends FormRequest
             'documents.video' => 'required|exists:uploads,id',
             'documents.others.*' => 'sometimes|required|exists:uploads,id',
             'quotes' => 'required|array|min:1',
-            'quotes.*.name' => 'required|min:2',
+            'quotes.*.type' => 'required|exists:claim_item_types,id',
             'quotes.*.quantity' => 'required|numeric',
             'quotes.*.amount' => 'required|numeric',
         ];

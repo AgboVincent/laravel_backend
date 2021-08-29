@@ -23,10 +23,12 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function (Router $
     $profile->get('/', Profile::class)
         ->name('profile');
     $profile->patch('/', \App\Http\Controllers\Profile\Update::class);
+    $profile->post('/bank', \App\Http\Controllers\Profile\CreateOrUpdateBankAccount::class);
     $profile->patch('password', \App\Http\Controllers\Profile\PasswordUpdate::class);
 });
 
 Route::get('accident/types', \App\Http\Controllers\Claims\Accident\TypeList::class);
+Route::get('claims/items/types', \App\Http\Controllers\Claims\Items\ListTypes::class);
 
 Route::group([
     'prefix' => 'claims',
@@ -37,6 +39,7 @@ Route::group([
     $claims->get('{claim}', SingleClaimInfo::class);
     $claims->get('{claim}/comments', \App\Http\Controllers\Claims\Comments\ListComments::class);
     $claims->post('{claim}/comments', \App\Http\Controllers\Claims\Comments\AddComment::class);
+    $claims->post('{claim}', \App\Http\Controllers\Claims\Settlement\Approval::class);
 });
 
 Route::get('policies', UserPolicies::class)

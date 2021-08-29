@@ -31,6 +31,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Accident $accident
+ * @property Company $company
  * @property Comment[] $comments
  * @method static self filter(...$args)
  */
@@ -44,6 +45,8 @@ class Claim extends Model
     const STATUS_PENDING = 'pending';
     const STATUS_APPROVED = 'approved';
     const STATUS_ATTENTION_REQUESTED = 'attention requested';
+    const STATUS_AWAITING_PAYMENT = 'awaiting payment';
+    const STATUS_COMPLETED = 'completed';
     const STATUS_DECLINED = 'declined';
     protected $guarded = [];
 

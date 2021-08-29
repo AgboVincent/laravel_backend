@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\ClaimItem;
+use App\Models\ClaimItemType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ClaimItemFactory extends Factory
@@ -12,8 +13,9 @@ class ClaimItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->text(30),
+            'type_id' => ClaimItemType::query()->first()->id,
             'quantity' => $this->faker->randomDigitNotZero(),
+            'quote' => $this->faker->randomDigitNotZero() * $this->faker->randomDigitNotZero() * 1000,
             'amount' => $this->faker->randomDigitNotZero() * $this->faker->randomDigitNotZero() * 1000,
             'status' => $this->faker->randomElement([
                 ClaimItem::STATUS_APPROVED,

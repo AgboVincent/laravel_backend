@@ -15,7 +15,9 @@ class PolicyFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::factory(),
+            'user_id' => function ($attributes) {
+                return User::factory()->state(['company_id' => $attributes['company_id']]);
+            },
             'number' => $this->faker->unique(true)->numberBetween(100000, 999999),
             'company_id' => Company::factory(),
             'expires_at' => now()->addMonths(2),

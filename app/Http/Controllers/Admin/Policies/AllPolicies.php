@@ -15,11 +15,11 @@ class AllPolicies extends Controller
 {
     public function __invoke(Request $request): JsonResponse
     {
-        $query = Auth::user()->company->policies();
+        $query = Auth::user()->company->policies()
+            ->join('users', 'users.id', '=', 'policies.user_id');
 
         if (Auth::user()->type === User::TYPE_BROKER) {
             $query = $query
-                ->join('users', 'users.id', '=', 'policies.user_id')
                 ->selectRaw('policies.*')
                 ->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(users.meta), ?, ?)', [(string)Auth::user()->id, '$.broker_id'])
                 ->whereNotNull('users.meta');

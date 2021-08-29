@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\AccidentMedia;
 use App\Models\Claim;
+use App\Models\ClaimItemType;
 use App\Models\Upload;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -32,11 +33,13 @@ class ProcessClaimImagesToML implements ShouldQueue
 
     public function handle()
     {
-        $request = Http::post('https://pmm2k4a73j.execute-api.us-east-2.amazonaws.com/test/estimates', ['images' => [
-            'front' => $this->images->where('type', AccidentMedia::TYPE_FRONT)->first(),
-            'back' => $this->images->where('type', AccidentMedia::TYPE_REAR)->first(),
-            'close-up' => $this->images->where('type', AccidentMedia::TYPE_CLOSE_UP)->first(),
-        ]]);
+        $request = Http::post('https://pmm2k4a73j.execute-api.us-east-2.amazonaws.com/test/estimates', [
+            'images' => [
+                'front' => $this->images->where('type', AccidentMedia::TYPE_FRONT)->first(),
+                'back' => $this->images->where('type', AccidentMedia::TYPE_REAR)->first(),
+                'close-up' => $this->images->where('type', AccidentMedia::TYPE_CLOSE_UP)->first(),
+            ]
+        ]);
 
         if ($request->failed()) {
             Log::debug('Claim Machine Learning Process Failed with Status: ' . $request->status());
@@ -44,5 +47,16 @@ class ProcessClaimImagesToML implements ShouldQueue
             return;
         }
 
+        $data = collect(json_decode($request->body(), true)['detected_damages']);
+
+        $data->each(function ($result) {
+            $type = ClaimItemType::query()->where('name', $result['damage'])->first();
+
+            if ($type) {
+                $this->claim->items()->where('type_id', $type->id)->update([
+                    'amount' => $result['price']
+                ]);
+            }
+        });
     }
 }

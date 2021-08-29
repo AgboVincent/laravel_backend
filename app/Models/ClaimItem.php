@@ -19,13 +19,14 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  * @property int $accident_id
  * @property int $amount
  * @property int $quote
- * @property string $name
+ * @property int $type_id
  * @property int $quantity
  * @property string $status
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property Accident $accident
  * @property Claim $claim
+ * @property ClaimItemType $type
  */
 class ClaimItem extends Model
 {
@@ -54,5 +55,10 @@ class ClaimItem extends Model
             Claim::class,
             Accident::class
         );
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(ClaimItemType::class, 'type_id');
     }
 }
