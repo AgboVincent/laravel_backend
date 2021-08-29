@@ -48,6 +48,9 @@ Route::get('policies', UserPolicies::class)
 Route::post('uploads', NewFileUpload::class)
     ->middleware('auth');
 
+Route::get('configurations', \App\Http\Controllers\Company\Configurations\ConfigurationList::class)
+    ->middleware('auth');
+
 Route::prefix('admin')
     ->group(function (Router $group) {
         $group->middleware('auth:admin')->group(function (Router $admin) {
@@ -63,6 +66,8 @@ Route::prefix('admin')
             ->middleware('auth:broker');
         $group->post('claims/{claim}', \App\Http\Controllers\Admin\Claims\InvolveInsurer::class)
             ->middleware('auth:broker');
+        $group->post('configurations/{configuration}', \App\Http\Controllers\Company\Configurations\UpdateConfiguration::class)
+            ->middleware('auth:insurer');
         $group->group(['prefix' => 'claims/{claim}/{claimItem}', 'middleware' => 'auth:insurer'], function (Router $item) {
             $item->patch('approve', \App\Http\Controllers\Claims\Items\ApproveClaimItem::class);
             $item->patch('reject', \App\Http\Controllers\Claims\Items\RejectClaimItem::class);

@@ -17,6 +17,6 @@ class PasswordUpdate extends Controller
             'password' => Hash::make($request->get('new_password'))
         ]);
 
-        return Output::success(true);
+        return Output::success('Updated');
     }
 }

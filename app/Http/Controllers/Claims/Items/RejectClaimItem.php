@@ -13,12 +13,13 @@ class RejectClaimItem extends Controller
 {
     public function __invoke(Claim $claim, ClaimItem $claimItem): JsonResponse
     {
+        $claimItem->load('type');
         $claimItem->update([
             'status' => ClaimItem::STATUS_REJECTED
         ]);
 
         $claim->comment(
-            'Item ' . $claimItem->name . ' has been rejected.'
+            'Item ' . $claimItem->type->name . ' has been rejected.'
         );
 
         $claim->computeStatus();

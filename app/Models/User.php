@@ -31,7 +31,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  * @property Vehicle $vehicle
  * @property Policy[]|Collection $policies
  * @property Company $company
- * @property BankAccount $bankAccount
+ * @property BankAccount|null $bankAccount
  * @property Address[]|Collection $addresses
  * @property Carbon $email_verified_at
  * @property Carbon $created_at

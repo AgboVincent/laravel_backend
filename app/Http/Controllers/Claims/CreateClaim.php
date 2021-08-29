@@ -14,7 +14,6 @@ use App\Models\Claim;
 use App\Models\User;
 use App\Models\Vehicle;
 use App\Notifications\Claim\NewClaimNotification;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -47,33 +46,33 @@ class CreateClaim extends Controller
         return Output::success(new ClaimResource($claim));
     }
 
-    /**
-     * @param Vehicle $vehicle
-     * @return Claim|Model
-     */
     private function createClaim(Vehicle $vehicle): Claim
     {
-        return Claim::query()->create([
+        /**
+         * @var Claim $claim
+         */
+        $claim = Claim::query()->create([
             'policy_id' => $vehicle->policy_id,
             'status' => Claim::STATUS_PENDING,
             'involves_insurer' => !!@Auth::user()->meta->broker_id
         ]);
 
+        return $claim;
     }
 
-    /**
-     * @param Claim $claim
-     * @param Request $request
-     * @return Accident|Model
-     */
     private function createAccident(Claim $claim, Request $request): Accident
     {
-        return $claim->accident()->create([
+        /**
+         * @var Accident $accident
+         */
+        $accident = $claim->accident()->create([
             'occurred_at' => $request->get('date_time'),
             'accident_type_id' => $request->get('accident_type'),
             'description' => $request->get('description'),
             'involved_third_party' => (bool)$request->get('involved_third_party')
         ]);
+
+        return $accident;
     }
 
     private function createThirdParty(Accident $accident, Request $request)

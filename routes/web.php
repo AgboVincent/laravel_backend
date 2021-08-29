@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    dispatch(new \App\Jobs\ProcessClaimImagesToML(\App\Models\Claim::first()));
     return view('welcome');
 });
 

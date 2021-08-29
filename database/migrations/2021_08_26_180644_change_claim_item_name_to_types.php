@@ -2,13 +2,15 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up()
     {
-        \App\Models\ClaimItem::query()->whereDate('created_at', '<', now())->delete();
+
         Schema::table('claim_items', function (Blueprint $table) {
+            DB::statement('delete from claim_items where date(created_at) < now()');
             $table->foreignId('type_id')
                 ->after('name')->constrained('claim_item_types')
                 ->cascadeOnDelete();

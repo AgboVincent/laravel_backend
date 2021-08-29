@@ -13,14 +13,15 @@ class ApproveClaimItem extends Controller
 {
     public function __invoke(Claim $claim, ClaimItem $claimItem): JsonResponse
     {
+        $claimItem->load('type');
+
         $claimItem->update([
             'status' => ClaimItem::STATUS_APPROVED
         ]);
 
         // todo: mail notification
-//        $claim->user->notify();
         $claim->comment(
-            'Item ' . $claimItem->name . ' has been approved.'
+            'Item ' . $claimItem->type->name . ' has been approved.'
         );
 
         $claim->computeStatus();
