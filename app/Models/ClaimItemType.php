@@ -10,4 +10,5 @@ class ClaimItemType extends Model
     use HasFactory;
 
     protected $guarded = [];
+    public $timestamps = false;
 }
