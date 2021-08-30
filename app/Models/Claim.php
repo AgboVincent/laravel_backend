@@ -103,12 +103,15 @@ class Claim extends Model
 
     public function computeStatus()
     {
-        if ($this->items()->where('status', ClaimItem::STATUS_REJECTED)->exists()) {
-            $status = $this::STATUS_DECLINED;
-        } elseif ($this->items()->whereIn('status', [ClaimItem::STATUS_PENDING, ClaimItem::STATUS_REJECTED])->doesntExist()) {
-            $status = $this::STATUS_APPROVED;
-        } else {
-            $status = $this::STATUS_PENDING;
+            $itemsCount = $this->items()->count();
+        if ($this->items()->where('status', ClaimItem::STATUS_PENDING)->exists()) {
+            $status = $this::STATUS_PENDING; // if there is a pending item, claim should be pending still
+        } elseif (
+            $this->items()->where('status',ClaimItem::STATUS_REJECTED)->count() === $itemsCount
+        ) {
+            $status = $this::STATUS_DECLINED; // if the number of rejected is exactly number of items, decline claim
+        }else{
+            $status = $this::STATUS_APPROVED; // else if every item is attended to either rejected or approved, approve claim
         }
 
         $this->update([
