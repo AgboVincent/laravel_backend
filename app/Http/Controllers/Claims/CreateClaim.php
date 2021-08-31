@@ -54,7 +54,7 @@ class CreateClaim extends Controller
         $claim = Claim::query()->create([
             'policy_id' => $vehicle->policy_id,
             'status' => Claim::STATUS_PENDING,
-            'involves_insurer' => !!@Auth::user()->meta->broker_id
+            'involves_insurer' => !@Auth::user()->meta->broker_id
         ]);
 
         return $claim;
