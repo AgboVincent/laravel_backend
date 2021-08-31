@@ -135,7 +135,7 @@ class CreateClaim extends Controller
 
     private function notifyBroker(Claim $claim)
     {
-        if (!$claim->involves_insurer) {
+        if (@$claim->user->meta->broker_id){
             (new User())
                 ->where('id', $claim->user->meta->broker_id)
                 ->first()
