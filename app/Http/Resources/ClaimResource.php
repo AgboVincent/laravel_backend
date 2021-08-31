@@ -13,7 +13,7 @@ class ClaimResource extends JsonResource
         $this->resource = $resource
             ->load([
                 'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
-                'items'
+                'items', 'items.type'
             ]);
     }
 

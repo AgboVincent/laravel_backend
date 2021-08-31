@@ -27,6 +27,7 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth'], function (Router $
     $profile->patch('password', \App\Http\Controllers\Profile\PasswordUpdate::class);
 });
 
+Route::get('banks', \App\Http\Controllers\BankList::class);
 Route::get('accident/types', \App\Http\Controllers\Claims\Accident\TypeList::class);
 Route::get('claims/items/types', \App\Http\Controllers\Claims\Items\ListTypes::class);
 
@@ -73,4 +74,8 @@ Route::prefix('admin')
             $item->patch('reject', \App\Http\Controllers\Claims\Items\RejectClaimItem::class);
             $item->patch('update', \App\Http\Controllers\Claims\Items\UpdateClaimItem::class);
         });
+        $group->post('claims/{claim}', \App\Http\Controllers\Admin\Claims\ProcessPayment::class)
+            ->middleware('auth:insurer');
+        $group->post('claims/{claim}/offline', \App\Http\Controllers\Admin\Claims\MarkAsPaid::class)
+            ->middleware('auth:insurer');
     });

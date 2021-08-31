@@ -15,7 +15,7 @@ class ListClaims extends Controller
 {
     public function __invoke(Request $request): JsonResponse
     {
-        $query = Auth::user()->company->claims();
+        $query = Auth::user()->company->claims()->latest('claims.created_at');
 
         if (Auth::user()->type === User::TYPE_BROKER) {
             $query = $query
@@ -30,7 +30,7 @@ class ListClaims extends Controller
             new PaginatedResource(
                 $query->filter($request->all())->with([
                     'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
-                    'items', 'user'
+                    'items.type', 'user'
                 ])->paginate(),
                 ClaimResource::class
             )

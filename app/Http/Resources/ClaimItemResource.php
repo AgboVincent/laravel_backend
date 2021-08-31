@@ -9,7 +9,7 @@ class ClaimItemResource extends JsonResource
     public function toArray($request): array
     {
         return $this->resource->only([
-            'id', 'name', 'status', 'quantity', 'quote', 'amount', 'created_at'
+            'id', 'type', 'status', 'quantity', 'quote', 'amount', 'created_at'
         ]);
     }
 }

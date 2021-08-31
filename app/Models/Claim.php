@@ -126,4 +126,9 @@ class Claim extends Model
             Accident::class
         );
     }
+
+    public function amount()
+    {
+        return $this->items()->where('status', ClaimItem::STATUS_APPROVED)->sum('amount');
+    }
 }

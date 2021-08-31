@@ -16,7 +16,7 @@ class SingleClaim extends Controller
             new ClaimResource(
                 $claim->load([
                     'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
-                    'items', 'user'
+                    'items', 'items.type', 'user'
                 ])
             )
         );

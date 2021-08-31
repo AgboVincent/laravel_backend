@@ -14,7 +14,7 @@ class CreateOrUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'bank' => 'required',
+            'bank' => 'required|exists:banks,id',
             'number' => 'required',
             'name' => 'required'
         ];
