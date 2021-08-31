@@ -18,4 +18,9 @@ class PolicyFilter extends ModelFilter
                     ->orWhere('number', 'LIKE', '%' . $query . '%');
             });
     }
+
+    public function status($status)
+    {
+        $this->where('policies.status', $status);
+    }
 }
