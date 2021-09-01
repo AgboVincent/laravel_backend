@@ -28,6 +28,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
  * @property string $password
  * @property string $remember_token
  * @property string $policy_number
+ * @property int $company_id
  * @property Vehicle $vehicle
  * @property Policy[]|Collection $policies
  * @property Company $company

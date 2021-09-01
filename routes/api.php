@@ -54,6 +54,8 @@ Route::get('configurations', \App\Http\Controllers\Company\Configurations\Config
 
 Route::prefix('admin')
     ->group(function (Router $group) {
+        $group->post('import/policy_holders', \App\Http\Controllers\Company\Import\PolicyHolderImport::class)
+            ->middleware('auth:insurer');
         $group->middleware('auth:admin')->group(function (Router $admin) {
             $admin->get('claims', \App\Http\Controllers\Admin\Claims\ListClaims::class);
             $admin->post('claims/{claim}/comments', \App\Http\Controllers\Claims\Comments\AddComment::class);
