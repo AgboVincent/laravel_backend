@@ -53,3 +53,8 @@ php artisan queue:work
 ```shell
 composer error-check
 ```
+
+- Sample Policy Holder/Broker CSV File
+```http request
+http://localhost:8080/samples/policy.csv
+```
