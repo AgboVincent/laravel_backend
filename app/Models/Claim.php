@@ -14,6 +14,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
+use Kreait\Firebase\Exception\FirebaseException;
+use Kreait\Firebase\Exception\MessagingException;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\Notification;
+use Kreait\Laravel\Firebase\Facades\Firebase;
 use Znck\Eloquent\Traits\BelongsToThrough;
 
 /**
@@ -89,6 +95,15 @@ class Claim extends Model
      */
     public function comment(string $comment): Model
     {
+        try {
+            Firebase::messaging()->send(
+                CloudMessage::withTarget('token', $this->user->meta->fcm_token)
+                    ->withNotification(Notification::create(Str::limit($comment), $comment))
+                    ->withData(['claim_id' => $this->id])
+            );
+        } catch (MessagingException | FirebaseException | \Throwable | \Exception $e) {
+        }
+
         return $this->comments()->create([
             'comment' => $comment,
             'involves_insurer' => $this->involves_insurer,
@@ -103,14 +118,14 @@ class Claim extends Model
 
     public function computeStatus()
     {
-            $itemsCount = $this->items()->count();
+        $itemsCount = $this->items()->count();
         if ($this->items()->where('status', ClaimItem::STATUS_PENDING)->exists()) {
             $status = $this::STATUS_PENDING; // if there is a pending item, claim should be pending still
         } elseif (
-            $this->items()->where('status',ClaimItem::STATUS_REJECTED)->count() === $itemsCount
+            $this->items()->where('status', ClaimItem::STATUS_REJECTED)->count() === $itemsCount
         ) {
             $status = $this::STATUS_DECLINED; // if the number of rejected is exactly number of items, decline claim
-        }else{
+        } else {
             $status = $this::STATUS_APPROVED; // else if every item is attended to either rejected or approved, approve claim
         }
 

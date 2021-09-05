@@ -64,6 +64,8 @@ Route::prefix('admin')
             $admin->get('customers', \App\Http\Controllers\Admin\CustomerList::class);
             $admin->get('policies', \App\Http\Controllers\Admin\Policies\AllPolicies::class);
         });
+        $group->post('policies/{policy}/claims', \App\Http\Controllers\Company\Claims\CreateNewClaim::class)
+            ->middleware('auth:insurer');
         $group->patch('claims/{claim}', \App\Http\Controllers\Claims\ModifyClaim::class)
             //todo: add middleware to prevent another broker/company from accessing other company's user claim.
             ->middleware('auth:broker');

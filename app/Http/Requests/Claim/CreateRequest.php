@@ -14,7 +14,6 @@ class CreateRequest extends FormRequest
 
     public function rules(): array
     {
-        // todo: accident type - what are they?
         $rules = [
             'vehicle_number' => ['required', new UserVehicleExists()],
             'date_time' => 'required|date|before:tomorrow',
