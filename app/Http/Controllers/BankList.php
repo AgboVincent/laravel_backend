@@ -11,6 +11,6 @@ class BankList extends Controller
 {
     public function __invoke(Request $request): JsonResponse
     {
-        return Output::success(Bank::all());
+        return Output::success(Bank::oldest('name')->get());
     }
 }

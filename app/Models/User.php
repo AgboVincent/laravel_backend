@@ -117,4 +117,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(BankAccount::class);
     }
+
+    public function fullName(): string
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }

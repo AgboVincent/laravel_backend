@@ -15,8 +15,7 @@ class CreateOrUpdateRequest extends FormRequest
     {
         return [
             'bank' => 'required|exists:banks,id',
-            'number' => 'required',
-            'name' => 'required'
+            'number' => 'required'
         ];
     }
 }

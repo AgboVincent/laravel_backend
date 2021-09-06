@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Claims;
 
 use App\Helpers\Output;
 use App\Http\Controllers\Controller;
+use App\Libraries\Flutterwave;
 use App\Libraries\Paystack;
 use App\Models\Claim;
 use Illuminate\Http\JsonResponse;
@@ -32,7 +33,11 @@ class ProcessPayment extends Controller
             return Output::error('Cannot Process Claim, policy holder has not accepted settlement.');
         }
 
-        $paystack = Paystack::initializeTransfer($claim->user->bankAccount->ref, $amount);
+        $paystack = Flutterwave::initializeTransfer(
+            $claim->user->bankAccount->number,
+            $claim->user->bankAccount->bankModel()->code,
+            $amount
+        );
 
         if ($paystack['status'] === false) {
             Log::debug('error processing transfer', $paystack);

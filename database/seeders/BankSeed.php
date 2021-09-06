@@ -2,15 +2,15 @@
 
 namespace Database\Seeders;
 
+use App\Libraries\Flutterwave;
 use App\Models\Bank;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Http;
 
 class BankSeed extends Seeder
 {
     public function run()
     {
-        $banks = collect(Http::get('https://api.paystack.co/bank')->json('data'));
+        $banks = collect(Flutterwave::bankList());
 
         if ($banks->isNotEmpty()) {
             $banks->each(function ($bank) {
