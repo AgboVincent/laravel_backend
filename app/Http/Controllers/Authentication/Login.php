@@ -18,6 +18,11 @@ class Login extends Controller
         $user = $model->where('email', $request->get('email'))->first();
 
         if ($user && Hash::check($request->get('password'), $user->password)) {
+            if ($request->get('fcm_token')) {
+                $user->update([
+                    'meta' => array_merge((array)$user->meta, ['fcm_token' => $request->get('fcm_token')])
+                ]);
+            }
             return Output::success(new LoginResource($user));
         }
 

@@ -95,13 +95,14 @@ class Claim extends Model
      */
     public function comment(string $comment): Model
     {
-        try {
-            Firebase::messaging()->send(
-                CloudMessage::withTarget('token', $this->user->meta->fcm_token)
-                    ->withNotification(Notification::create(Str::limit($comment), $comment))
-                    ->withData(['claim_id' => $this->id])
-            );
-        } catch (MessagingException | FirebaseException | \Throwable | \Exception $e) {
+        if ($this->user->meta->fcm_token && Auth::user()->id !== $this->user->id) {
+            $message = CloudMessage::withTarget('token', $this->user->meta->fcm_token)
+                ->withNotification(Notification::create(Str::limit($comment), $comment))
+                ->withData(['claim_id' => $this->id]);
+            try {
+                Firebase::messaging()->send($message, false);
+            } catch (MessagingException | FirebaseException | \Throwable | \Exception $e) {
+            }
         }
 
         return $this->comments()->create([

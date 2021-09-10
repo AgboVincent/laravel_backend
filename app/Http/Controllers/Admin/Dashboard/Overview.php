@@ -21,7 +21,8 @@ class Overview extends Controller
                 ->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)', [(string)Auth::user()->id, '$.broker_id'])
                 ->whereNotNull('meta');
         } else {
-            $builder = Auth::user()->company->claims();
+            $builder = Auth::user()->company->claims()
+                ->where('involves_insurer', true);
         }
 
         return Output::success([
