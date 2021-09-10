@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Kreait\Laravel\Firebase\Facades\Firebase;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +14,6 @@ use Kreait\Laravel\Firebase\Facades\Firebase;
 */
 
 Route::get('/', function () {
-        \App\Models\Claim::find(8)->comment('Here is where you can register web routes for your application. These routes are loaded by the RouteServiceProvider within a group which');
     return view('welcome');
 });
 
