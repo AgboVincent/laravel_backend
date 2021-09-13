@@ -4,6 +4,8 @@ use App\Http\Controllers\Authentication\Login;
 use App\Http\Controllers\Claims\All;
 use App\Http\Controllers\Claims\CreateClaim;
 use App\Http\Controllers\Claims\SingleClaimInfo;
+use App\Http\Controllers\Notifications\AllNotifications;
+use App\Http\Controllers\Notifications\ToggleNotificationReadStatus;
 use App\Http\Controllers\Password\Reset;
 use App\Http\Controllers\Password\ResetRequest;
 use App\Http\Controllers\Policy\UserPolicies;
@@ -42,6 +44,9 @@ Route::group([
     $claims->post('{claim}/comments', \App\Http\Controllers\Claims\Comments\AddComment::class);
     $claims->post('{claim}', \App\Http\Controllers\Claims\Settlement\Approval::class);
 });
+
+Route::get('notifications', AllNotifications::class)->middleware('auth');
+Route::post('notifications/{notification}', ToggleNotificationReadStatus::class)->middleware('auth');
 
 Route::get('policies', UserPolicies::class)
     ->middleware('auth');

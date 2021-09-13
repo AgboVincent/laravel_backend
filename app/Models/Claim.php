@@ -95,7 +95,7 @@ class Claim extends Model
      */
     public function comment(string $comment): Model
     {
-        if ($this->user->meta->fcm_token && Auth::user()->id !== $this->user->id) {
+        if (@$this->user->meta->fcm_token && Auth::user()->id !== $this->user->id) {
             $message = CloudMessage::withTarget('token', $this->user->meta->fcm_token)
                 ->withNotification(Notification::create(Str::limit($comment), $comment))
                 ->withData(['claim_id' => $this->id]);
@@ -104,6 +104,12 @@ class Claim extends Model
             } catch (MessagingException | FirebaseException | \Throwable | \Exception $e) {
             }
         }
+
+        $this->user->notifications()->create([
+            'id' => Str::uuid()->toString(),
+            'data' => $comment,
+            'type' => 'CLAIM'
+        ]);
 
         return $this->comments()->create([
             'comment' => $comment,
