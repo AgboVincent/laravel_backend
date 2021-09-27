@@ -19,8 +19,6 @@ class AddComment extends Controller
          */
         $comment = $claim->comment($request->get('comment'));
 
-        //todo: notify those needed to be notified.
-
         return Output::success(new CommentResource($comment));
     }
 }

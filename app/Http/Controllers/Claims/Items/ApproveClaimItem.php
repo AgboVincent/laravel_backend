@@ -19,7 +19,6 @@ class ApproveClaimItem extends Controller
             'status' => ClaimItem::STATUS_APPROVED
         ]);
 
-        // todo: mail notification
         $claim->comment(
             'Item ' . $claimItem->type->name . ' has been approved.'
         );

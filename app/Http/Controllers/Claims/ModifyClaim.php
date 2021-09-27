@@ -26,7 +26,6 @@ class ModifyClaim extends Controller
         }
 
         $claim->touch();
-        // todo: Notification
         return Output::success(new ClaimResource($claim->load([
             'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
             'items', 'user'

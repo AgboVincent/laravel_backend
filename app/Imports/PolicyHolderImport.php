@@ -26,7 +26,6 @@ class PolicyHolderImport extends HeadingRowFormatter implements OnEachRow, WithH
         $password = Str::random(10);
         $meta = null;
         if (@$row['Broker']) {
-            // todo: broker should have been a company also just like insurance. Should redesign broker related tables.
             $broker = User::query()->firstOrCreate([
                 'email' => $row['Broker Email'],
             ], [

@@ -11,7 +11,6 @@ class PolicyResource extends JsonResource
     {
         parent::__construct($resource);
         $this->resource = $resource
-            //todo: remove ->load methods from resources, and migrate to class instance for better performance
             ->load(['company', 'vehicle']);
     }
 
