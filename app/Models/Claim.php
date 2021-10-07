@@ -102,9 +102,7 @@ class Claim extends Model
                     ->withData(['claim_id' => $this->id]);
                 Firebase::messaging()->send($message, false);
             }
-        catch
-            (MessagingException | FirebaseException | \Throwable | \Exception $e) {
-            }
+        } catch (MessagingException | FirebaseException | \Throwable | \Exception $e) {
         }
 
         $this->user->notifications()->create([
