@@ -40,6 +40,8 @@ class ProcessClaimImagesToML implements ShouldQueue
         $uploadId = $this->image->where('type', AccidentMedia::TYPE_CLOSE_UP)->first()->upload_id;
         $imagePath = (new \App\Models\Upload)->find($uploadId)->path;
 
+        Log::info('Image Path', [$imagePath]);
+
         $imageClassificationRequest = Http::post($imageClassificationService, [
             'image_data' => $imagePath
         ]);
@@ -48,9 +50,11 @@ class ProcessClaimImagesToML implements ShouldQueue
             Log::debug('Image classification model process failed with Status: ' . $imageClassificationRequest->status());
             Log::debug($imageClassificationRequest->body());
         } else {
+            Log::info('Image classification ok');
             if($imageClassificationRequest->json()['is_damaged']) {
+                Log::info('Image classification model classified vehicle as damaged');
                 $objectDetectionServiceRequest = Http::post($objectDetectionService, [
-                    'image' => (new \App\Models\Upload)->find($uploadId)->path,
+                    'image' => $imagePath,
                     'model' => $this->claim->policy->vehicle->model,
                     'year' => $this->claim->policy->vehicle->year
                 ]);
@@ -62,6 +66,7 @@ class ProcessClaimImagesToML implements ShouldQueue
                 }
 
                 $data = collect($objectDetectionServiceRequest->json()['detected_damages']);
+                Log::info('Object detection model ran successfully and got this result', [$data]);
 
                 $data->each(function ($result) {
                     if (isset($result['pred_boxes'])) {
