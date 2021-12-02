@@ -89,6 +89,8 @@ class ProcessClaimImagesToML implements ShouldQueue
                     }
                 }
             });
+        } else {
+            $this->claim->items()->update(['is_damaged' => 0]);
         }
     }
 }

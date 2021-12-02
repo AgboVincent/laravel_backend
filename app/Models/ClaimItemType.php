@@ -11,4 +11,5 @@ class ClaimItemType extends Model
 
     protected $guarded = [];
     public $timestamps = false;
+//    protected $casts = ['is_damaged' => 'boolean'];
 }
