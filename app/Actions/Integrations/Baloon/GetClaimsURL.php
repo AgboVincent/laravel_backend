@@ -2,11 +2,13 @@
 
 namespace App\Actions\Integrations\Baloon;
 
+use App\Helpers\JWT;
 use App\Models\User;
 use App\Helpers\Output;
 use App\Models\Company;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use App\Helpers\Integrations\Baloon;
 use App\Http\Resources\LoginResource;
 use Lorisleiva\Actions\Concerns\AsAction;
 use App\Http\Requests\Integrations\Baloon\ClaimURLRequest;
@@ -17,9 +19,9 @@ class GetClaimsURL
 
     public function handle(array $requestPayload)
     {
-        $jwtPayload = $this->decodeBaloonJWTPayload($requestPayload['baloonSsoInfo']['token']);
+        $jwtPayload = JWT::decodePayload($requestPayload['baloonSsoInfo']['token']);
 
-        $user = $this->createUser($jwtPayload);
+        $user = Baloon::createUser($jwtPayload);
 
         $data = [];
 
@@ -40,49 +42,6 @@ class GetClaimsURL
         
     }
 
-    /**
-     * Create a new user instance from Baloon SSO JWT.
-     *
-     * @param  array  $payload - decoded JWT's payload
-     * @return \App\User
-     */
-    protected function createUser(array $payload)
-    {
-        $email = $payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
-        $name = $payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
-        $mobile = $payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/mobilephone'];
-        $name = explode(' ', $name);
-
-        $baloonId = Company::where('code', 'baloon')->pluck('id')->first();
-
-        return 
-            User::firstOrCreate([
-                'email' => $email,
-            ], [
-                'first_name' => $name[0],
-                'last_name' => $name[1],
-                'company_id' => $baloonId,
-                'password' => bcrypt('baloon'),
-                'mobile' => $mobile,
-            ]);
-    }
-
-    /**
-     * Decode the Baloon SSO JWT.
-     * 
-     * @param  string  $token
-     * @return array - the payload of the decoded JWT
-     */
-    protected function decodeBaloonJWTPayload(string $token)
-    {   
-        $tokenParts = explode('.', $token);
-
-        return  json_decode(
-                    base64_decode($tokenParts[1]),
-                    true
-                );
-
-    }
     
     /**
      * Get the bearer token for authentication on redirect.
