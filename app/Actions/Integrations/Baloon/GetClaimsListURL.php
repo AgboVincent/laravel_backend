@@ -5,16 +5,16 @@ namespace App\Actions\Integrations\Baloon;
 use App\Helpers\JWT;
 use App\Models\User;
 use App\Helpers\Output;
-use App\Models\Company;
-use Illuminate\Support\Arr;
-use Illuminate\Http\Request;
 use App\Helpers\Integrations\Baloon;
 use App\Http\Resources\LoginResource;
 use Lorisleiva\Actions\Concerns\AsAction;
-use App\Http\Requests\Integrations\Baloon\ClaimURLRequest;
+use App\Http\Requests\Integrations\Baloon\ListClaimsURLRequest;
 
-class GetClaimsURL
-{
+/**
+ * @mixin AsAction
+ */
+class GetClaimsListURL
+{   
     use AsAction;
 
     public function handle(array $requestPayload)
@@ -32,17 +32,17 @@ class GetClaimsURL
         $data['baloonSsoInfo'] = $requestPayload['baloonSsoInfo'];
 
         return $data;
+
     }
 
-    public function asController(ClaimURLRequest $request)
+    public function AsController(ListClaimsURLRequest $request)
     {
         $data = $this->handle($request->all());
        
         return Output::success($data);
-        
+
     }
 
-    
     /**
      * Get the bearer token for authentication on redirect.
      * 
@@ -55,14 +55,13 @@ class GetClaimsURL
     }
 
     /**
-     * Get the create-claims URL for the user.
+     * Get the list-claims URL for the user.
      * 
      * @param  User  $user
      * @return string
      */
     protected function getClaimsURL(User $user)
     {
-        return \config('app.front') . "customers/{$user->id}/claims/create";;
+        return \config('app.front') . "claims";;
     }
-
 }

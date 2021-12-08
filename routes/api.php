@@ -94,5 +94,6 @@ Route::prefix('/integrations')
         $integrations->prefix('/baloon')
             ->group(function (Router $baloon) {
                 $baloon->post('/create-claim', \App\Actions\Integrations\Baloon\GetClaimsURL::class);
+                $baloon->post('/list-claims', \App\Actions\Integrations\Baloon\GetClaimsListURL::class);
             });
     });
