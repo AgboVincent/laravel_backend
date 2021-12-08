@@ -11,7 +11,7 @@ definitions:
           - apt-get update && apt-get install -qy unzip git curl libmcrypt-dev
           - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
           - composer --version
-          - composer install --no-ansi --no-dev --no-interaction --no-plugins --no-progress --no-scripts --optimize-autoloader --prefer-dist --ignore-platform-reqs
+          - composer install --no-ansi --no-interaction --no-plugins --no-progress --no-scripts --optimize-autoloader --prefer-dist --ignore-platform-reqs
         artifacts:
           - vendor/**
 
