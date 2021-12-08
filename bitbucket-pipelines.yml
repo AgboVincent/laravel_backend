@@ -33,17 +33,19 @@ pipelines:
     - step: *composer-install
 
   branches:
-    master:
+    main:
       - step: *composer-install
-      - parallel:
-          - step:
-              <<: *deploy
-              deployment: Production
-              name: Deploy to Production
-          - step:
-              <<: *deploy
-              deployment: Sandbox
-              name: Deploy to Sandbox
+      - step:
+          <<: *deploy
+          deployment: Sandbox
+          name: Deploy to Sandbox
+
+      #- parallel:
+      #    - step:
+      #        <<: *deploy
+      #        deployment: Production
+      #        name: Deploy to Production
+
 
     dev:
       - step: *composer-install
