@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\BaloonItegration;
+namespace Tests\Feature\BaloonIntegration;
 
 use Tests\TestCase;
 use App\Models\Company;
