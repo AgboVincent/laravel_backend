@@ -1,0 +1,1056 @@
+{
+	"baloonSsoInfo": {
+		"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJDdXJhY2VsIENJIiwianRpIjoiNTMwMDJkYzgtYmM5Ni00YTZjLTllOWEtNWIxM2RiZDgwMjFjIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoibWFuYWdlci5jdXJhY2VsQGJhbG9vbi5hZnJpY2EiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiQ3VyYWNlbCBDSSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2dpdmVubmFtZSI6Ik1hbmFnZXIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9tb2JpbGVwaG9uZSI6IiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6WyJCYWxvb25Qcm8iLCJSRUFEX0FDVEVVUl9DT01NRVJDSUFMIiwiUkVBRF9DTElFTlQiLCJHRVNUX0NMSUVOVCIsIlJFQURfREVNQU5ERV9DT05UQUNUIiwiVFJBSVRFUl9ERU1BTkRFX0NPTlRBQ1QiLCJSRUFEX1JFU0VBVSIsIlJFQURfREVWSVMiLCJHRVNUX0RFVklTIiwiUkVBRF9TSU1VIiwiR0VTVF9TSU1VIiwiUkVBRF9DT05UUkFUIiwiR0VTVF9DT05UUkFUIiwiUkVBRF9ET0NVTUVOVF9DTElFTlQiLCJHRVNUX0RPQ1VNRU5UX0NMSUVOVCIsIlJFQURfUVVJVFRBTkNFIiwiR0VTVF9RVUlUVEFOQ0UiLCJSRUFEX1BBSUVNRU5UIiwiR0VTVF9QQUlFTUVOVCIsIlJFQURfVFJBQ0VfVEFSSUZBSVJFIiwiSU5ESUNBVEVVUlNfQ09OVFJBVFMiLCJSRUFEX01FU1NBR0VfU09SVEFOVCIsIlRVTk5FTF9BVVRPX0FWQU5DRSIsIlZBTElEQVRJT05fRE9DVU1FTlRfQ0xJRU5UIiwiRU5WT0lfU01TX0NMSUVOVCIsIlJFQURfUEFHRVNfRU5WSVJPTk5FTUVOVCIsIkdFU1RfUEFHRVNfRU5WSVJPTk5FTUVOVCIsIkNIQVRCT1RfQVVUTyIsIlJFQURfVVNFUl9CQUxPT04iLCJJTVBPUlRFUl9MRUFEUyIsIkdFU1RfT1BQT1JUVU5JVEUiLCJSRUFEX09QUE9SVFVOSVRFIiwiR0VTVF9MRUFEUyIsIkdFU1RfUklTUVVFX0NMSUVOVCIsIlJFQURfUklTUVVFX0NMSUVOVCIsIlJFQURfUEFSQU1FVFJBR0VfQ1JNIiwiU0lNVV9CQUNLX09GRklDRSIsIkFQUExJUVVFUl9QUk9NT1RJT04iLCJHRVNUX0xFQURfU0FOVEUiLCJSRUFEX1NIT1JUVVJMIiwiR0VTVF9TSE9SVFVSTCIsIk1FU1NBR0VIVUIiLCJSRUFEX0NSRU5FQVVfUkFQUEVMIiwiUkVBRF9MRUFEUyIsIlJFQURfUEFSUkFJTkFHRSIsIkdFU1RfUEFSUkFJTkFHRSIsIlJFQURfQ09PUkRPTk5FRVNfQ0xJRU5UIiwiUkVBRF9GSUNIRV9QUk9EVUlUIiwiUkVBRF9TSU5JU1RSRSIsIlJFQURfQlVER0VUX0NPTU1FUkNJQUwiLCJDUkVESVRFUl9DQUdOT1RURV9DTElFTlQiLCJSRUFEX0FMRVJURSIsIklORElDQVRFVVJfUkVTRUFVIiwiUkVBRF9DQUdOT1RURV9DTElFTlQiLCJWQUxJREVSX0RPQ1VNRU5UX0NMSUVOVCIsIlJFQURfQ0xBSU0iLCJNQU5BR0VfQ0xBSU0iLCJHRVNUX1VTRVJfQkFMT09OIiwiUkVBRF9SRUZFUkVOVElFTCIsIkVOVk9ZRVJfTEVBRFMiLCJDT1JSSUdFUl9DT05UUkFUIiwiUElMT1RBR0VfQ1JNIiwiUkVBRF9PQkpFQ1RJRl9DUk0iLCJHRVNUX09CSkVDVElGX0NSTSIsIk1FU1NBR0VIVUJfTUFOQUdFUiIsIkdFU1RfQ1JFTkVBVV9SQVBQRUwiLCJSRUdFTkVSRVJfQ1AiLCJHRVNUX0FDVEVVUl9DT01NRVJDSUFMIiwiUkVBRF9DT01QQUdOSUUiLCJSRUFEX0dBUkFOVElFIiwiUkVBRF9QUk9EVUlUIl0sImh0dHA6Ly93d3cuaXRjL2NvcmUvY2xhaW1zL3V0aWxpc2F0ZXVyL2xvZ2luIjoibWFuYWdlci5jdXJhY2VsQGJhbG9vbi5hZnJpY2EiLCJodHRwOi8vd3d3Lml0Yy9jb3JlL2NsYWltcy91dGlsaXNhdGV1ci9pZCI6IjkwMiIsImh0dHA6Ly93d3cuaXRjL2NvcmUvY2xhaW1zL3V0aWxpc2F0ZXVyL3RpbWV6b25laWQiOiJHcmVlbndpY2ggU3RhbmRhcmQgVGltZSIsImh0dHA6Ly93d3cuaXRjL2NvcmUvY2xhaW1zL3V0aWxpc2F0ZXVyL3Byb2ZpbC9pZCI6IjYxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvY291bnRyeSI6IjM4NCIsIm5iZiI6MTYzODM1MzU4NywiZXhwIjoxNjM4NDM5OTg3LCJpc3MiOiJodHRwczovL3JlY2V0dGUtcHJvLWNpLmJhbG9vbi1hc3N1cmFuY2UuY29tLyIsImF1ZCI6Imh0dHBzOi8vcmVjZXR0ZS1wcm8tY2kuYmFsb29uLWFzc3VyYW5jZS5jb20vIn0.qUGmO1NaDIXk2dEiMNBIoaN_CZ3KDVbK0mEU2iLZOnE",
+		"baloonProUserId": 902,
+		"accessRights": [
+			{
+				"accessRightCode": "READ_CLAIM",
+				"compagnies": [
+					4,
+					6,
+					7,
+					21,
+					22
+				],
+				"reseaux": [
+					1
+				],
+				"acteursCommerciaux": []
+			},
+			{
+				"accessRightCode": "MANAGE_CLAIM",
+				"compagnies": [
+					4,
+					6,
+					7,
+					21,
+					22
+				],
+				"reseaux": [
+					1
+				],
+				"acteursCommerciaux": []
+			}
+		]
+	},
+	"dossierContact": {
+		"contactId": 263,
+		"nomContact": "SEYDOU SY",
+		"typeContact": "Particulier",
+		"risques": [
+			{
+				"type": "TourismeOuUtilitaire",
+				"identifiant": "",
+				"designation": "TOYOTA RAV 4 - 723GS01"
+			},
+			{
+				"type": "TourismeOuUtilitaire",
+				"identifiant": "1390JH01",
+				"designation": "PEUGEOT 406 1390JH01"
+			}
+		],
+		"versionsContrats": [
+			{
+				"contratId": 10512,
+				"versionId": 1,
+				"branche": "VehiculeTerrestreAMoteur",
+				"compagnieId": 6,
+				"nomCompagnie": "SANLAM",
+				"reseauId": 1,
+				"nomReseau": "Baloon Côte d'Ivoire",
+				"acteurCommercialId": 10006,
+				"nomActeurCommercial": "Baloon Côte d'Ivoire",
+				"risques": [
+					{
+						"identifiant": "",
+						"garanties": [
+							{
+								"garantieId": 91,
+								"versionId": 5,
+								"code": "RC",
+								"libelleTechnique": "Responsabilité Civile",
+								"libelleCommercial": "Responsabilité Civile",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "4 000 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "500 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 92,
+								"versionId": 3,
+								"code": "DR",
+								"libelleTechnique": "Défense et recours",
+								"libelleCommercial": "Défense et recours",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "75 000 FCFA par degré de juridiction"
+									}
+								]
+							},
+							{
+								"garantieId": 98,
+								"versionId": 2,
+								"code": "RA",
+								"libelleTechnique": "Avance sur recours",
+								"libelleCommercial": "Avance sur recours",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Néant"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "3 000 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 100,
+								"versionId": 4,
+								"code": "IA1",
+								"libelleTechnique": "Individuelle conducteur",
+								"libelleCommercial": "Individuelle conducteur",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "1 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "2 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "100 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 103,
+								"versionId": 6,
+								"code": "ASSFA",
+								"libelleTechnique": "Formule Assistance Avantage",
+								"libelleCommercial": "Formule Assistance Avantage",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "Remorquage en cas d'accident, Aide au constat, Alerte aux autorités"
+									}
+								]
+							}
+						],
+						"formule": "Tiers simple"
+					}
+				],
+				"quittances": [
+					{
+						"quittanceId": 10980,
+						"nature": "AffaireNouvelle",
+						"debutCouvertureReelle": "2018-03-01T22:14:12.273",
+						"finCouvertureReelle": "2018-05-31T00:00:00"
+					},
+					{
+						"quittanceId": 10981,
+						"nature": "Renouvellement",
+						"debutCouvertureReelle": "2018-06-01T00:00:00",
+						"finCouvertureReelle": "2018-08-31T00:00:00"
+					},
+					{
+						"quittanceId": 10982,
+						"nature": "Renouvellement",
+						"debutCouvertureReelle": "2018-09-01T00:00:00",
+						"finCouvertureReelle": "2018-11-30T00:00:00"
+					},
+					{
+						"quittanceId": 10983,
+						"nature": "Renouvellement",
+						"debutCouvertureReelle": "2018-12-01T00:00:00",
+						"finCouvertureReelle": "2019-02-28T00:00:00"
+					}
+				],
+				"debut": "2018-03-01T22:14:12.273",
+				"fin": "2019-02-28T23:59:00"
+			},
+			{
+				"contratId": 10512,
+				"versionId": 2,
+				"branche": "VehiculeTerrestreAMoteur",
+				"compagnieId": 6,
+				"nomCompagnie": "SANLAM",
+				"reseauId": 1,
+				"nomReseau": "Baloon Côte d'Ivoire",
+				"acteurCommercialId": 10006,
+				"nomActeurCommercial": "Baloon Côte d'Ivoire",
+				"risques": [
+					{
+						"identifiant": "",
+						"garanties": [
+							{
+								"garantieId": 91,
+								"versionId": 5,
+								"code": "RC",
+								"libelleTechnique": "Responsabilité Civile",
+								"libelleCommercial": "Responsabilité Civile",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "4 000 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "500 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 92,
+								"versionId": 3,
+								"code": "DR",
+								"libelleTechnique": "Défense et recours",
+								"libelleCommercial": "Défense et recours",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "75 000 FCFA par degré de juridiction"
+									}
+								]
+							},
+							{
+								"garantieId": 98,
+								"versionId": 2,
+								"code": "RA",
+								"libelleTechnique": "Avance sur recours",
+								"libelleCommercial": "Avance sur recours",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Néant"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "3 000 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 100,
+								"versionId": 4,
+								"code": "IA1",
+								"libelleTechnique": "Individuelle conducteur",
+								"libelleCommercial": "Individuelle conducteur",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "1 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "2 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "100 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 103,
+								"versionId": 6,
+								"code": "ASSFA",
+								"libelleTechnique": "Formule Assistance Avantage",
+								"libelleCommercial": "Formule Assistance Avantage",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "Remorquage en cas d'accident, Aide au constat, Alerte aux autorités"
+									}
+								]
+							}
+						],
+						"formule": "Tiers simple"
+					}
+				],
+				"quittances": [],
+				"debut": "2019-03-01T00:00:00",
+				"fin": "2019-02-28T23:59:00"
+			},
+			{
+				"contratId": 12739,
+				"versionId": 1,
+				"branche": "VehiculeTerrestreAMoteur",
+				"compagnieId": 6,
+				"nomCompagnie": "SANLAM",
+				"reseauId": 1,
+				"nomReseau": "Baloon Côte d'Ivoire",
+				"acteurCommercialId": 10006,
+				"nomActeurCommercial": "Baloon Côte d'Ivoire",
+				"risques": [
+					{
+						"identifiant": "",
+						"garanties": [
+							{
+								"garantieId": 91,
+								"versionId": 5,
+								"code": "RC",
+								"libelleTechnique": "Responsabilité Civile",
+								"libelleCommercial": "Responsabilité Civile",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "4 000 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "500 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 92,
+								"versionId": 3,
+								"code": "DR",
+								"libelleTechnique": "Défense et recours",
+								"libelleCommercial": "Défense et recours",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "75 000 FCFA par degré de juridiction"
+									}
+								]
+							},
+							{
+								"garantieId": 98,
+								"versionId": 3,
+								"code": "RA",
+								"libelleTechnique": "Avance sur recours",
+								"libelleCommercial": "Avance sur recours",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "3 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 100,
+								"versionId": 4,
+								"code": "IA1",
+								"libelleTechnique": "Individuelle conducteur",
+								"libelleCommercial": "Individuelle conducteur",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "1 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "2 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "100 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 103,
+								"versionId": 6,
+								"code": "ASSFA",
+								"libelleTechnique": "Formule Assistance Avantage",
+								"libelleCommercial": "Formule Assistance Avantage",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "Remorquage en cas d'accident, Aide au constat, Alerte aux autorités"
+									}
+								]
+							}
+						],
+						"formule": "Tiers simple"
+					}
+				],
+				"quittances": [
+					{
+						"quittanceId": 18243,
+						"nature": "AffaireNouvelle",
+						"debutCouvertureReelle": "2019-03-01T11:35:40.49",
+						"finCouvertureReelle": "2019-05-31T00:00:00"
+					},
+					{
+						"quittanceId": 18244,
+						"nature": "Renouvellement",
+						"debutCouvertureReelle": "2019-06-01T00:00:00",
+						"finCouvertureReelle": "2019-08-31T00:00:00"
+					},
+					{
+						"quittanceId": 18245,
+						"nature": "Renouvellement",
+						"debutCouvertureReelle": "2019-09-01T00:00:00",
+						"finCouvertureReelle": "2019-11-30T00:00:00"
+					},
+					{
+						"quittanceId": 18246,
+						"nature": "Renouvellement",
+						"debutCouvertureReelle": "2019-12-01T00:00:00",
+						"finCouvertureReelle": "2020-02-29T00:00:00"
+					}
+				],
+				"debut": "2019-03-01T11:35:40.49",
+				"fin": "2019-08-31T23:59:00"
+			},
+			{
+				"contratId": 12739,
+				"versionId": 2,
+				"branche": "VehiculeTerrestreAMoteur",
+				"compagnieId": 6,
+				"nomCompagnie": "SANLAM",
+				"reseauId": 1,
+				"nomReseau": "Baloon Côte d'Ivoire",
+				"acteurCommercialId": 10006,
+				"nomActeurCommercial": "Baloon Côte d'Ivoire",
+				"risques": [
+					{
+						"identifiant": "",
+						"garanties": [
+							{
+								"garantieId": 91,
+								"versionId": 5,
+								"code": "RC",
+								"libelleTechnique": "Responsabilité Civile",
+								"libelleCommercial": "Responsabilité Civile",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "4 000 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "500 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 92,
+								"versionId": 3,
+								"code": "DR",
+								"libelleTechnique": "Défense et recours",
+								"libelleCommercial": "Défense et recours",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "75 000 FCFA par degré de juridiction"
+									}
+								]
+							},
+							{
+								"garantieId": 98,
+								"versionId": 3,
+								"code": "RA",
+								"libelleTechnique": "Avance sur recours",
+								"libelleCommercial": "Avance sur recours",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "3 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 100,
+								"versionId": 4,
+								"code": "IA1",
+								"libelleTechnique": "Individuelle conducteur",
+								"libelleCommercial": "Individuelle conducteur",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "1 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "2 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "100 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 103,
+								"versionId": 6,
+								"code": "ASSFA",
+								"libelleTechnique": "Formule Assistance Avantage",
+								"libelleCommercial": "Formule Assistance Avantage",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "Remorquage en cas d'accident, Aide au constat, Alerte aux autorités"
+									}
+								]
+							}
+						],
+						"formule": "Tiers simple"
+					}
+				],
+				"quittances": [],
+				"debut": "2019-09-01T00:00:00",
+				"fin": "2019-08-31T23:59:00"
+			},
+			{
+				"contratId": 14691,
+				"versionId": 1,
+				"branche": "VehiculeTerrestreAMoteur",
+				"compagnieId": 4,
+				"nomCompagnie": "ALLIANZ",
+				"reseauId": 1,
+				"nomReseau": "Baloon Côte d'Ivoire",
+				"acteurCommercialId": 10006,
+				"nomActeurCommercial": "Baloon Côte d'Ivoire",
+				"risques": [
+					{
+						"identifiant": "",
+						"garanties": [
+							{
+								"garantieId": 32,
+								"versionId": 8,
+								"code": "RC",
+								"libelleTechnique": "Responsabilité Civile",
+								"libelleCommercial": "Responsabilité Civile",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "500 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "Illimité"
+									}
+								]
+							},
+							{
+								"garantieId": 33,
+								"versionId": 8,
+								"code": "DR",
+								"libelleTechnique": "Défense et recours",
+								"libelleCommercial": "Défense et recours",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "1 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 45,
+								"versionId": 7,
+								"code": "RA",
+								"libelleTechnique": "Avance sur frais de réparation",
+								"libelleCommercial": "Avance sur frais de réparation",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "3 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 50,
+								"versionId": 9,
+								"code": "ASSFS",
+								"libelleTechnique": "Assistance Formule Secours",
+								"libelleCommercial": "Assistance Formule Secours",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "Remorquage 50 000 FCFA, Aide au constat, Envoi d'un Facilitateur, Alerte à la police ou à la gendarmerie"
+									}
+								]
+							},
+							{
+								"garantieId": 53,
+								"versionId": 8,
+								"code": "IA1",
+								"libelleTechnique": "Protection des Personnes niveau 1",
+								"libelleCommercial": "Protection des Personnes",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "1 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "2 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "100 000 FCFA"
+									}
+								]
+							}
+						],
+						"formule": "Tiers simple"
+					}
+				],
+				"quittances": [
+					{
+						"quittanceId": 24390,
+						"nature": "AffaireNouvelle",
+						"debutCouvertureReelle": "2019-07-12T12:09:56.087",
+						"finCouvertureReelle": "2020-01-11T00:00:00"
+					},
+					{
+						"quittanceId": 24391,
+						"nature": "Renouvellement",
+						"debutCouvertureReelle": "2020-01-12T00:00:00",
+						"finCouvertureReelle": "2020-07-11T00:00:00"
+					}
+				],
+				"debut": "2019-07-12T12:09:56.087",
+				"fin": "2020-01-11T23:59:00"
+			},
+			{
+				"contratId": 14691,
+				"versionId": 2,
+				"branche": "VehiculeTerrestreAMoteur",
+				"compagnieId": 4,
+				"nomCompagnie": "ALLIANZ",
+				"reseauId": 1,
+				"nomReseau": "Baloon Côte d'Ivoire",
+				"acteurCommercialId": 10006,
+				"nomActeurCommercial": "Baloon Côte d'Ivoire",
+				"risques": [
+					{
+						"identifiant": "",
+						"garanties": [
+							{
+								"garantieId": 32,
+								"versionId": 8,
+								"code": "RC",
+								"libelleTechnique": "Responsabilité Civile",
+								"libelleCommercial": "Responsabilité Civile",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "500 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "Illimité"
+									}
+								]
+							},
+							{
+								"garantieId": 33,
+								"versionId": 8,
+								"code": "DR",
+								"libelleTechnique": "Défense et recours",
+								"libelleCommercial": "Défense et recours",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "1 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 45,
+								"versionId": 7,
+								"code": "RA",
+								"libelleTechnique": "Avance sur frais de réparation",
+								"libelleCommercial": "Avance sur frais de réparation",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "3 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 50,
+								"versionId": 9,
+								"code": "ASSFS",
+								"libelleTechnique": "Assistance Formule Secours",
+								"libelleCommercial": "Assistance Formule Secours",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "Remorquage 50 000 FCFA, Aide au constat, Envoi d'un Facilitateur, Alerte à la police ou à la gendarmerie"
+									}
+								]
+							},
+							{
+								"garantieId": 53,
+								"versionId": 8,
+								"code": "IA1",
+								"libelleTechnique": "Protection des Personnes niveau 1",
+								"libelleCommercial": "Protection des Personnes",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "1 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "2 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "100 000 FCFA"
+									}
+								]
+							}
+						],
+						"formule": "Tiers simple"
+					}
+				],
+				"quittances": [],
+				"debut": "2020-01-12T00:00:00",
+				"fin": "2020-01-11T23:59:00"
+			},
+			{
+				"contratId": 18245,
+				"versionId": 1,
+				"branche": "VehiculeTerrestreAMoteur",
+				"compagnieId": 4,
+				"nomCompagnie": "ALLIANZ",
+				"reseauId": 1,
+				"nomReseau": "Baloon Côte d'Ivoire",
+				"acteurCommercialId": 10006,
+				"nomActeurCommercial": "Baloon Côte d'Ivoire",
+				"risques": [
+					{
+						"identifiant": "",
+						"garanties": [
+							{
+								"garantieId": 32,
+								"versionId": 8,
+								"code": "RC",
+								"libelleTechnique": "Responsabilité Civile",
+								"libelleCommercial": "Responsabilité Civile",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "500 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "Illimité"
+									}
+								]
+							},
+							{
+								"garantieId": 33,
+								"versionId": 8,
+								"code": "DR",
+								"libelleTechnique": "Défense et recours",
+								"libelleCommercial": "Défense et recours",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "1 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 45,
+								"versionId": 7,
+								"code": "RA",
+								"libelleTechnique": "Avance sur frais de réparation",
+								"libelleCommercial": "Avance sur frais de réparation",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "3 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 50,
+								"versionId": 9,
+								"code": "ASSFS",
+								"libelleTechnique": "Assistance Formule Secours",
+								"libelleCommercial": "Assistance Formule Secours",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "Remorquage 50 000 FCFA, Aide au constat, Envoi d'un Facilitateur, Alerte à la police ou à la gendarmerie"
+									}
+								]
+							},
+							{
+								"garantieId": 53,
+								"versionId": 8,
+								"code": "IA1",
+								"libelleTechnique": "Protection des Personnes niveau 1",
+								"libelleCommercial": "Protection des Personnes",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "1 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "2 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "100 000 FCFA"
+									}
+								]
+							}
+						],
+						"formule": "Tiers simple"
+					}
+				],
+				"quittances": [
+					{
+						"quittanceId": 35571,
+						"nature": "AffaireNouvelle",
+						"debutCouvertureReelle": "2020-01-12T00:00:00",
+						"finCouvertureReelle": "2021-01-11T00:00:00"
+					}
+				],
+				"debut": "2020-01-12T00:00:00",
+				"fin": "2021-01-11T23:59:59"
+			},
+			{
+				"contratId": 18245,
+				"versionId": 2,
+				"branche": "VehiculeTerrestreAMoteur",
+				"compagnieId": 4,
+				"nomCompagnie": "ALLIANZ",
+				"reseauId": 1,
+				"nomReseau": "Baloon Côte d'Ivoire",
+				"acteurCommercialId": 10006,
+				"nomActeurCommercial": "Baloon Côte d'Ivoire",
+				"risques": [
+					{
+						"identifiant": "1390JH01",
+						"garanties": [
+							{
+								"garantieId": 32,
+								"versionId": 8,
+								"code": "RC",
+								"libelleTechnique": "Responsabilité Civile",
+								"libelleCommercial": "Responsabilité Civile",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "500 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "Illimité"
+									}
+								]
+							},
+							{
+								"garantieId": 33,
+								"versionId": 8,
+								"code": "DR",
+								"libelleTechnique": "Défense et recours",
+								"libelleCommercial": "Défense et recours",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "1 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 45,
+								"versionId": 7,
+								"code": "RA",
+								"libelleTechnique": "Avance sur frais de réparation",
+								"libelleCommercial": "Avance sur frais de réparation",
+								"limites": [
+									{
+										"type": "Franchise",
+										"descriptionCommerciale": "Pas de franchise"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "3 000 000 FCFA"
+									}
+								]
+							},
+							{
+								"garantieId": 50,
+								"versionId": 9,
+								"code": "ASSFS",
+								"libelleTechnique": "Assistance Formule Secours",
+								"libelleCommercial": "Assistance Formule Secours",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "Remorquage 50 000 FCFA, Aide au constat, Envoi d'un Facilitateur, Alerte à la police ou à la gendarmerie"
+									}
+								]
+							},
+							{
+								"garantieId": 53,
+								"versionId": 8,
+								"code": "IA1",
+								"libelleTechnique": "Protection des Personnes niveau 1",
+								"libelleCommercial": "Protection des Personnes",
+								"limites": [
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "1 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "2 000 000 FCFA"
+									},
+									{
+										"type": "Plafond",
+										"descriptionCommerciale": "100 000 FCFA"
+									}
+								]
+							}
+						],
+						"formule": "Tiers simple"
+					}
+				],
+				"quittances": [
+					{
+						"quittanceId": 66252,
+						"nature": "Terme",
+						"debutCouvertureReelle": "2021-01-12T00:00:00",
+						"finCouvertureReelle": "2022-01-11T00:00:00"
+					}
+				],
+				"debut": "2021-01-12T00:00:00",
+				"fin": null
+			}
+		],
+		"telephone": "+2250777000011",
+		"email": null,
+		"typePersonneMorale": null,
+		"contactPrincipal": null
+	}
+}
