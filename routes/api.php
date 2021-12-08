@@ -88,3 +88,12 @@ Route::prefix('admin')
         $group->post('claims/{claim}/offline', \App\Http\Controllers\Admin\Claims\MarkAsPaid::class)
             ->middleware('auth:insurer');
     });
+
+Route::prefix('/integrations')
+    ->group(function (Router $integrations) {
+        $integrations->prefix('/baloon')
+            ->group(function (Router $baloon) {
+                $baloon->post('/create-claim', \App\Actions\Integrations\Baloon\GetClaimsURL::class);
+                $baloon->post('/list-claims', \App\Actions\Integrations\Baloon\GetClaimsListURL::class);
+            });
+    });
