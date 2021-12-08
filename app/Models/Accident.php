@@ -61,7 +61,7 @@ class Accident extends Model
 
     public function media(): HasMany
     {
-        return $this->hasMany(AccidentMedia::class,);
+        return $this->hasMany(AccidentMedia::class);
     }
 
     public function items(): HasMany

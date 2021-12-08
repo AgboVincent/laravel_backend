@@ -23,6 +23,7 @@ class ClaimResource extends JsonResource
             'id', 'status', 'status', 'involves_insurer',
             'created_at', 'updated_at'
         ]))
+            ->put('settlement_amount', $this->resource->amount())
             ->put('policy', new PolicyResource($this->resource->policy))
             ->put('accident', new AccidentResource($this->resource->accident))
             ->put('items', ClaimItemResource::collection($this->resource->items))

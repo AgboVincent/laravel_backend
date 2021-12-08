@@ -20,6 +20,10 @@ class Upload extends Model
 
     public function getPathAttribute($value): string
     {
-        return Storage::disk('s3')->url($value);
+        if(env('APP_ENV') == 'local') {
+            return Storage::disk('uploads')->url($value);
+        } else {
+            return Storage::disk('s3')->url($value);
+        }
     }
 }

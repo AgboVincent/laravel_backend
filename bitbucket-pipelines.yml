@@ -1,0 +1,69 @@
+image: php:7.4-fpm
+
+definitions:
+  services:
+    mysql:
+      image: mysql:5.7
+      environment:
+        MYSQL_DATABASE: 'curacel_auto_claims'
+        MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+        MYSQL_USER: 'curacel_test_db_user'
+        MYSQL_PASSWORD: 'T3$tDbP8s$'
+
+  steps:
+    - step: &build_and_test
+        name: Build and Test
+        caches:
+          - composer
+        script:
+          - apt-get update && apt-get install -qy git zip curl libmcrypt-dev default-mysql-client libxml2-dev wget zlib1g-dev libzip-dev libpng-dev
+          - docker-php-ext-install pdo\_mysql bcmath zip gd
+          - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+          - composer install
+          - ln -f -s .env.pipelines.test .env
+          #- php artisan test
+          - composer install --no-dev --optimize-autoloader
+          - composer dump-autoload -o
+
+        artifacts:
+          - vendor/**
+          - bootstrap/cache/**
+
+        #services:
+         # - mysql
+
+    - step: &deploy_to_server
+        name: Deploy to Server
+        deployment: Test Server
+        trigger: automatic
+        caches:
+          - node
+        script:
+          #create .env
+          - apt-get update && apt-get install -y gettext-base openssh-client
+          - envsubst < .env.pipelines.deploy > .env
+
+          - ssh curaceldev@$SERVER_HOST "mkdir $SERVER_PATH -p"
+
+          - pipe: atlassian/rsync-deploy:0.4.3
+            variables:
+              USER: 'curaceldev'
+              SERVER: '$SERVER_HOST'
+              REMOTE_PATH: "$SERVER_PATH"
+              LOCAL_PATH: '$BITBUCKET_CLONE_DIR/'
+              EXTRA_ARGS: '--exclude-from=deployment-exclude.txt --update -raz'
+              #DELETE_FLAG: 'false'
+
+          #grant dir permissions and run deploy script on server
+          #- ssh curaceldev@$SERVER_HOST "sudo chown curaceldev:www-data $SERVER_PATH -R && sudo chmod 775 $SERVER_PATH -R && cd $SERVER_PATH && sudo -u www-data ./deploy.sh"
+
+
+
+pipelines:
+  branches:
+    develop:
+      - step: *build_and_test
+
+      - step:
+          <<: *deploy_to_server
+          deployment: Develop Server

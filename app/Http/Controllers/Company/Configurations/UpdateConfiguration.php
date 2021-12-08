@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 class UpdateConfiguration extends Controller
 {
-    // todo: Don't forget to include a way to populate company's configurations on creation.
     public function __invoke(Configuration $configuration, Request $request): JsonResponse
     {
         if(Auth::user()->company->id != $configuration->company_id){
