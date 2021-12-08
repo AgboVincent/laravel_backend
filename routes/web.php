@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'curacel auto-claims api';//view('welcome');
 });
 
 Route::get('password/reset')->name('password.reset');
