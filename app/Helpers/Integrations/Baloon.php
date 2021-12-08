@@ -20,7 +20,10 @@ class Baloon
         $mobile = $payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/mobilephone'];
         $name = explode(' ', $name);
 
-        $baloonId = Company::where('code', 'baloon')->pluck('id')->first();
+        $baloonId = Company::firstOrCreate([
+            'name' => 'Baloon',
+            'code' => 'baloon',
+        ])->id;
 
         return 
             User::firstOrCreate([
