@@ -1,0 +1,4 @@
+.git
+.bitbucket
+bitbucket-pipelines.yml
+.gitignore
