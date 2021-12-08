@@ -17,14 +17,15 @@
         "lorisleiva/laravel-actions": "^2.1",
         "maatwebsite/excel": "^3.1",
         "staudenmeir/belongs-to-through": "^2.5",
-        "tucker-eric/eloquentfilter": "^3.0"
+        "tucker-eric/eloquentfilter": "^3.0",
+        "laravel/telescope": "^4.5"
     },
     "require-dev": {
         "beyondcode/laravel-er-diagram-generator": "^1.5",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
-        "laravel/telescope": "^4.5",
+
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "nunomaduro/larastan": "^0.7.9",
