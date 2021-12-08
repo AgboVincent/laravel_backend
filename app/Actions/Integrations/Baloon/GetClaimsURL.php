@@ -103,7 +103,7 @@ class GetClaimsURL
      */
     protected function getClaimsURL(User $user)
     {
-        return \config('app.front') . "/customers/{$user->id}/claims/create";;
+        return \config('app.front') . "customers/{$user->id}/claims/create";;
     }
 
 }
