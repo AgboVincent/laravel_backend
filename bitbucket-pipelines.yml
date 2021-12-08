@@ -33,7 +33,7 @@ pipelines:
     - step: *composer-install
 
   branches:
-    main:
+    feature/AP-36-cd-pipeline:
       - step: *composer-install
       - step:
           <<: *deploy
