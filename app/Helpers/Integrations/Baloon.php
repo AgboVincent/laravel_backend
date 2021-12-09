@@ -55,6 +55,7 @@ class Baloon
                 'company_id' => $baloonId,
                 'password' => bcrypt('baloon'),
                 'mobile' => $mobile,
+                'email_verified_at' => now(),
             ]);
     }
 
