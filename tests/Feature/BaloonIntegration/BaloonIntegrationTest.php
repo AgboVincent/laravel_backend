@@ -67,4 +67,32 @@ class BaloonIntegrationTest extends TestCase
             ],
         ]);
     }
+
+    /**
+     * @dataProvider urlProvider
+     */
+    public function test_sso_token_is_valid(string $url){
+        $data = file_get_contents(__DIR__.'/data/invalidData.json');
+        $data = json_decode("$data", true);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+        ])->json('POST', $url, $data);
+
+        $response->assertStatus(422);
+
+        $response->assertJson([
+            "error" => [
+                "ssoInfoToken" => ["The token in the SSO contains invalid user keys or data."],
+            ]
+        ]);
+    }
+
+    public function urlProvider()
+    {
+        return [
+            'list claims url' => ['api/integrations/baloon/list-claims'],
+            'create claims' => ['api/integrations/baloon/create-claim'],
+        ];
+    }
 }
