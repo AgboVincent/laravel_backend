@@ -41,7 +41,7 @@ class BaloonIntegrationTest extends TestCase
 
         $response->assertJson([
             'data' => [
-                'url' => config('app.front') . "customers/1/claims/create",
+                'url' => config('app.front') . "customers/2/claims/create",
             ],
         ]);
     }
