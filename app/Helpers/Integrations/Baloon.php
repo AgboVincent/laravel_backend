@@ -48,6 +48,7 @@ class Baloon
 
         $brokerId = User::firstOrCreate([
             'email' => 'baloon.notreal@example.com',
+        ],[
             'first_name' => 'Broker',
             'last_name' => 'Baloon',
             'mobile' => '234234234234',
