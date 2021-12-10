@@ -46,6 +46,16 @@ class Baloon
             'code' => 'baloon',
         ])->id;
 
+        $brokerId = User::firstOrCreate([
+            'email' => 'baloon.notreal@example.com',
+            'first_name' => 'Broker',
+            'last_name' => 'Baloon',
+            'mobile' => '234234234234',
+            'company_id' => $baloonId,
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
+        ])->id;
+
         return 
             User::firstOrCreate([
                 'email' => $email,
@@ -56,6 +66,9 @@ class Baloon
                 'password' => bcrypt('baloon'),
                 'mobile' => $mobile,
                 'email_verified_at' => now(),
+                'meta' => [
+                    'broker_id' => $brokerId,
+                ],
             ]);
     }
 
