@@ -58,11 +58,13 @@ class Kernel extends HttpKernel
             ShareErrorsFromSession::class,
             VerifyCsrfToken::class,
             SubstituteBindings::class,
+            \Inspector\Laravel\Middleware\WebRequestMonitoring::class,
         ],
 
         'api' => [
             'throttle:api',
             SubstituteBindings::class,
+            \Inspector\Laravel\Middleware\WebRequestMonitoring::class
         ],
     ];
 
