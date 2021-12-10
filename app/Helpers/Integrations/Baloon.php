@@ -54,6 +54,7 @@ class Baloon
             'company_id' => $baloonId,
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
+            'type' => 'broker',
         ])->id;
 
         return 
@@ -66,6 +67,7 @@ class Baloon
                 'password' => bcrypt('baloon'),
                 'mobile' => $mobile,
                 'email_verified_at' => now(),
+                'type' => 'user',
                 'meta' => [
                     'broker_id' => $brokerId,
                 ],
