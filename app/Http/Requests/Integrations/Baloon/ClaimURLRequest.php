@@ -27,6 +27,13 @@ class ClaimURLRequest extends FormRequest
     {
         return [
             'baloonSsoInfo.token' => 'required|string',
+            'dossierContact.contactId' => 'required|numeric',
+            'dossierContact.email' => 'sometimes|nullable|email',
+            'dossierContact.telephone' => 'sometimes|nullable|string',
+            'dossierContact.nomContact' => 'required|string',
+            'dossierContact.risques' => 'required|array',
+            'dossierContact.risques.*.identifiant' => 'required|string',
+            'dossierContact.risques.*.designation' => 'required|string',
         ];
     }
 
