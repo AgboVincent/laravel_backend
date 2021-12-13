@@ -7,7 +7,7 @@ use App\Models\Company;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class BaloonIntegrationTest extends TestCase
+class ClaimsTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -41,7 +41,7 @@ class BaloonIntegrationTest extends TestCase
 
         $response->assertJson([
             'data' => [
-                'url' => config('app.front') . "customers/2/claims/create",
+                'url' => config('app.front') . "customers/1/claims/create",
             ],
         ]);
     }

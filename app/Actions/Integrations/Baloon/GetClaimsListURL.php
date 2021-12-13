@@ -21,7 +21,7 @@ class GetClaimsListURL
     {
         $jwtPayload = JWT::decodePayload($requestPayload['baloonSsoInfo']['token']);
 
-        $user = Baloon::createUser($jwtPayload);
+        $user = Baloon::createUserForAuth($jwtPayload);
 
         $data = [];
 
