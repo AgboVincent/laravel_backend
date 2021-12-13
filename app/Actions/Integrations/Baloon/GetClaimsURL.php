@@ -4,6 +4,7 @@ namespace App\Actions\Integrations\Baloon;
 
 use App\Helpers\JWT;
 use App\Models\User;
+use App\Models\Policy;
 use App\Helpers\Output;
 use App\Models\Company;
 use Illuminate\Support\Arr;
@@ -21,15 +22,21 @@ class GetClaimsURL
     {
         $jwtPayload = JWT::decodePayload($requestPayload['baloonSsoInfo']['token']);
 
-        $user = Baloon::createUser($jwtPayload);
+        $userForAuth = Baloon::createUserForAuth($jwtPayload);
+
+        // create policies
+        Baloon::createPolicies($requestPayload['dossierContact']);
+
+        Baloon::setCustomerBroker($userForAuth);
 
         $data = [];
 
-        $data['url'] = $this->getClaimsURL($user);
-        $data['token'] = $this->getCuracelAuthToken($user);
+        $data['url'] = $this->getClaimsURL();
+        $data['token'] = $this->getCuracelAuthToken($userForAuth);
 
         // always include Baloon's SSO info
         $data['baloonSsoInfo'] = $requestPayload['baloonSsoInfo'];
+
 
         return $data;
     }
@@ -60,9 +67,10 @@ class GetClaimsURL
      * @param  User  $user
      * @return string
      */
-    protected function getClaimsURL(User $user)
+    protected function getClaimsURL()
     {
-        return \config('app.front') . "customers/{$user->id}/claims/create";;
+        $randomPolicyId = Baloon::getPolicyIds()[0];
+        return \config('app.front') . "customers/{$randomPolicyId}/claims/create";;
     }
 
 }
