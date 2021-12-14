@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin\Claims;
 
 use App\Models\Claim;
 use App\Helpers\Output;
+use App\Http\Controllers\Controller;
 
-class GetItems
+class GetItems extends Controller
 {
     public function __invoke(Claim $claim)
     {
