@@ -6,6 +6,7 @@ use App\Models\Claim;
 use App\Helpers\Output;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Admin\ClaimResource;
 
 class UpdateClientResponsibility extends Controller 
 {
@@ -19,8 +20,6 @@ class UpdateClientResponsibility extends Controller
 
         $claim->touch();
 
-        return Output::success('Client Responsibility updated');
-        
         return Output::success(new ClaimResource($claim->load([
             'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
             'items', 'user'
