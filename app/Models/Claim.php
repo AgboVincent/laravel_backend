@@ -3,24 +3,25 @@
 namespace App\Models;
 
 use App\Helpers\Auth;
-use App\Models\Traits\RouteBinding;
-use EloquentFilter\Filterable;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
-use Kreait\Firebase\Exception\FirebaseException;
-use Kreait\Firebase\Exception\MessagingException;
+use EloquentFilter\Filterable;
+use Illuminate\Support\Carbon;
+use App\Models\Traits\RouteBinding;
+use App\Models\ClientResponsibility;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Znck\Eloquent\Traits\BelongsToThrough;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
+use Illuminate\Database\Eloquent\Collection;
 use Kreait\Laravel\Firebase\Facades\Firebase;
-use Znck\Eloquent\Traits\BelongsToThrough;
+use Kreait\Firebase\Exception\FirebaseException;
+use Kreait\Firebase\Exception\MessagingException;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * Class Claim
@@ -152,5 +153,12 @@ class Claim extends Model
     public function amount()
     {
         return $this->items()->where('status', ClaimItem::STATUS_APPROVED)->sum('amount');
+    }
+
+    public function clientResponsibility(){
+        return $this->belongsTo(ClientResponsibility::class)->withDefault(function(){
+            $re = ClientResponsibility::where('value', 0)->first();
+            return $re ?? new ClientResponsibility(['value' => 0]);
+        });
     }
 }

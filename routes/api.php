@@ -69,7 +69,9 @@ Route::prefix('admin')
             $admin->get('customers', \App\Http\Controllers\Admin\CustomerList::class);
             $admin->get('policies', \App\Http\Controllers\Admin\Policies\AllPolicies::class);
             $admin->post('claims/{claim}/items', \App\Http\Controllers\Admin\Claims\AddItems::class);
-            $admin->get('claims/{claim}/items', \App\Http\Controllers\Admin\Claims\GetItems::class);
+            $admin->post('claims/{claim}/responsibility', \App\Http\Controllers\Admin\Claims\UpdateClientResponsibility::class);
+            $admin->get('claims/responsibilities/all', \App\Http\Controllers\Admin\Claims\GetClientResponsibilities::class);
+
         });
         $group->post('policies/{policy}/claims', \App\Http\Controllers\Company\Claims\CreateNewClaim::class)
             ->middleware('auth:insurer');
