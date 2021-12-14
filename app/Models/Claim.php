@@ -57,6 +57,10 @@ class Claim extends Model
     const STATUS_DECLINED = 'declined';
     protected $guarded = [];
 
+    protected $casts = [
+        'requires_expert' => 'boolean',
+    ];
+
     public function notFoundMessage(): string
     {
         return 'Claim Not Found';
