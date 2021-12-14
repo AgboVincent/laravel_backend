@@ -21,7 +21,7 @@ class ClaimResource extends JsonResource
     {
         return collect($this->resource->load('clientResponsibility')->only([
             'id', 'status', 'status', 'involves_insurer', 'clientResponsibility',
-            'created_at', 'updated_at'
+            'requires_expert', 'created_at', 'updated_at'
         ]))
             ->put('user', new UserResource($this->resource->user))
             ->put('policy', new PolicyResource($this->resource->policy))

@@ -71,6 +71,7 @@ Route::prefix('admin')
             $admin->post('claims/{claim}/items', \App\Http\Controllers\Admin\Claims\AddItems::class);
             $admin->post('claims/{claim}/responsibility', \App\Http\Controllers\Admin\Claims\UpdateClientResponsibility::class);
             $admin->get('claims/responsibilities/all', \App\Http\Controllers\Admin\Claims\GetClientResponsibilities::class);
+            $admin->post('claims/{claim}/expert-requirement', \App\Http\Controllers\Admin\Claims\UpdateExpertRequirement::class);
 
         });
         $group->post('policies/{policy}/claims', \App\Http\Controllers\Company\Claims\CreateNewClaim::class)
