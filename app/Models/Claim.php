@@ -165,4 +165,8 @@ class Claim extends Model
             return $re ?? new ClientResponsibility(['value' => 0]);
         });
     }
+
+    public function guarantees(){
+        return $this->hasMany(Guarantee::class);
+    }
 }
