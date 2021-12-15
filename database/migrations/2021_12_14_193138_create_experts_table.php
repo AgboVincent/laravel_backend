@@ -24,7 +24,8 @@ class CreateExpertsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('expert_id');
             $table->unsignedBigInteger('claim_id');
-            $table->string('report');
+            $table->string('file_path');
+            $table->string('file_name');
             $table->timestamps();
         });
     }
