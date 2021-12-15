@@ -76,6 +76,9 @@ Route::prefix('admin')
             $admin->post('claims/{claim}/experts/{expert}', \App\Http\Controllers\Admin\Claims\AssignExpert::class);
             $admin->post('claims/{claim}/experts/{expert}/report', \App\Http\Controllers\Admin\Claims\UploadExpertReport::class);
 
+            $admin->get('claims/policy/guarantee-types', \App\Http\Controllers\Admin\Policies\ListGuaranteeTypes::class);
+            $admin->post('claims/{claim}/guarantees/', \App\Http\Controllers\Admin\Policies\SaveGuarantees::class);
+
         });
         $group->post('policies/{policy}/claims', \App\Http\Controllers\Company\Claims\CreateNewClaim::class)
             ->middleware('auth:insurer');
