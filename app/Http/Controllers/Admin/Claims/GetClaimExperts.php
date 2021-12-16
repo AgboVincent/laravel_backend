@@ -16,7 +16,9 @@ class GetClaimExperts extends Controller
 
         $expert = Expert::with(['reports' => function($query) use ($claim) {
             $query->where('claim_id', $claim->id);
-        }])->find($expertIds);
+        }])
+        ->latest()
+        ->find($expertIds);
         
         return Output::success($expert);
     }

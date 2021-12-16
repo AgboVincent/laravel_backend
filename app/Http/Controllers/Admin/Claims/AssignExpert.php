@@ -20,11 +20,10 @@ class AssignExpert extends Controller
             'file_name' => '',
         ]);
 
-        $claim->touch();
+        $expert->load(['reports' => function($query) use ($claim) {
+            $query->where('claim_id', $claim->id);
+        }]);
 
-        return Output::success(new ClaimResource($claim->load([
-            'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
-            'items', 'user'
-        ])));
+        return Output::success($expert);
     }
 }
