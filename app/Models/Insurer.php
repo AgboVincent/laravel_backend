@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Insurer extends Model
 {
     use HasFactory;
+
+    public function brokers(){
+        return $this->belongsToMany(Broker::class);
+    }
 }
