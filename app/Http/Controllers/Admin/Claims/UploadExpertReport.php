@@ -24,18 +24,19 @@ class UploadExpertReport extends Controller
             'visibility' => Filesystem::VISIBILITY_PUBLIC
         ]);
         
-        $addedExpert = ExpertReport::where('claim_id', $claim->id)
+        //check for empty report for this expert to this claim
+        $report = ExpertReport::where('claim_id', $claim->id)
                                 ->where('expert_id', $expert->id)
                                 ->where('file_path', '')
                                 ->where('file_name', '')
                                 ->first();
 
-        if ($addedExpert) {
-            $addedExpert->file_path = $filepath;
-            $addedExpert->file_name = $file->getClientOriginalName();
-            $addedExpert->save();
+        if ($report) {
+            $report->file_path = $filepath;
+            $report->file_name = $file->getClientOriginalName();
+            $report->save();
         } else {
-            ExpertReport::create([
+           $report = ExpertReport::create([
                 'claim_id' => $claim->id,
                 'expert_id' => $expert->id,
                 'file_path' => $filepath,
@@ -43,11 +44,6 @@ class UploadExpertReport extends Controller
             ]);
         }
 
-        $claim->touch();
-
-        return Output::success(new ClaimResource($claim->load([
-            'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
-            'items', 'user'
-        ])));
+        return Output::success($report);
     }
 }
