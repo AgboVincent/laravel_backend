@@ -10,4 +10,9 @@ class Expert extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function reports()
+    {
+        return $this->hasMany(ExpertReport::class);
+    }
 }

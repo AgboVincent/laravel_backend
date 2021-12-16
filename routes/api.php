@@ -78,6 +78,7 @@ Route::prefix('admin')
 
             $admin->get('claims/policy/guarantee-types', \App\Http\Controllers\Admin\Policies\ListGuaranteeTypes::class);
             $admin->post('claims/{claim}/guarantees/', \App\Http\Controllers\Admin\Policies\SaveGuarantees::class);
+            $admin->get('claims/{claim}/experts', \App\Http\Controllers\Admin\Claims\GetClaimExperts::class);
 
         });
         $group->post('policies/{policy}/claims', \App\Http\Controllers\Company\Claims\CreateNewClaim::class)

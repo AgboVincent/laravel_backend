@@ -24,15 +24,24 @@ class UploadExpertReport extends Controller
             'visibility' => Filesystem::VISIBILITY_PUBLIC
         ]);
         
-        $report = ExpertReport::firstOrNew([
-            'expert_id' => $expert->id,
-            'claim_id' => $claim->id,
-        ]);
+        $addedExpert = ExpertReport::where('claim_id', $claim->id)
+                                ->where('expert_id', $expert->id)
+                                ->where('file_path', '')
+                                ->where('file_name', '')
+                                ->first();
 
-        $report->update([
-            'file_path' => $filepath,
-            'file_name' => $request->file('report')->getClientOriginalName(),
-        ]);
+        if ($addedExpert) {
+            $addedExpert->file_path = $filepath;
+            $addedExpert->file_name = $file->getClientOriginalName();
+            $addedExpert->save();
+        } else {
+            ExpertReport::create([
+                'claim_id' => $claim->id,
+                'expert_id' => $expert->id,
+                'file_path' => $filepath,
+                'file_name' => $file->getClientOriginalName(),
+            ]);
+        }
 
         $claim->touch();
 
