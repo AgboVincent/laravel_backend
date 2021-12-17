@@ -9,6 +9,10 @@ class ClaimFinancialMovement extends Model
 {
     use HasFactory;
 
+    protected $casts = ['guarantees'=>'json'];
+
+    protected $guarded = ['id'];
+
     public function claim(){
         return $this->belongsTo(Claim::class);
     }
