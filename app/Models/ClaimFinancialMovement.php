@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ClaimFinancialMovement extends Model
 {
     use HasFactory;
+
+    public function claim(){
+        return $this->belongsTo(Claim::class);
+    }
 }
