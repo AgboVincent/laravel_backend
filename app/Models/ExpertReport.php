@@ -16,7 +16,11 @@ class ExpertReport extends Model
     // protected $hidden = ['file_path'];
 
     public function getFileAttribute(): string
-    {
+    {   
+        if($this->file_path == ''){
+            return '';
+        }
+        
         if(env('APP_ENV') == 'local') {
             return Storage::disk('uploads')->url($this->file_path);
         } else {

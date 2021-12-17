@@ -21,6 +21,13 @@ class CreateNewClaim extends Controller
 {
     public function __invoke(Policy $policy, Request $request): JsonResponse
     {
+        // $request->validate([
+        //     'accident_type' => 'integer|required',
+        //     'date' =>  'date|required',
+        //     'description' => 'string|required',
+        //     'p'
+        // ]);
+
         DB::beginTransaction();
         $accident = $this->createAccident(
             $claim = $this->createClaim($policy),
