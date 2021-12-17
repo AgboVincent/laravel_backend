@@ -81,6 +81,7 @@ Route::prefix('admin')
             $admin->get('claims/{claim}/experts', \App\Http\Controllers\Admin\Claims\GetClaimExperts::class);
 
             $admin->post('claims/{claim}/financial-movements', \App\Actions\Claims\SaveFinancialMovement::class);
+            $admin->get('claims/{claim}/financial-movements', \App\Actions\Claims\ListFinancialMovements::class);
 
         });
         $group->post('policies/{policy}/claims', \App\Http\Controllers\Company\Claims\CreateNewClaim::class)
