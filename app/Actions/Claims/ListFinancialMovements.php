@@ -26,7 +26,7 @@ class ListFinancialMovements
 
         return $movements->map(function ($row){
 
-            if($row->nature==ClaimFinancialMovement::NATURE_PROVISION){
+            if(strtolower($row->nature)==ClaimFinancialMovement::NATURE_PROVISION){
                 $row = $this->subtractTotalOfSameGuarantees($row);
             }
 
