@@ -11,7 +11,7 @@ class ClaimFinancialMovement extends Model
 
     const NATURE_PROVISION = 'provision';
 
-    protected $casts = ['guarantees'=>'json'];
+    protected $casts = ['guarantees'=>'json', 'amount'=>'double'];
 
     protected $guarded = ['id'];
 
