@@ -169,4 +169,8 @@ class Claim extends Model
     public function guarantees(){
         return $this->hasMany(Guarantee::class);
     }
+
+    public function financialMovements(){
+        return $this->hasMany(ClaimFinancialMovement::class);
+    }
 }

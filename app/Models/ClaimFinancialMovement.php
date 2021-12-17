@@ -9,6 +9,8 @@ class ClaimFinancialMovement extends Model
 {
     use HasFactory;
 
+    const NATURE_PROVISION = 'provision';
+
     protected $casts = ['guarantees'=>'json'];
 
     protected $guarded = ['id'];
