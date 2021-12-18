@@ -26,6 +26,7 @@ class ClaimURLRequest extends FormRequest
     public function rules()
     {
         return [
+            'baloonSsoInfo' => 'required|array',
             'baloonSsoInfo.token' => 'required|string',
             'dossierContact.contactId' => 'required|numeric',
             'dossierContact.email' => 'sometimes|nullable|email',
@@ -37,12 +38,12 @@ class ClaimURLRequest extends FormRequest
         ];
     }
 
-    public function withValidator($validator)
+    /*public function withValidator($validator)
     {
         $validator->after(function ($validator) {
             if (!Baloon::hasValidToken(JWT::decodePayload($this->input('baloonSsoInfo.token')))) {
                 $validator->errors()->add('ssoInfoToken', 'The token in the SSO contains invalid user keys or data.');
             }
         });
-    }
+    }*/
 }
