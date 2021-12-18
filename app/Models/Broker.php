@@ -12,4 +12,8 @@ class Broker extends Model
     public function insurers(){
         return $this->belongsToMany(Insurer::class);
     }
+
+    public function policies(){
+        return $this->hasMany(Policy::class);
+    }
 }
