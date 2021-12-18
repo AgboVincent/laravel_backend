@@ -173,4 +173,8 @@ class Claim extends Model
     public function financialMovements(){
         return $this->hasMany(ClaimFinancialMovement::class);
     }
+
+    public function garage(){
+        return $this->belongsTo(Garage::class);
+    }
 }

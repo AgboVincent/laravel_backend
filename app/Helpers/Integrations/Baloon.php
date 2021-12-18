@@ -36,6 +36,13 @@ class Baloon
     const USER_MOBILE_KEY = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/mobilephone';
 
     /**
+     * The name for garage id in the metas table
+     * 
+     * @var string
+     */
+    const GARAGE_META_KEY = 'baloon_garage_id';
+   
+    /**
      * The Baloon customer (dossier contact)
      *
      * @var string
@@ -105,12 +112,28 @@ class Baloon
             && isset($payload[static::USER_NAME_KEY]) && trim($payload[static::USER_NAME_KEY]) != '';
     }
 
-    public static function createCompany()
+    public static function createCompany(array $versionContract = [])
     {
-        return Company::firstOrCreate([
-            'name' => 'Baloon',
-            'code' => 'baloon',
+        //for authenticated user from baloon
+        if(count($versionContract) == 0){
+            return Company::firstOrCreate([
+                'name' => 'Baloon',
+                'code' => 'baloon',
+            ]);
+        }
+
+        //for policies 
+        $company = Company::firstOrCreate([
+            'name' => $versionContract['nomCompagnie'],
+            'code' => Str::slug($versionContract['nomCompagnie'])
         ]);
+        
+        $company->meta()->firstOrCreate([
+            'name' => 'baloon_company_id',
+            'value' => $versionContract['compagnieId'],
+        ]);
+        
+        return $company;
     }
 
     public static function createCustomer(array $dossierContact, Company $company)
@@ -189,7 +212,7 @@ class Baloon
 
     private static function getOrCreatePolicy(array $dossierContact, array $versionContract)
     {
-        $company = static::createCompany();
+        $company = static::createCompany($versionContract);
         $customer = static::createCustomer($dossierContact, $company);
 
         $policy = Policy::firstOrCreate([
@@ -220,7 +243,7 @@ class Baloon
             'model' => $model,
             'year' => rand(1990, 2021),
             'color' => $faker->colorName(),
-            'gear_type' => $faker->randomElement(['manaul', 'auto']),
+            'gear_type' => $faker->randomElement(['manual', 'auto']),
             'estimate' => rand(100000, 999999999),
         ]);
     }
