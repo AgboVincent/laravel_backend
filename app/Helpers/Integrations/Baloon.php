@@ -2,6 +2,7 @@
 
 namespace App\Helpers\Integrations;
 
+use App\Helpers\JWT;
 use App\Models\User;
 use Faker\Generator;
 use App\Models\Policy;
@@ -13,55 +14,57 @@ class Baloon
 {
     /**
      * The user's email key in the token payload
-     * 
+     *
      * @var string
      */
     const USER_EMAIL_KEY = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress';
-    
+
     /**
      * The user's name key in the token payload
-     * 
+     *
      * @var string
      */
     const USER_NAME_KEY = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name';
 
     /**
      * The user's phone key in the token payload
-     * 
+     *
      * @var string
      */
     const USER_MOBILE_KEY = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/mobilephone';
 
     /**
      * The Baloon customer (dossier contact)
-     * 
+     *
      * @var string
      */
     private static User $customer;
 
     /**
      * The ids of policies that have been created
-     * 
+     *
      * @var array
      */
     private static array $policyIds = [];
 
     /**
-     * Create a new user instance for authentication from Baloon SSO JWT.
+     * Create a new user instance for authentication from Baloon SSO.
      *
-     * @param  array  $payload - decoded JWT's payload
-     * @return \App\User
+     * @param  array  $payload - baloon request payload
+     * @return \App\Models\User
      */
-    public static function createUserForAuth(array $payload)
+    public static function createUserForAuth(array $requestPayload)
     {
-        $email = $payload[static::USER_EMAIL_KEY];
-        $name = $payload[static::USER_NAME_KEY];
-        $mobile = $payload[static::USER_MOBILE_KEY];
+        $jwtPayload = JWT::decodePayload($requestPayload['baloonSsoInfo']['token']);
+
+        $email = $jwtPayload[static::USER_EMAIL_KEY];
+        $name = $jwtPayload[static::USER_NAME_KEY];
+        $mobile = $jwtPayload[static::USER_MOBILE_KEY];
         $name = explode(' ', $name);
 
         $baloon = static::createCompany();
 
-        return 
+        return
             User::firstOrCreate([
                 'email' => $email,
                 'type' => 'broker',
@@ -95,14 +98,14 @@ class Baloon
     }
 
     public static function createCustomer(array $dossierContact, Company $company)
-    {   
+    {
         $customer = User::whereRaw(
-                'JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)', 
+                'JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)',
                 [(string)$dossierContact['contactId'], '$.baloonContactId']
             )->whereNotNull('meta')
             ->first();
-        
-            
+
+
         if($customer) {
             static::$customer = $customer;
             return $customer;
@@ -150,7 +153,7 @@ class Baloon
                 \collect($versionContract['risques'])
                     ->filter(fn($risque) => $risque['identifiant'] != '')
                     ->each(function($risque) use ($versionContract, $dossierContact){
-                        
+
                         $risqueDetails = collect($dossierContact['risques'])
                             ->filter(fn($r) => $r['identifiant'] != '')
                             ->firstWhere('identifiant', $risque['identifiant']);

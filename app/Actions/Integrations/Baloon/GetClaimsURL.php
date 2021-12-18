@@ -20,9 +20,7 @@ class GetClaimsURL
 
     public function handle(array $requestPayload)
     {
-        $jwtPayload = JWT::decodePayload($requestPayload['baloonSsoInfo']['token']);
-
-        $userForAuth = Baloon::createUserForAuth($jwtPayload);
+        $userForAuth = Baloon::createUserForAuth($requestPayload);
 
         // create policies
         Baloon::createPolicies($requestPayload['dossierContact']);
@@ -44,15 +42,15 @@ class GetClaimsURL
     public function asController(ClaimURLRequest $request)
     {
         $data = $this->handle($request->all());
-       
+
         return Output::success($data);
-        
+
     }
 
-    
+
     /**
      * Get the bearer token for authentication on redirect.
-     * 
+     *
      * @param  User $user
      * @return string
      */
@@ -63,7 +61,7 @@ class GetClaimsURL
 
     /**
      * Get the create-claims URL for the user.
-     * 
+     *
      * @param  User  $user
      * @return string
      */
