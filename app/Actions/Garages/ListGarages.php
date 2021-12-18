@@ -2,6 +2,7 @@
 
 namespace App\Actions\Garages;
 
+use App\Models\Garage;
 use App\Helpers\Output;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -13,7 +14,7 @@ class ListGarages
     {
         $garages = Garage::with('meta')->get();
         
-        return Output::success($garages);
+        return $garages;
     }
 
     public function AsController()
