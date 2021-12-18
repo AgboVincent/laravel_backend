@@ -33,14 +33,13 @@ class CustomerList extends Controller
             return $user->owner->customers();
         }
 
-        $query = Auth::user()->company->users();
+        $query = $user->company->users();
 
-        if (Auth::user()->type === User::TYPE_BROKER) {
+        if ($user->type === User::TYPE_BROKER) {
             $query = $query->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)', [(string)Auth::user()->id, '$.broker_id'])
                 ->whereNotNull('meta');
         }
 
         return  $query;
-
     }
 }
