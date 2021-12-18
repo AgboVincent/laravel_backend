@@ -14,12 +14,14 @@ use App\Http\Requests\Integrations\Baloon\ListClaimsURLRequest;
  * @mixin AsAction
  */
 class GetClaimsListURL
-{
+{   
     use AsAction;
 
     public function handle(array $requestPayload)
     {
-        $user = Baloon::createUserForAuth($requestPayload);
+        $jwtPayload = JWT::decodePayload($requestPayload['baloonSsoInfo']['token']);
+
+        $user = Baloon::createUserForAuth($jwtPayload);
 
         $data = [];
 
@@ -36,14 +38,14 @@ class GetClaimsListURL
     public function AsController(ListClaimsURLRequest $request)
     {
         $data = $this->handle($request->all());
-
+       
         return Output::success($data);
 
     }
 
     /**
      * Get the bearer token for authentication on redirect.
-     *
+     * 
      * @param  User $user
      * @return string
      */
@@ -54,7 +56,7 @@ class GetClaimsListURL
 
     /**
      * Get the list-claims URL for the user.
-     *
+     * 
      * @param  User  $user
      * @return string
      */
