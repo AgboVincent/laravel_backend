@@ -31,6 +31,7 @@ class ClaimResource extends JsonResource
             ->put('accident', new AccidentResource($this->resource->accident))
             ->put('items', ClaimItemResource::collection($this->resource->items))
             ->put('guarantees', GuaranteeResource::collection($this->resource->guarantees))
+            ->put('user_can_edit', true) //mock
             ->toArray();
     }
 }
