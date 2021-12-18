@@ -126,4 +126,8 @@ class User extends Authenticatable
     public function metas(){
         return $this->morphMany(Meta::class,'owner');
     }
+
+    public function owner(){
+        return $this->morphTo();
+    }
 }
