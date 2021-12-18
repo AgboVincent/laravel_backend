@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Integrations\Baloon\Helpers\ApplyAccessRightsToListQuery;
 use App\Helpers\Auth;
+use App\Helpers\Integrations\Baloon;
 use App\Helpers\Output;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PaginatedResource;
@@ -30,17 +32,25 @@ class CustomerList extends Controller
         $user = Auth::user();
 
         if($user->owner){
-            return $user->owner->customers();
+            $query = $user->owner->customers();
+            return $this->applyMoreFilters($user,$query);
         }
 
-        $query = Auth::user()->company->users();
+        $query = $user->company->users();
 
-        if (Auth::user()->type === User::TYPE_BROKER) {
+        if ($user->type === User::TYPE_BROKER) {
             $query = $query->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)', [(string)Auth::user()->id, '$.broker_id'])
                 ->whereNotNull('meta');
         }
 
         return  $query;
+    }
 
+    protected function applyMoreFilters(User $user, $query){
+        if($user->owner->code==Baloon::BROKER_CODE){
+            $query = ApplyAccessRightsToListQuery::make()->handle($user,$query);
+        }
+
+        return $query;
     }
 }

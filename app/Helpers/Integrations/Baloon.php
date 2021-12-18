@@ -3,6 +3,7 @@
 namespace App\Helpers\Integrations;
 
 use App\Helpers\JWT;
+use App\Models\Broker;
 use App\Models\User;
 use Faker\Generator;
 use App\Models\Policy;
@@ -27,6 +28,8 @@ class Baloon
     const USER_NAME_KEY = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name';
 
     const ACCESS_RIGHT_META_KEY = 'baloon_access_rights';
+
+    const BROKER_CODE = 'baloon';
 
     /**
      * The user's phone key in the token payload
@@ -251,5 +254,9 @@ class Baloon
     public static function getPolicyIds()
     {
         return static::$policyIds;
+    }
+
+    public static function getBrokerModel():Broker{
+        return Broker::firstWhere('code',self::BROKER_CODE);
     }
 }

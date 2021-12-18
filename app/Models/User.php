@@ -130,4 +130,8 @@ class User extends Authenticatable
     public function owner(){
         return $this->morphTo();
     }
+
+    public function insurers(){
+        return $this->belongsToMany(Insurer::class,'policies');
+    }
 }
