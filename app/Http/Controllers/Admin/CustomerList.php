@@ -15,12 +15,8 @@ class CustomerList extends Controller
 {
     public function __invoke(Request $request): JsonResponse
     {
-        $query = Auth::user()->company->users();
 
-        if (Auth::user()->type === User::TYPE_BROKER) {
-            $query = $query->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)', [(string)Auth::user()->id, '$.broker_id'])
-                ->whereNotNull('meta');
-        }
+        $query = $this->makeCustomerQuery();
 
         return Output::success(
             new PaginatedResource(
@@ -28,5 +24,23 @@ class CustomerList extends Controller
                 UserResource::class
             )
         );
+    }
+
+    protected function makeCustomerQuery(){
+        $user = Auth::user();
+
+        if($user->owner){
+            return $user->owner->customers();
+        }
+
+        $query = Auth::user()->company->users();
+
+        if (Auth::user()->type === User::TYPE_BROKER) {
+            $query = $query->whereRaw('JSON_CONTAINS(JSON_UNQUOTE(meta), ?, ?)', [(string)Auth::user()->id, '$.broker_id'])
+                ->whereNotNull('meta');
+        }
+
+        return  $query;
+
     }
 }

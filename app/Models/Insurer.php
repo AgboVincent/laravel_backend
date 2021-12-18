@@ -16,4 +16,8 @@ class Insurer extends Model
     public function policies(){
         return $this->hasMany(Policy::class);
     }
+
+    public function customers(){
+        return $this->belongsToMany(User::class,'policies');
+    }
 }
