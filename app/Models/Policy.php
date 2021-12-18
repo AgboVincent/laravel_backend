@@ -63,4 +63,12 @@ class Policy extends Model
     {
         return $this->hasMany(Vehicle::class);
     }
+
+    public function insurer(){
+        return $this->belongsTo(Insurer::class);
+    }
+
+    public function broker(){
+        return $this->belongsTo(Broker::class);
+    }
 }
