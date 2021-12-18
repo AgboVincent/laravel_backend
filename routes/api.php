@@ -83,6 +83,8 @@ Route::prefix('admin')
             $admin->post('claims/{claim}/financial-movements', \App\Actions\Claims\SaveFinancialMovement::class);
             $admin->get('claims/{claim}/financial-movements', \App\Actions\Claims\ListFinancialMovements::class);
 
+            $admin->get('garages', \App\Actions\Garages\ListGarages::class);
+
         });
         $group->post('policies/{policy}/claims', \App\Http\Controllers\Company\Claims\CreateNewClaim::class)
             ->middleware('auth:insurer');
