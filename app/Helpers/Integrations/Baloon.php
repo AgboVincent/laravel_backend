@@ -26,6 +26,8 @@ class Baloon
      */
     const USER_NAME_KEY = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name';
 
+    const ACCESS_RIGHT_META_KEY = 'baloon_access_rights';
+
     /**
      * The user's phone key in the token payload
      *
@@ -64,18 +66,32 @@ class Baloon
 
         $baloon = static::createCompany();
 
-        return
-            User::firstOrCreate([
-                'email' => $email,
-                'type' => 'broker',
-            ], [
-                'first_name' => $name[0],
-                'last_name' => $name[1],
-                'company_id' => $baloon->id,
-                'password' => bcrypt('baloon'),
-                'mobile' => $mobile,
-                'email_verified_at' => now(),
-            ]);
+        $user = User::firstOrCreate([
+            'email' => $email,
+            'type' => 'broker',
+        ], [
+            'first_name' => $name[0],
+            'last_name' => $name[1],
+            'company_id' => $baloon->id,
+            'password' => bcrypt('baloon'),
+            'mobile' => $mobile,
+            'email_verified_at' => now(),
+        ]);
+
+        self::saveAccessRights($user,$requestPayload);
+
+        return $user;
+
+    }
+
+    protected static function saveAccessRights(User $user,array $payload){
+        if(!empty($payload['baloonSsoInfo']['accessRights'])){
+            $accessRightsJson = json_encode($payload['baloonSsoInfo']['accessRights']);
+            $user->metas()->firstOrCreate(
+                ['name'=>self::ACCESS_RIGHT_META_KEY],
+                ['value'=>$accessRightsJson]
+            );
+        }
     }
 
     /**

@@ -122,4 +122,8 @@ class User extends Authenticatable
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+
+    public function metas(){
+        return $this->morphMany(Meta::class,'owner');
+    }
 }

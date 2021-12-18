@@ -9,6 +9,8 @@ class Meta extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name','value'];
+
     public function owner(){
         return $this->morphTo();
     }
