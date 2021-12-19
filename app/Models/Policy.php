@@ -71,4 +71,8 @@ class Policy extends Model
     public function broker(){
         return $this->belongsTo(Broker::class);
     }
+
+    public function metas(){
+        return $this->morphMany(Meta::class,'owner');
+    }
 }

@@ -34,6 +34,13 @@ class Baloon
 
     const BROKER_NAME = 'Baloon';
 
+    const EXTRA_META_FIELDS = [
+        'baloon_reseauId' => 'reseauId',
+        'baloon_nomReseau' => 'nomReseau',
+        'baloon_acteurCommercialId' => 'acteurCommercialId',
+        'baloon_nomActeurCommercial' => 'nomActeurCommercial',
+    ];
+
     /**
      * The user's phone key in the token payload
      *
@@ -239,10 +246,18 @@ class Baloon
             'broker_id' => $broker->id,
             'insurer_id' => $insurer->id,
             'company_id' => $company->id, //remove
-            'type' => 'comprehensive',
+            'type' => 'comprehensive', //remove or make optional
             'expires_at' => isset($versionContract['fin']) ? $versionContract['fin'] : null,
             'created_at' => $versionContract['debut'],
         ]);
+
+        foreach(self::EXTRA_META_FIELDS as $metaKey => $baloonKey)
+        {
+            $policy->metas()->firstOrCreate([
+                'name' => $metaKey,
+                'value' => $versionContract[$baloonKey],
+            ]);
+        }
 
         return $policy;
     }
