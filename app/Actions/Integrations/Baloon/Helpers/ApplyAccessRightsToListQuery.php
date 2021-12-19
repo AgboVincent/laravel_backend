@@ -12,6 +12,11 @@ class ApplyAccessRightsToListQuery
 {
     use AsObject, ChecksAccessRight;
 
+    protected string $queryType = self::QUERY_TYPE_POLICY;
+
+    const QUERY_TYPE_POLICY = 'policy';
+    const QUERY_TYPE_CLAIM = 'claim';
+
     public function handle(User $user, $query)
     {
         $accessRights = $this->loadAccessRights($user);
