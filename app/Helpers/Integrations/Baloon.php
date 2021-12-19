@@ -107,6 +107,12 @@ class Baloon
 
         self::saveAccessRights($user,$requestPayload);
 
+        if(!$user->owner){
+            $user->owner()->associate(self::getBrokerModel());
+            $user->save();
+        }
+
+
         return $user;
 
     }
