@@ -3,11 +3,12 @@
 namespace App\Helpers\Integrations;
 
 use App\Helpers\JWT;
-use App\Models\Broker;
 use App\Models\User;
 use Faker\Generator;
+use App\Models\Broker;
 use App\Models\Policy;
 use App\Models\Company;
+use App\Models\Insurer;
 use App\Models\Vehicle;
 use Illuminate\Support\Str;
 
@@ -30,6 +31,8 @@ class Baloon
     const ACCESS_RIGHT_META_KEY = 'baloon_access_rights';
 
     const BROKER_CODE = 'baloon';
+
+    const BROKER_NAME = 'Baloon';
 
     /**
      * The user's phone key in the token payload
@@ -58,6 +61,13 @@ class Baloon
      * @var array
      */
     private static array $policyIds = [];
+
+    /**
+     * Baloon's Broker instance
+     *
+     * @var Broker
+     */
+    private static Broker $brokerInstance;
 
     /**
      * Create a new user instance for authentication from Baloon SSO.
@@ -215,14 +225,20 @@ class Baloon
 
     private static function getOrCreatePolicy(array $dossierContact, array $versionContract)
     {
-        $company = static::createCompany($versionContract);
+        $company = static::createCompany($versionContract); //remove
+
+        $insurer = self::createInsurer($versionContract);
+        $broker = self::getBrokerModel();
+
         $customer = static::createCustomer($dossierContact, $company);
 
         $policy = Policy::firstOrCreate([
             'number' => $versionContract['contratId'],
             'user_id' => $customer->id,
         ],[
-            'company_id' => $company->id,
+            'broker_id' => $broker->id,
+            'insurer_id' => $insurer->id,
+            'company_id' => $company->id, //remove
             'type' => 'comprehensive',
             'expires_at' => now()->addYear(),
         ]);
@@ -257,7 +273,11 @@ class Baloon
     }
 
     public static function getBrokerModel():Broker{
-        return Broker::firstWhere('code',self::BROKER_CODE);
+
+        return self::$brokerInstance = self::$brokerInstance ?? Broker::firstOrCreate(
+            ['code' => self::BROKER_CODE],
+            ['name' => self::BROKER_NAME]
+        );
     }
 
     public static function getInsurerIdsForCompagnies(array $compagnies){
@@ -266,5 +286,27 @@ class Baloon
             ->wherePivotIn('insurer_id_from_broker',$compagnies)
             ->get(['insurers.id'])->pluck('id')
             ->toArray();
+    }
+
+    public static function createInsurer(array $versionContract){
+        $broker = self::getBrokerModel();
+
+        $insurer = $broker->insurers()
+            ->wherePivot('insurer_id_from_broker', $versionContract['compagnieId'])
+            ->first();
+
+        if($insurer) {
+            return $insurer;
+        }
+
+        $insurer = $broker->insurers()->create([
+            'name' => $versionContract['nomCompagnie'],
+        ]);
+
+        $insurer->brokers()->updateExistingPivot($broker->id, [
+            'insurer_id_from_broker' => $versionContract['compagnieId']
+        ]);
+
+        return $insurer;
     }
 }

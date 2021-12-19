@@ -9,6 +9,8 @@ class Insurer extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function brokers(){
         return $this->belongsToMany(Broker::class);
     }
