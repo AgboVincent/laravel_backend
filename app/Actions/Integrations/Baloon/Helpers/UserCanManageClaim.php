@@ -6,6 +6,7 @@ use App\DTOs\Integrations\Baloon\AccessRight;
 use App\DTOs\Integrations\Baloon\AccessRightCollection;
 use App\Helpers\Integrations\Baloon;
 use App\Models\Claim;
+use App\Models\Policy;
 use App\Models\User;
 use Lorisleiva\Actions\Concerns\AsObject;
 
@@ -57,6 +58,10 @@ class UserCanManageClaim
 
         $result[] = $this->checkRuleCompagnies($accessRight,$object);
 
+        $result[] = $this->checkRuleReseaux($accessRight,$object);
+
+        $result[] = $this->checkRuleActeurCommercial($accessRight,$object);
+
         return $result;
     }
 
@@ -71,6 +76,50 @@ class UserCanManageClaim
             return false;
             //prevent access if the user has an insurer restriction
             // but somehow the claim's policy doesnt have to an insurer
+        }
+
+        return true;
+    }
+
+    protected function checkRuleReseaux(AccessRight $accessRight,$object){
+        if(count($accessRight->reseaux)){
+
+            if($object instanceof Claim){
+                $policy = $object->policy;
+
+            }elseif ($object instanceof Policy){
+                $policy = $object;
+
+            }else {
+                return true;
+            }
+
+            return $policy->metas()
+                ->where('name',Baloon::META_KEY_RESEAU_ID)
+                ->whereIn('value',$accessRight->reseaux)
+                ->exists();
+        }
+
+        return true;
+    }
+
+    protected function checkRuleActeurCommercial(AccessRight $accessRight,$object){
+        if(count($accessRight->acteursCommerciaux)){
+
+            if($object instanceof Claim){
+                $policy = $object->policy;
+
+            }elseif ($object instanceof Policy){
+                $policy = $object;
+
+            }else {
+                return true;
+            }
+
+            return $policy->metas()
+                ->where('name',Baloon::META_KEY_ACTEUR_COMMERCIAL_ID)
+                ->whereIn('value',$accessRight->acteursCommerciaux)
+                ->exists();
         }
 
         return true;
