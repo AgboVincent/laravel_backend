@@ -25,7 +25,7 @@ class ApplyAccessRightsToListQuery
     protected function buildFilters(AccessRightCollection $accessRights, $query){
 
         foreach ($accessRights as $accessRight){
-            if($accessRight->accessRightCode!=='READ_CLAIM'){
+            if(!in_array($accessRight->accessRightCode,['READ_CLAIM','MANAGE_CLAIM'])){
                 continue;
             }
 
