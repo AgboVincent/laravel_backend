@@ -40,11 +40,11 @@ class Baloon
 
     /**
      * The name for garage id in the metas table
-     * 
+     *
      * @var string
      */
     const GARAGE_META_KEY = 'baloon_garage_id';
-   
+
     /**
      * The Baloon customer (dossier contact)
      *
@@ -125,17 +125,17 @@ class Baloon
             ]);
         }
 
-        //for policies 
+        //for policies
         $company = Company::firstOrCreate([
             'name' => $versionContract['nomCompagnie'],
             'code' => Str::slug($versionContract['nomCompagnie'])
         ]);
-        
+
         $company->meta()->firstOrCreate([
             'name' => 'baloon_company_id',
             'value' => $versionContract['compagnieId'],
         ]);
-        
+
         return $company;
     }
 
@@ -258,5 +258,13 @@ class Baloon
 
     public static function getBrokerModel():Broker{
         return Broker::firstWhere('code',self::BROKER_CODE);
+    }
+
+    public static function getInsurerIdsByCompagnies(array $compagnies){
+       return self::getBrokerModel()
+            ->insurers()
+            ->wherePivotIn('insurer_id_from_broker',$compagnies)
+            ->get(['insurers.id'])->pluck('id')
+            ->toArray();
     }
 }

@@ -31,16 +31,11 @@ class ApplyAccessRightsToListQuery
 
             $query->where(function($query) use ($accessRight){
                 if(count($accessRight->compagnies)){
-                    $matchingInsurerIds = Baloon::getBrokerModel()
-                        ->insurers()
-                        ->wherePivotIn('insurer_id_from_broker',$accessRight->compagnies)
-                        ->get(['insurers.id'])->pluck('id')
-                        ->toArray();
+                    $insurerIds = Baloon::getInsurerIdsByCompagnies($accessRight->compagnies);
 
-                    $query->whereHas('insurers',function ($insurers) use ($matchingInsurerIds){
-                        $insurers->whereIn('insurers.id',$matchingInsurerIds);
+                    $query->whereHas('insurers',function ($insurers) use ($insurerIds){
+                        $insurers->whereIn('insurers.id',$insurerIds);
                     });
-
                 }
             });
 
