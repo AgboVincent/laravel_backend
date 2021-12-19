@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Actions\Integrations\Baloon\Helpers\UserCanManageClaim;
 use App\Helpers\Auth;
+use App\Helpers\Integrations\Baloon;
 use Illuminate\Support\Str;
 use EloquentFilter\Filterable;
 use Illuminate\Support\Carbon;
@@ -176,5 +178,14 @@ class Claim extends Model
 
     public function garage(){
         return $this->belongsTo(Garage::class);
+    }
+
+    public function getUserCanEditAttribute(){
+        $user = auth()->user();
+        if($user->owner && $user->owner->code==Baloon::BROKER_CODE){
+            return UserCanManageClaim::make()->handle($user,$this);
+        }
+
+        return true;
     }
 }
