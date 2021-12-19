@@ -37,6 +37,20 @@ class ApplyAccessRightsToListQuery
                         $insurers->whereIn('insurers.id',$insurerIds);
                     });
                 }
+
+                if(count($accessRight->reseaux)){
+                    $query->whereHas('metas',function ($metas) use ($accessRight){
+                        $metas->where('name',Baloon::META_KEY_RESEAU_ID)
+                            ->whereIn('value',$accessRight->reseaux);
+                    });
+                }
+
+                if(count($accessRight->acteursCommerciaux)){
+                    $query->whereHas('metas',function ($metas) use ($accessRight){
+                        $metas->where('name',Baloon::META_KEY_ACTEUR_COMMERCIAL_ID)
+                            ->whereIn('value',$accessRight->acteursCommerciaux);
+                    });
+                }
             });
 
         }
