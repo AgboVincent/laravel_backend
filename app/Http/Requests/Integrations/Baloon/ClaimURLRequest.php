@@ -37,6 +37,8 @@ class ClaimURLRequest extends FormRequest
             'dossierContact.risques.*.designation' => 'required|string',
             'dossierContact.versionsContrats.*.compagnieId' => 'required|integer',
             'dossierContact.versionsContrats.*.nomCompagnie' => 'required|string',
+            'dossierContact.versionsContrats.*.debut' => 'required|date',
+            'dossierContact.versionsContrats.*.fin' => 'nullable|date',
         ];
     }
 
