@@ -10,7 +10,7 @@ use Lorisleiva\Actions\Concerns\AsObject;
 
 class ApplyAccessRightsToListQuery
 {
-    use AsObject;
+    use AsObject, ChecksAccessRight;
 
     public function handle(User $user, $query)
     {
@@ -22,23 +22,10 @@ class ApplyAccessRightsToListQuery
         return $query;
     }
 
-    protected function loadAccessRights($user){
-        $accessRights = $user->metas()
-            ->firstWhere('name',Baloon::ACCESS_RIGHT_META_KEY);
-
-        if(!$accessRights || ($accessRights && empty($accessRights->value))){
-            return null;
-        }
-
-        $array = json_decode($accessRights->value,true);
-
-        return new AccessRightCollection($array);
-    }
-
     protected function buildFilters(AccessRightCollection $accessRights, $query){
 
         foreach ($accessRights as $accessRight){
-            if($accessRight->accessRightCode!=='READ_CLAIM'){
+            if(!in_array($accessRight->accessRightCode,['READ_CLAIM','MANAGE_CLAIM'])){
                 continue;
             }
 
