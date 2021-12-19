@@ -63,7 +63,7 @@ class UserCanManageClaim
 
     protected function checkRuleCompagnies(AccessRight $accessRight,$object){
         if(count($accessRight->compagnies)){
-            $InsurerIds  = Baloon::getInsurerIdsByCompagnies($accessRight->compagnies);
+            $InsurerIds  = Baloon::getInsurerIdsForCompagnies($accessRight->compagnies);
 
             if($object instanceof Claim && $object->policy->insurer){
                 return in_array($object->policy->insurer->id, $InsurerIds);

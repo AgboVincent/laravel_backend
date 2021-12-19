@@ -31,7 +31,7 @@ class ApplyAccessRightsToListQuery
 
             $query->where(function($query) use ($accessRight){
                 if(count($accessRight->compagnies)){
-                    $insurerIds = Baloon::getInsurerIdsByCompagnies($accessRight->compagnies);
+                    $insurerIds = Baloon::getInsurerIdsForCompagnies($accessRight->compagnies);
 
                     $query->whereHas('insurers',function ($insurers) use ($insurerIds){
                         $insurers->whereIn('insurers.id',$insurerIds);

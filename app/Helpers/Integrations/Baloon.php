@@ -260,7 +260,7 @@ class Baloon
         return Broker::firstWhere('code',self::BROKER_CODE);
     }
 
-    public static function getInsurerIdsByCompagnies(array $compagnies){
+    public static function getInsurerIdsForCompagnies(array $compagnies){
        return self::getBrokerModel()
             ->insurers()
             ->wherePivotIn('insurer_id_from_broker',$compagnies)
