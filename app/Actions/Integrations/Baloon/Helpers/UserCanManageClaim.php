@@ -68,6 +68,9 @@ class UserCanManageClaim
             if($object instanceof Claim && $object->policy->insurer){
                 return in_array($object->policy->insurer->id, $InsurerIds);
             }
+            return false;
+            //prevent access if the user has an insurer restriction
+            // but somehow the claim's policy doesnt have to an insurer
         }
 
         return true;
