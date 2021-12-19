@@ -34,12 +34,17 @@ class Baloon
 
     const BROKER_NAME = 'Baloon';
 
+    const META_KEY_RESEAU_ID = 'baloon_reseauId';
+
+    const META_KEY_ACTEUR_COMMERCIAL_ID = 'baloon_acteurCommercialId';
+
     const EXTRA_META_FIELDS = [
-        'baloon_reseauId' => 'reseauId',
+        self::META_KEY_RESEAU_ID => 'reseauId',
         'baloon_nomReseau' => 'nomReseau',
-        'baloon_acteurCommercialId' => 'acteurCommercialId',
+        self::META_KEY_ACTEUR_COMMERCIAL_ID => 'acteurCommercialId',
         'baloon_nomActeurCommercial' => 'nomActeurCommercial',
     ];
+
 
     /**
      * The user's phone key in the token payload
