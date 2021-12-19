@@ -27,6 +27,7 @@ class UserCanManageClaim
 
     protected function rightsCanManageClaim(AccessRightCollection $accessRights, $object){
 
+        //this iteration simulates OR comparison as baloon wants
         foreach ($accessRights as $accessRight){
             if($accessRight->accessRightCode!=='MANAGE_CLAIM'){
                 continue;
@@ -35,7 +36,7 @@ class UserCanManageClaim
             $rulesPassed = $this->iterateAccessRules($accessRight,$object);
 
             //check if $rulesPassed has all elements to be true
-            //by looking for any ocurrence of false
+            //by looking for any ocurrence of false to simulate AND comparison
             if(in_array(false, $rulesPassed, true) === false){
                 return true;
             }
