@@ -240,7 +240,8 @@ class Baloon
             'insurer_id' => $insurer->id,
             'company_id' => $company->id, //remove
             'type' => 'comprehensive',
-            'expires_at' => now()->addYear(),
+            'expires_at' => isset($versionContract['fin']) ? $versionContract['fin'] : null,
+            'created_at' => $versionContract['debut'],
         ]);
 
         return $policy;
