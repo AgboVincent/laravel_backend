@@ -20,7 +20,7 @@ class PolicyResource extends JsonResource
     public function toArray($request): array
     {
         $data = $this->resource->only([
-            'id', 'number', 'status', 'type', 'created_at', 'expires_at'
+            'id', 'number', 'status', 'type', 'created_at', 'expires_at','user_can_create_claim'
         ]);
 
         $data['company'] = new CompanyResource($this->resource->company);
