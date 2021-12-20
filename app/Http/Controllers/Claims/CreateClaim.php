@@ -33,7 +33,7 @@ class CreateClaim extends Controller
 
         $claim = $this->createClaim($vehicle);
         $accident = $this->createAccident($claim, $request);
-        $this->createThirdParty($accident, $request);
+        $this->createThirdParties($accident, $request);
         $this->createItems($accident, (array)$request->get('quotes'));
         $this->uploadDocuments($accident, $request);
         DB::commit();
@@ -75,10 +75,10 @@ class CreateClaim extends Controller
         return $accident;
     }
 
-    private function createThirdParty(Accident $accident, Request $request)
+    private function createThirdParties(Accident $accident, Request $request)
     {
         if ($accident->involved_third_party) {
-            $accident->thirdParty()->create($request->get('third_party'));
+            $accident->thirdParties()->createMany($request->get('third_parties'));
         }
     }
 

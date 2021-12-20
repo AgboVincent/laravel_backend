@@ -38,7 +38,7 @@ class AddItems extends Controller
         $claim->touch();
         
         return Output::success(new ClaimResource($claim->load([
-            'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
+            'policy', 'accident.media', 'accident.thirdParties', 'accident.media.file',
             'items', 'user'
         ])));
     }
