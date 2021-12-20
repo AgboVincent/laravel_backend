@@ -29,7 +29,7 @@ class ListClaims extends Controller
         return Output::success(
             new PaginatedResource(
                 $query->filter($request->all())->with([
-                    'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
+                    'policy', 'accident.media', 'accident.thirdParties', 'accident.media.file',
                     'items.type', 'user'
                 ])->paginate(),
                 ClaimResource::class

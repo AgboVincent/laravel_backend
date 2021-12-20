@@ -18,7 +18,7 @@ class All extends Controller
         $claims = Auth::user()->claims()->latest()
             ->filter($request->all())
             ->with([
-                'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
+                'policy', 'accident.media', 'accident.thirdParties', 'accident.media.file',
                 'items', 'user'
             ])
             ->paginate();
