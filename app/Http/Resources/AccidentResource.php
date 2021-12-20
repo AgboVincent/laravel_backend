@@ -24,7 +24,7 @@ class AccidentResource extends JsonResource
         $data['documents'] = AccidentMediaResource::collection($this->resource->media);
 
         if ($this->resource->involved_third_party) {
-            $data['third_party'] = new ThirdPartyResource($this->resource->thirdParty);
+            $data['third_parties'] = ThirdPartyResource::collection($this->resource->thirdParties);
         }
 
         return $data;

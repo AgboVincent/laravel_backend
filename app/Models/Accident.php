@@ -21,7 +21,7 @@ use Illuminate\Support\Carbon;
  * @property int $accident_type_id
  * @property string $description
  * @property bool $involved_third_party
- * @property AccidentThirdParty|null $thirdParty
+ * @property AccidentThirdParty[]|null $thirdParty
  * @property Upload[]|Collection $uploads
  * @property Upload[]|Collection $media
  * @property AccidentType $type
@@ -44,9 +44,9 @@ class Accident extends Model
         return $this->belongsTo(Claim::class);
     }
 
-    public function thirdParty(): HasOne
+    public function thirdParties(): HasMany
     {
-        return $this->hasOne(AccidentThirdParty::class);
+        return $this->hasMany(AccidentThirdParty::class);
     }
 
     /**
