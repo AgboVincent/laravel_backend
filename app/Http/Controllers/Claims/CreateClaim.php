@@ -78,7 +78,7 @@ class CreateClaim extends Controller
     private function createThirdParty(Accident $accident, Request $request)
     {
         if ($accident->involved_third_party) {
-            $accident->thirdParty()->create($request->get('third_party'));
+            $accident->thirdParties()->create($request->get('third_party'));
         }
     }
 
