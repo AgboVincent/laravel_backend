@@ -12,7 +12,7 @@ class ClaimResource extends JsonResource
         parent::__construct($resource);
         $this->resource = $resource
             ->load([
-                'policy', 'accident.media', 'accident.thirdParty', 'accident.media.file',
+                'policy', 'accident.media', 'accident.thirdParties', 'accident.media.file',
                 'items', 'items.type'
             ]);
     }

@@ -21,7 +21,7 @@ use Illuminate\Support\Carbon;
  * @property int $accident_type_id
  * @property string $description
  * @property bool $involved_third_party
- * @property AccidentThirdParty[]|null $thirdParty
+ * @property AccidentThirdParties[]|null $thirdParties
  * @property Upload[]|Collection $uploads
  * @property Upload[]|Collection $media
  * @property AccidentType $type
