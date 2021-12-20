@@ -33,8 +33,6 @@ class ApplyAccessRightsToListQuery
     protected function buildFilters(AccessRightCollection $accessRights, $query){
 
         $query->where(function ($query) use ($accessRights){
-            $query->whereRaw('1=1');
-
             foreach ($accessRights as $accessRight){
                 if(
                     !in_array($accessRight->accessRightCode,['READ_CLAIM','MANAGE_CLAIM']) ||
