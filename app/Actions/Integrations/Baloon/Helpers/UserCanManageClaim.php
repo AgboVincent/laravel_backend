@@ -70,8 +70,15 @@ class UserCanManageClaim
         if(count($accessRight->compagnies)){
             $InsurerIds  = Baloon::getInsurerIdsForCompagnies($accessRight->compagnies);
 
-            if($object instanceof Claim && $object->policy->insurer){
-                return in_array($object->policy->insurer->id, $InsurerIds);
+            if($object instanceof Claim){
+                $policy = $object->policy;
+
+            }elseif ($object instanceof Policy){
+                $policy = $object;
+            }
+
+            if($policy->insurer){
+                return in_array($policy->insurer->id, $InsurerIds);
             }
             return false;
             //prevent access if the user has an insurer restriction
