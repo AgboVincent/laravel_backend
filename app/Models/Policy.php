@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Actions\Integrations\Baloon\Helpers\UserCanManageClaim;
+use App\Helpers\Integrations\Baloon;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -74,5 +76,14 @@ class Policy extends Model
 
     public function metas(){
         return $this->morphMany(Meta::class,'owner');
+    }
+
+    public function getUserCanCreateClaimAttribute(){
+        $user = auth()->user();
+        if($user->owner && $user->owner->code==Baloon::BROKER_CODE){
+            return UserCanManageClaim::make()->handle($user,$this);
+        }
+
+        return true;
     }
 }
