@@ -2,11 +2,9 @@
 
 namespace App\Actions\Integrations\Baloon\Helpers;
 
-use App\DTOs\Integrations\Baloon\AccessRight;
 use App\DTOs\Integrations\Baloon\AccessRightCollection;
 use App\Helpers\Integrations\Baloon;
 use App\Models\User;
-use Illuminate\Support\Facades\Log;
 use Lorisleiva\Actions\Concerns\AsObject;
 
 class ApplyAccessRightsToListQuery
@@ -34,7 +32,6 @@ class ApplyAccessRightsToListQuery
                     !in_array($accessRight->accessRightCode,['READ_CLAIM','MANAGE_CLAIM']) ||
                     (!$accessRight->compagnies && !$accessRight->reseaux && !$accessRight->acteursCommerciaux)
                 ){
-                    Log::info("Skipping access right",['right'=>$accessRight]);
                     continue;
                 }
 
@@ -67,7 +64,5 @@ class ApplyAccessRightsToListQuery
 
         return $query;
     }
-
-
 
 }
