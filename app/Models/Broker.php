@@ -22,4 +22,8 @@ class Broker extends Model
     public function customers(){
         return $this->belongsToMany(User::class,'policies');
     }
+
+    public function claims(){
+        return $this->hasManyThrough(Claim::class,Policy::class);
+    }
 }
