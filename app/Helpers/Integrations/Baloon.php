@@ -184,7 +184,7 @@ class Baloon
         $name = explode(' ', $dossierContact['nomContact']);
 
         $first_name = $name[0];
-        $last_name = $name[1];
+        $last_name = !empty($name[1])?$name[1]:'';
 
         $customer = User::create([
             'type' => 'user',
