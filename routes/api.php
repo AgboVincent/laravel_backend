@@ -64,7 +64,7 @@ Route::prefix('admin')
         $group->middleware('auth:admin')->group(function (Router $admin) {
             $admin->get('claims', \App\Http\Controllers\Admin\Claims\ListClaims::class);
             $admin->post('claims/{claim}/comments', \App\Http\Controllers\Claims\Comments\AddComment::class);
-            $admin->get('claims/{claim}', \App\Http\Controllers\Admin\Claims\SingleClaim::class);
+            $admin->get('claims/{claim_id}', \App\Http\Controllers\Admin\Claims\SingleClaim::class);
             $admin->get('overview', \App\Http\Controllers\Admin\Dashboard\Overview::class);
             $admin->get('customers', \App\Http\Controllers\Admin\CustomerList::class);
             $admin->get('policies', \App\Http\Controllers\Admin\Policies\AllPolicies::class);
