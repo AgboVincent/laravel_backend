@@ -18,7 +18,7 @@ class GuaranteeResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->type->name ?? '',
+            'name' => $this->type->code ?? '',
             'type_id' => $this->guarantee_type_id,
         ];
 
