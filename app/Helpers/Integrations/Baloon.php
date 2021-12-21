@@ -11,6 +11,7 @@ use App\Models\Company;
 use App\Models\Insurer;
 use App\Models\Vehicle;
 use Illuminate\Support\Str;
+use App\Models\GuaranteeType;
 
 class Baloon
 {
@@ -262,6 +263,8 @@ class Baloon
             'created_at' => $versionContract['debut'],
         ]);
 
+        self::createPolicyGuarantees($policy, $versionContract['risques'][0]['garanties']);
+
         foreach(self::EXTRA_META_FIELDS as $metaKey => $baloonKey)
         {
             $policy->metas()->firstOrCreate([
@@ -335,5 +338,18 @@ class Baloon
         ]);
 
         return $insurer;
+    }
+
+    public static function createPolicyGuarantees(Policy $policy, array $guarantees)
+    {
+        $guaranteeTypes = collect($guarantees)
+            ->map(function($guarantee) {
+                return  [
+                    'code' => $guarantee['code'],
+                    'details' => json_encode($guarantee),
+                ];
+            });
+
+        GuaranteeType::upsert($guaranteeTypes->toArray(), ['code']);
     }
 }
