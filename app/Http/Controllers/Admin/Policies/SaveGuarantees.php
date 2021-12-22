@@ -2,35 +2,29 @@
 
 namespace App\Http\Controllers\Admin\Policies;
 
-use App\Models\Claim;
+use App\Models\Policy;
 use App\Helpers\Output;
 use App\Models\Guarantee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Admin\ClaimResource;
+use App\Http\Resources\PolicyResource;
 
 class SaveGuarantees extends Controller
 {
-    public function __invoke(Claim $claim, Request $request)
+    public function __invoke(Policy $policy, Request $request)
     {   
         $request->validate([
             'guarantees' => 'required|array',
         ]);
-        
-        Guarantee::where('claim_id', $claim->id)->delete();
+         
+        Guarantee::where('policy_id', $policy->id)->delete();
 
-        \collect($request->input('guarantees'))->each(function ($guarantee) use ($claim) {
-            Guarantee::create([
-                'claim_id' => $claim->id,
-                'guarantee_type_id' => $guarantee
-            ]);
-        });
+        $guarantees = collect($request->input('guarantees'))->map(fn($guarantee) => [
+            'guarantee_type_id' => $guarantee,
+        ]);
 
-        $claim->touch();
-        
-        return Output::success(new ClaimResource($claim->load([
-            'policy', 'accident.media', 'accident.thirdParties', 'accident.media.file',
-            'items', 'user'
-        ])));
+        $policy->guarantees()->createMany($guarantees->toArray());
+
+        return Output::success(new PolicyResource($policy));
     }
 }

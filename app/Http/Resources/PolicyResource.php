@@ -11,7 +11,7 @@ class PolicyResource extends JsonResource
     {
         parent::__construct($resource);
         $this->resource = $resource
-            ->load(['company', 'vehicle']);
+            ->load(['company', 'vehicle', 'guarantees']);
     }
 
     public function toArray($request): array
@@ -22,6 +22,7 @@ class PolicyResource extends JsonResource
 
         $data['company'] = new CompanyResource($this->resource->company);
         $data['vehicle'] = new VehicleResource($this->resource->vehicle);
+        $data['guarantees'] = GuaranteeResource::collection($this->resource->guarantees);
 
         return $data;
     }
