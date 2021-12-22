@@ -16,6 +16,7 @@ class AddPolicyIdToGuaranteesTable extends Migration
     {
         Schema::table('guarantees', function (Blueprint $table) {
             $table->foreignId('policy_id')->after('guarantee_type_id')->nullable()->constrained();
+            $table->unique(['policy_id', 'guarantee_type_id']);
             $table->dropColumn('claim_id');
         });
     }
@@ -29,6 +30,7 @@ class AddPolicyIdToGuaranteesTable extends Migration
     {
         Schema::table('guarantees', function (Blueprint $table) {
             $table->unsignedBigInteger('claim_id')->after('guarantee_type_id');
+            $table->dropUnique(['policy_id', 'guarantee_type_id']);
             $table->dropConstrainedForeignId('policy_id');
         });
     }
