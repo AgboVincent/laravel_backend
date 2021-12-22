@@ -90,4 +90,12 @@ class Policy extends Model
     public function guarantees(){
         return $this->hasMany(Guarantee::class);
     }
+
+    public function getStatusAttribute($value){
+        if($this->expires_at && $this->expires_at->isPast()){
+            return self::STATUS_EXPIRED;
+        }
+
+        return $value;
+    }
 }
