@@ -86,4 +86,8 @@ class Policy extends Model
 
         return true;
     }
+
+    public function guarantees(){
+        return $this->hasMany(Guarantee::class);
+    }
 }

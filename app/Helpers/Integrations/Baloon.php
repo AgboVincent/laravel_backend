@@ -10,6 +10,7 @@ use App\Models\Policy;
 use App\Models\Company;
 use App\Models\Insurer;
 use App\Models\Vehicle;
+use App\Models\Guarantee;
 use Illuminate\Support\Str;
 use App\Models\GuaranteeType;
 
@@ -351,5 +352,17 @@ class Baloon
             });
 
         GuaranteeType::upsert($guaranteeTypes->toArray(), ['code']);
+
+        $guaranteeTypeIds = GuaranteeType::whereIn('code', $guaranteeTypes->pluck('code'))->pluck('id');
+        
+        $guarantees = $guaranteeTypeIds->map(function($guaranteeTypeId) use ($policy) {
+            return [
+                'policy_id' => $policy->id,
+                'guarantee_type_id' => $guaranteeTypeId,
+            ];
+        });
+
+        //add the guarantee types to the policy
+        Guarantee::upsert($guarantees->toArray(), ['policy_id', 'guarantee_type_id']);
     }
 }
