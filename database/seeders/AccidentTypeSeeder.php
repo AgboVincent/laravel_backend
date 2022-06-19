@@ -16,7 +16,7 @@ class AccidentTypeSeeder extends Seeder
     public function run()
     {
         collect([
-            'Head-on collisions', 'Rear-end collisions', 'Side-impact accidents',
+            'A Head-on collision.', 'Rear-end collisions', 'Side-impact accidents',
             'Chain reactions', 'Rollovers', 'Other',
         ])
             ->each(function ($key) {
