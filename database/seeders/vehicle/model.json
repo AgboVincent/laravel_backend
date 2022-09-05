@@ -1,0 +1,305 @@
+[
+    {
+        "brand": "Acura",
+        "model": "Mdx"
+    },
+    {
+        "brand": "Acura",
+        "model": "Rdx"
+    },
+    {
+        "brand": "Acura",
+        "model": "Tl"
+    },
+    {
+        "brand": "Acura",
+        "model": "Tlx"
+    },
+    {
+        "brand": "Acura",
+        "model": "Tsx"
+    },
+    {
+        "brand": "Acura",
+        "model": "Zdx"
+    },
+
+
+    {
+        "brand": "Ford",
+        "model": "Focus"
+    },
+    {
+        "brand": "Ford",
+        "model": "Edge"
+    },
+    {
+        "brand": "Ford",
+        "model": "Escape"
+    },
+    {
+        "brand": "Ford",
+        "model": "Explorer"
+    },
+
+
+    {
+        "brand": "Honda",
+        "model": "Accord"
+    },
+    {
+        "brand": "Honda",
+        "model": "City"
+    },
+    {
+        "brand": "Honda",
+        "model": "Civic"
+    },
+    {
+        "brand": "Honda",
+        "model": "Crosstour"
+    },
+    {
+        "brand": "Honda",
+        "model": "Crv"
+    },
+    {
+        "brand": "Honda",
+        "model": "Pilot"
+    },
+
+    {
+        "brand": "Hyundai",
+        "model": "Ix35"
+    },
+    {
+        "brand": "Hyundai",
+        "model": "Sonata"
+    },
+    {
+        "brand": "Hyundai",
+        "model": "Elantra"
+    },
+    {
+        "brand": "Hyundai",
+        "model": "Santa Fe"
+    },
+    {
+        "brand": "Hyundai",
+        "model": "Accent"
+    },
+
+
+    {
+        "brand": "Kia",
+        "model": "Rio"
+    },
+    {
+        "brand": "Kia",
+        "model": "Sportage"
+    },
+    {
+        "brand": "Kia",
+        "model": "Sorento"
+    },
+    {
+        "brand": "Kia",
+        "model": "Soul"
+    },
+    {
+        "brand": "Kia",
+        "model": "Optima"
+    },
+    {
+        "brand": "Kia",
+        "model": "Cerato"
+    },
+
+    {
+        "brand": "Land Rover",
+        "model": "Lr3"
+    },
+    {
+        "brand": "Land Rover",
+        "model": "Range Rover Evoque"
+    },
+    {
+        "brand": "Land Rover",
+        "model": "Lr4"
+    },
+    {
+        "brand": "Land Rover",
+        "model": "Range Rover"
+    },
+    {
+        "brand": "Land Rover",
+        "model": "Range Rover Velar"
+    },
+    {
+        "brand": "Land Rover",
+        "model": "Range Rover Sport"
+    },
+
+
+    {
+        "brand": "Lexus",
+        "model": "Is"
+    },
+    {
+        "brand": "Lexus",
+        "model": "Es 330"
+    },
+    {
+        "brand": "Lexus",
+        "model": "Gs 300"
+    },
+    {
+        "brand": "Lexus",
+        "model": "Es 350"
+    },
+    {
+        "brand": "Lexus",
+        "model": "Gs 350"
+    },
+    {
+        "brand": "Lexus",
+        "model": "Gx 470"
+    },
+    {
+        "brand": "Lexus",
+        "model": "Gx 460"
+    },
+    {
+        "brand": "Lexus",
+        "model": "Lx 470"
+    },
+    {
+        "brand": "Lexus",
+        "model": "Lx 570"
+    },
+    {
+        "brand": "Lexus",
+        "model": "Rx 300"
+    },
+    {
+        "brand": "Lexus",
+        "model": "Rx 330"
+    },
+
+
+    {
+        "brand": "Nissan",
+        "model": "Altima"
+    },
+    {
+        "brand": "Nissan",
+        "model": "Armada"
+    },
+    {
+        "brand": "Nissan",
+        "model": "Maxima"
+    },
+    {
+        "brand": "Nissan",
+        "model": "Murano"
+    },
+    {
+        "brand": "Nissan",
+        "model": "Pathfinder"
+    },
+    {
+        "brand": "Nissan",
+        "model": "Qashqai"
+    },
+    {
+        "brand": "Nissan",
+        "model": "Sentra"
+    },
+    {
+        "brand": "Nissan",
+        "model": "Frontier"
+    },
+
+    {
+        "brand": "Peugeot",
+        "model": "406"
+    },
+    {
+        "brand": "Peugeot",
+        "model": "307"
+    },
+
+
+    {
+        "brand": "Toyota",
+        "model": "4Runner"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Avalon"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Avensis"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Camry"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Corolla"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Highlander"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Hilux"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Land Cruiser"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Matrix"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Prado"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Rav4"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Sienna"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Solara"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Tundra"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Venza"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Yaris"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Sienna"
+    },
+    {
+        "brand": "Toyota",
+        "model": "Tacoma"
+    }
+]

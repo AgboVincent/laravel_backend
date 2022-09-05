@@ -11,6 +11,7 @@ use App\Http\Controllers\Password\ResetRequest;
 use App\Http\Controllers\Policy\UserPolicies;
 use App\Http\Controllers\Upload\NewFileUpload;
 use App\Http\Controllers\User\Profile;
+use App\Http\Controllers\Evaluations\PreEvaluations;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +58,7 @@ Route::post('uploads', NewFileUpload::class)
 Route::get('configurations', \App\Http\Controllers\Company\Configurations\ConfigurationList::class)
     ->middleware('auth');
 
+Route::resource('evals', PreEvaluations::class);
 Route::prefix('admin')
     ->group(function (Router $group) {
         $group->post('import/policy_holders', \App\Http\Controllers\Company\Import\PolicyHolderImport::class)
@@ -118,3 +120,8 @@ Route::prefix('/integrations')
                 $baloon->post('/list-claims', \App\Actions\Integrations\Baloon\GetClaimsListURL::class);
             });
     });
+
+Route::prefix('brands')->group(function(Router $router){
+    $router->get('/', \App\Actions\Vehicle\GetBrand::class);
+   $router->get('{brand}/models', \App\Actions\Vehicle\GetModel::class);
+});    
