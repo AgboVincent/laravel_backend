@@ -14,6 +14,7 @@ use App\Http\Controllers\User\Profile;
 use App\Http\Controllers\Evaluations\PreEvaluations;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Upload\FileUploadNew;
 
 Route::prefix('authentication')->group(function (Router $auth) {
     $auth->post('login', Login::class)
@@ -52,8 +53,10 @@ Route::post('notifications/{notification}', ToggleNotificationReadStatus::class)
 Route::get('policies', UserPolicies::class)
     ->middleware('auth');
 
-Route::post('uploads', NewFileUpload::class)
-    ->middleware('auth');
+Route::post('uploads', NewFileUpload::class);
+    //->middleware('auth');
+
+Route::post('uploads', FileUploadNew::class );
 
 Route::get('configurations', \App\Http\Controllers\Company\Configurations\ConfigurationList::class)
     ->middleware('auth');
