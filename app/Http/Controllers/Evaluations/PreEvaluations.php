@@ -41,7 +41,7 @@ class PreEvaluations extends Controller
             'name' => 'required|string|min:5',
             'email' => 'required|email|unique:pre_evaluations',
             'chassis_number' => 'required|string',
-            // 'manufacturer' => 'required|string',
+            'manufacturer' => 'required|string',
             'model' => 'required|string',
             'year' => 'required|numeric',
             'status' => 'required|string',
