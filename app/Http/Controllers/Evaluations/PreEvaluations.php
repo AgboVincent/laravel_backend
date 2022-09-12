@@ -8,20 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class PreEvaluations extends Controller
 {
-    protected function Validator(array $data){
-        return Validator::make($data, [
-            'name' => 'required|string|min:5',
-            'email' => 'required|email|unique:pre_evaluations',
-            'chassis_number' => 'required|text',
-            'manufacturer' => 'required|string',
-            'model' => 'required|numeric',
-            'year' => 'required|numeric',
-            'status' => 'required|string',
-            'color' => 'required|string',
-            'estimate' => 'nullable|string',
-            'evaluation_status' => 'nullable|string',
-        ]);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -51,6 +37,19 @@ class PreEvaluations extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|min:5',
+            'email' => 'required|email|unique:pre_evaluations',
+            'chassis_number' => 'required|string',
+            'manufacturer' => 'required|string',
+            'model' => 'required|string',
+            'year' => 'required|numeric',
+            'status' => 'required|string',
+            'color' => 'required|string',
+            'estimate' => 'nullable|string',
+            'evaluation_status' => 'nullable|string'
+        ]);
+
         DB::table('pre_evaluations')->insert([
             'name'=> $request['name'],
             'email'=> $request['email'],
