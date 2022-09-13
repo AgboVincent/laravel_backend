@@ -53,7 +53,7 @@ Route::post('notifications/{notification}', ToggleNotificationReadStatus::class)
 Route::get('policies', UserPolicies::class)
     ->middleware('auth');
 
-Route::post('uploads', NewFileUpload::class);
+// Route::post('uploads', NewFileUpload::class);
     //->middleware('auth');
 
 Route::post('uploads', FileUploadNew::class );
