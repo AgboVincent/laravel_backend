@@ -13,7 +13,14 @@ class ForceAllMigrations extends Migration
      */
     public function up()
     {
-        
+        Schema::create('uploads_new', function (Blueprint $table) {
+            $table->id();
+            $table->string('mime');
+            $table->string('ext');
+            $table->string('path', 190)->index();
+            $table->float('size');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ class ForceAllMigrations extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('uploads_new');
     }
 }
