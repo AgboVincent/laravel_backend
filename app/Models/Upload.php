@@ -26,4 +26,5 @@ class Upload extends Model
             return Storage::disk('s3')->url($value);
         }
     }
+    protected $table = 'uploads_new';
 }
