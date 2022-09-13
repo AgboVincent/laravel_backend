@@ -9,11 +9,6 @@ use Lorisleiva\Actions\Concerns\AsAction;
 class GetModel{
     use AsAction;
 
-    // public function rules(){
-    //     // return [
-    //     //     'brand' => 'required|string'
-    //     // ];
-    //  }
     public function handle($name){
         $brand = VehicleBrand::where('brand', $name)->firstOrFail();
         $models = $brand->models();
