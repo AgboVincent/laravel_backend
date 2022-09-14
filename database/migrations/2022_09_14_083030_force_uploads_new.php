@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ForceAllMigrations extends Migration
+class ForceUploadsNew extends Migration
 {
     /**
      * Run the migrations.
@@ -24,7 +24,7 @@ class ForceAllMigrations extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations. 
      *
      * @return void
      */
