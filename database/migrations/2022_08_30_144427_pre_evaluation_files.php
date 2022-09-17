@@ -16,7 +16,8 @@ class PreEvaluationFiles extends Migration
         Schema::create('pre_evaluation_files', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pre_evaluation_id')->constrained();
-            $table->string('type_id')->constrianed();
+            $table->foreignId('type_id')->references('id')->on('vehicle_types');
+            $table->string('vehicle_part')->nullable()
             $table->string('url');
             $table->string('processing_status');
             $table->string('result');

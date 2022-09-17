@@ -50,7 +50,7 @@ class PreEvaluations extends Controller
             'evaluation_status' => 'nullable|string'
         ]);
 
-        DB::table('pre_evaluations')->insert([
+       $id = DB::table('pre_evaluations')->insertGetId([
             'name'=> $request['name'],
             'email'=> $request['email'],
             'chassis_number'=> $request['chassis_number'],
@@ -63,6 +63,8 @@ class PreEvaluations extends Controller
             'evaluation_status'=> $request['evaluation_status'],
            // 'insurer_id' => 4
         ]);
+
+        return $id;
         
     }
 

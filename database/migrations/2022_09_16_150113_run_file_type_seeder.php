@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterUploadsTable extends Migration
+class RunFileTypeSeeder extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class AlterUploadsTable extends Migration
      */
     public function up()
     {
-        Schema::table('uploads', function (Blueprint $table) {
-            $table->dropForeign(['uploader']);
-            $table->dropColumn('uploader');
-        });
+        Artisan::call('db:seed', [
+            '--class' => 'FileTypeSeeder',
+            '--force' => true
+        ]);
     }
 
     /**
@@ -26,8 +26,6 @@ class AlterUploadsTable extends Migration
      */
     public function down()
     {
-        Schema::table('uploads', function (Blueprint $table) {
-            $table->integer('uploader');
-        });
+        //
     }
 }
