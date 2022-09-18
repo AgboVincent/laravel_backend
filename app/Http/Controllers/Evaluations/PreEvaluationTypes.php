@@ -26,10 +26,11 @@ class PreEvaluationTypes extends Controller
         }
         $type = $type->create([
             'pre_evaluation_id' => $request['id'],
+            'vehicle_part' => $request['part'],
             'type_id' => $id,
             'url' => $path,
             'processing_status' => 'pending',
-            'result' => 'null'
+            'result' => 'unavailable',
         ]);
 
         return $type;

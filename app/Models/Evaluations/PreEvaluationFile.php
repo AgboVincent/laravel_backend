@@ -11,7 +11,7 @@ use App\Models\Evaluations\VehicleFileType;
 class PreEvaluationFile extends Model
 {
     use HasFactory;
-    protected $fillable = ['pre_evaluation_id', 'type_id','url','processing_status', 'result'];
+    protected $fillable = ['pre_evaluation_id','vehicle_part', 'type_id','url','processing_status', 'result'];
 
     protected $guarded = [];
 
