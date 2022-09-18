@@ -17,7 +17,7 @@ class PreEvaluationFiles extends Migration
             $table->id();
             $table->foreignId('pre_evaluation_id')->constrained();
             $table->foreignId('type_id')->references('id')->on('vehicle_types');
-            $table->string('vehicle_part')->nullable()
+            $table->string('vehicle_part')->nullable();
             $table->string('url');
             $table->string('processing_status');
             $table->string('result');
