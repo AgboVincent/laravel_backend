@@ -61,7 +61,6 @@ class PreEvaluations extends Controller
             'color'=> $request['color'],
             'estimate'=> $request['estimate'],
             'evaluation_status'=> $request['evaluation_status'],
-           // 'insurer_id' => 4
         ]);
 
         return $id;
