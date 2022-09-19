@@ -16,18 +16,10 @@ class PreEvaluationTypes extends Controller
             'visibility' => Filesystem::VISIBILITY_PUBLIC
         ]);
 
-        $id = 1;
-        $ext = $file->getClientOriginalExtension();
-        if($ext == 'mp4'){
-            $id = 2;
-        }
-        if($ext == 'image'){
-            $id = 1;
-        }
         $type = $type->create([
             'pre_evaluation_id' => $request['id'],
             'vehicle_part' => $request['part'],
-            'type_id' => $id,
+            'type_id' => $request['type_id'],
             'url' => $path,
             'processing_status' => 'pending',
             'result' => 'unavailable',
