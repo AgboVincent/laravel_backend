@@ -54,10 +54,10 @@ Route::post('notifications/{notification}', ToggleNotificationReadStatus::class)
 Route::get('policies', UserPolicies::class)
     ->middleware('auth');
 
- //Route::post('uploads', NewFileUpload::class);
-    //->middleware('auth');
+ Route::post('uploads', NewFileUpload::class)
+    ->middleware('auth');
 
-Route::post('uploads', PreEvaluationTypes::class );
+Route::post('file/uploads', PreEvaluationTypes::class );
 
 Route::get('configurations', \App\Http\Controllers\Company\Configurations\ConfigurationList::class)
     ->middleware('auth');
