@@ -16,12 +16,4 @@ class PreEvaluationFile extends Model
     protected $guarded = [];
 
     
-    public function getPathAttribute($value): string
-    {
-        if(env('APP_ENV') == 'local') {
-            return Storage::disk('uploads')->url($value);
-        } else {
-            return Storage::disk('s3')->url($value);
-        }
-    }
 }

@@ -1,0 +1,4 @@
+[
+    {"name": "City Cruise", "description": "Vehicle Policy for metropolitan driving","amount": 4000.00, "payment_duration": "monthly"},
+    {"name": "Auto Premium", "description": "Vehicle policy with maximum coverage for both intercity and city routes","amount": 5000.00, "payment_duration": "monthly"}
+]

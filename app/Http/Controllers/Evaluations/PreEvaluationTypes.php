@@ -10,7 +10,7 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 
 class PreEvaluationTypes extends Controller
 {
-    public function __invoke(Request $request, PreEvaluationFile $type)
+    public function store(Request $request, PreEvaluationFile $type)
     {
         $path = Storage::putFile('uploads', $file = $request->file('file'), [
             'visibility' => Filesystem::VISIBILITY_PUBLIC
@@ -26,5 +26,16 @@ class PreEvaluationTypes extends Controller
         ]);
 
         return $type;
+    }
+
+    public function update(Request $request, PreEvaluationFile $type)
+    {
+        $array = $request->all();
+        foreach($array as $res){
+            $result = $type->where('url', '=', $res['path'])->update([
+                'result' => $res['result'],
+                'processing_status' => 'completed'
+            ]);
+        }
     }
 }

@@ -16,6 +16,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Upload\FileUploadNew;
 use App\Http\Controllers\Evaluations\PreEvaluationTypes;
+use App\Http\Controllers\Evaluations\GetPolicies;
 
 Route::prefix('authentication')->group(function (Router $auth) {
     $auth->post('login', Login::class)
@@ -57,7 +58,11 @@ Route::get('policies', UserPolicies::class)
  Route::post('uploads', NewFileUpload::class)
     ->middleware('auth');
 
-Route::post('file/uploads', PreEvaluationTypes::class );
+Route::post('file/uploads', [PreEvaluationTypes::class, 'store']);
+
+Route::put('result', [PreEvaluationTypes::class,'update']);
+
+Route::get('new/policies', GetPolicies::class);
 
 Route::get('configurations', \App\Http\Controllers\Company\Configurations\ConfigurationList::class)
     ->middleware('auth');
