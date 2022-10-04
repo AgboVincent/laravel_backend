@@ -21,6 +21,11 @@ class CreatePolicyTable extends Migration
             $table->string('payment_duration');
             $table->timestamps();
         });
+
+        Artisan::call('db:seed', [
+            '--class' => 'PolicySeeder',
+            '--force' => true
+        ]);
     }
 
     /**

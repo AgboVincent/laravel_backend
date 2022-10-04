@@ -20,6 +20,11 @@ class CreatePolicyItemTable extends Migration
             $table->boolean('is_covered')->nullable();
             $table->timestamps();
         });
+
+        Artisan::call('db:seed', [
+            '--class' => 'PolicyItemSeeder',
+            '--force' => true
+        ]);
     }
 
     /**
