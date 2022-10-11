@@ -5,11 +5,11 @@ namespace App\Models\Evaluations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PreEvaluations extends Model
+class PreEvaluationsModel extends Model
 {
     use HasFactory;
     public function eval(){
-      return  $this->hasMany(PreEvaluations::class)
+      return  $this->hasMany(PreEvaluationsModel::class);
     }
     protected $fillable = [
         'name',

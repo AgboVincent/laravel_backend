@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Evaluations;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Evaluations\PreEvaluationsModel;
 
 class PreEvaluations extends Controller
 {
@@ -13,9 +14,10 @@ class PreEvaluations extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PreEvaluationsModel $data)
     {
-        //
+        $data = $data->query()->get();
+        return $data;
     }
 
     /**
@@ -35,7 +37,7 @@ class PreEvaluations extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,PreEvaluationsModel $data)
     {
         $request->validate([
             'name' => 'required|string|min:5',
@@ -50,7 +52,7 @@ class PreEvaluations extends Controller
             'evaluation_status' => 'nullable|string'
         ]);
 
-       $id = DB::table('pre_evaluations')->insertGetId([
+       $user = $data->create([
             'name'=> $request['name'],
             'email'=> $request['email'],
             'chassis_number'=> $request['chassis_number'],
@@ -63,7 +65,7 @@ class PreEvaluations extends Controller
             'evaluation_status'=> $request['evaluation_status'],
         ]);
 
-        return $id;
+        return $user->id;
         
     }
 

@@ -99,6 +99,7 @@ Route::prefix('admin')
             $admin->post('claims/{claim}/garage', \App\Actions\Claims\SetGarage::class);
 
             $admin->get('policies/{policy}/insurer', \App\Actions\Policies\GetInsurer::class);
+            $admin->resource('evals', PreEvaluations::class);
 
         });
         $group->post('policies/{policy}/claims', \App\Http\Controllers\Company\Claims\CreateNewClaim::class)
