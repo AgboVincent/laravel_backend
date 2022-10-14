@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Evaluations\PreEvaluationFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use App\Models\Evaluations\PreEvaluationsModel;
 
 class PreEvaluationTypes extends Controller
 {
@@ -37,5 +38,13 @@ class PreEvaluationTypes extends Controller
                 'processing_status' => 'completed'
             ]);
         }
+    }
+
+    public function getFiles(Request $request, PreEvaluationFile $type)
+    {
+       $result = $type->where('pre_evaluation_id', '=', $request['id'])->get();
+       $user = PreEvaluationsModel::where('id', '=',  $request['id'])->first();
+       $user->uploads = $result;
+       return $user;
     }
 }
