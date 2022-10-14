@@ -68,7 +68,6 @@ Route::get('configurations', \App\Http\Controllers\Company\Configurations\Config
     ->middleware('auth');
 
 Route::resource('evals', PreEvaluations::class);
-Route::get('inspection/{id}', [PreEvaluationTypes::class,'getFiles']);
 Route::prefix('admin')
     ->group(function (Router $group) {
         $group->post('import/policy_holders', \App\Http\Controllers\Company\Import\PolicyHolderImport::class)
