@@ -8,6 +8,7 @@ use App\Models\Evaluations\PreEvaluationFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use App\Models\Evaluations\PreEvaluationsModel;
+use Illuminate\Support\Facades\Http;
 
 class PreEvaluationTypes extends Controller
 {
@@ -46,5 +47,16 @@ class PreEvaluationTypes extends Controller
        $user = PreEvaluationsModel::where('id', '=',  $request['id'])->first();
        $user->uploads = $result;
        return $user;
+    }
+
+    public function mlValidate(Request $request)
+    {
+        $response = Http::post("https://auto-service.sjeq6kb6jh0oc.us-east-2.cs.amazonlightsail.com/auto-claim/validate-detect",[
+            "image_data1" => $request['image_data1'],
+            "image_data2" => $request['image_data2'],
+            "image_data3" => $request['image_data3'],
+            "image_data4" => $request['image_data4']
+        ]);
+        return $response;
     }
 }

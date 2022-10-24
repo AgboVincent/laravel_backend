@@ -19,9 +19,9 @@ class PreEvaluationsModel extends Model
         'manufacturer',
         'color',
         'year',
-        'status',
-        'estimate',
-        'evaluation_status'
+        'phone',
+        'vehicle_regno',
+        'engine_no'
     ];
 
     /**

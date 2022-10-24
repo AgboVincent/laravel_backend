@@ -45,11 +45,11 @@ class PreEvaluations extends Controller
             'chassis_number' => 'required|string',
             'manufacturer' => 'required|string',
             'model' => 'required|string',
-            'year' => 'required|numeric',
-            'status' => 'required|string',
+            'year' => 'required|numeric', 
             'color' => 'required|string',
-            'estimate' => 'nullable|string',
-            'evaluation_status' => 'nullable|string'
+            'phone' => 'required|string|min:11|max:11',
+            'vehicle_regno' => 'required|string',
+            'engine_no' => 'required|string',
         ]);
 
        $user = $data->create([
@@ -59,10 +59,10 @@ class PreEvaluations extends Controller
             'manufacturer'=> $request['manufacturer'],
             'model'=> $request['model'],
             'year'=> $request['year'],
-            'status'=> $request['status'],
             'color'=> $request['color'],
-            'estimate'=> $request['estimate'],
-            'evaluation_status'=> $request['evaluation_status'],
+            'phone'=> $request['phone'],
+            'vehicle_regno'=> $request['vehicle_regno'],
+            'engine_no'=> $request['engine_no'],
         ]);
 
         return $user->id;

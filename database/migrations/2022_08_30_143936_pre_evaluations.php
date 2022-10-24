@@ -15,8 +15,6 @@ class PreEvaluations extends Migration
     {
         Schema::create('pre_evaluations', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('insurer_id');
-            // $table->foreign('insurer_id')->references('id')->on('insurers');
             $table->string('name');
             $table->string('email')->uniqid();
             $table->string('chassis_number');

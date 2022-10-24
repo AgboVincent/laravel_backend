@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Upload\FileUploadNew;
 use App\Http\Controllers\Evaluations\PreEvaluationTypes;
 use App\Http\Controllers\Evaluations\GetPolicies;
+use App\Http\Controllers\Evaluations\PurchasePolicy;
 
 Route::prefix('authentication')->group(function (Router $auth) {
     $auth->post('login', Login::class)
@@ -64,6 +65,12 @@ Route::put('result', [PreEvaluationTypes::class,'update']);
 
 Route::get('new/policies', GetPolicies::class);
 
+Route::post('validate/detect', [PreEvaluationTypes::class, 'mlValidate']);
+
+Route::post('policy/select', [PurchasePolicy::class, 'chosePolicy']);
+
+Route::get('user/{email}', [PurchasePolicy::class, 'getUserPolicyStatus']);
+
 Route::get('configurations', \App\Http\Controllers\Company\Configurations\ConfigurationList::class)
     ->middleware('auth');
 
@@ -101,6 +108,8 @@ Route::prefix('admin')
             $admin->get('policies/{policy}/insurer', \App\Actions\Policies\GetInsurer::class);
             $admin->resource('evals', PreEvaluations::class);
             $admin->get('inspection/{id}', [PreEvaluationTypes::class,'getFiles']);
+            $admin->get('purchase/policy', [PurchasePolicy::class, 'getPurchasePolicies']);
+            $admin->put('status/update', [PurchasePolicy::class, 'updateUserPolicyStatus']);
 
         });
         $group->post('policies/{policy}/claims', \App\Http\Controllers\Company\Claims\CreateNewClaim::class)
