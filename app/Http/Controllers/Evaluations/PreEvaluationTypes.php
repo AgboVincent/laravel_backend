@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use App\Models\Evaluations\PreEvaluationsModel;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Config;
 
 class PreEvaluationTypes extends Controller
 {
@@ -51,7 +52,7 @@ class PreEvaluationTypes extends Controller
 
     public function mlValidate(Request $request)
     {
-        $response = Http::post("https://auto-service.sjeq6kb6jh0oc.us-east-2.cs.amazonlightsail.com/auto-claim/validate-detect",[
+        $response = Http::post(config('ml.url'),[
             "image_data1" => $request['image_data1'],
             "image_data2" => $request['image_data2'],
             "image_data3" => $request['image_data3'],
