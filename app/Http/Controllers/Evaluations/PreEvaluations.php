@@ -40,7 +40,7 @@ class PreEvaluations extends Controller
     public function store(Request $request,PreEvaluationsModel $data)
     {
         $request->validate([
-            'name' => 'required|string|min:5',
+            'name' => 'required|string|min:8|regex:/^(?=\S*\s\S*$)/',
             'email' => 'required|email|unique:pre_evaluations',
             'chassis_number' => 'required|string',
             'manufacturer' => 'required|string',
