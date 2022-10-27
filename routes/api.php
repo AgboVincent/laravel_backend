@@ -18,6 +18,7 @@ use App\Http\Controllers\Upload\FileUploadNew;
 use App\Http\Controllers\Evaluations\PreEvaluationTypes;
 use App\Http\Controllers\Evaluations\GetPolicies;
 use App\Http\Controllers\Evaluations\PurchasePolicy;
+use App\Http\Controllers\Evaluations\EmailUser;
 
 Route::prefix('authentication')->group(function (Router $auth) {
     $auth->post('login', Login::class)
@@ -110,6 +111,7 @@ Route::prefix('admin')
             $admin->get('inspection/{id}', [PreEvaluationTypes::class,'getFiles']);
             $admin->get('purchase/policy', [PurchasePolicy::class, 'getPurchasePolicies']);
             $admin->put('status/update', [PurchasePolicy::class, 'updateUserPolicyStatus']);
+            $admin->post('policy/mail', EmailUser::class); 
 
         });
         $group->post('policies/{policy}/claims', \App\Http\Controllers\Company\Claims\CreateNewClaim::class)
