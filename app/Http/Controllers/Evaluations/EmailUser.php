@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PolicyStatus;
+use Illuminate\Support\Facades\Config;
 
 class EmailUser extends Controller
 {
@@ -13,7 +14,7 @@ class EmailUser extends Controller
     {      
         $data = array(
             'name'=> $request['name'],
-            'url' => 'https://master.ddj4mdpe91w4b.amplifyapp.com/',
+            'url' => config('mail.url'),
             'msg' => $request['msg']
         );
    

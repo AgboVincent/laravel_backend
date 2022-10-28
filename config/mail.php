@@ -84,7 +84,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'curaceldev@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
@@ -106,5 +106,8 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
+
+    'url' =>  'https://master.ddj4mdpe91w4b.amplifyapp.com/',
+    'subject' => 'Policy pre evaluation result'
 
 ];

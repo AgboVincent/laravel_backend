@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Config;
 
 class PolicyStatus extends Mailable
 {
@@ -30,8 +31,8 @@ class PolicyStatus extends Mailable
     public function build()
     {
         return $this
-        ->from('curaceldev@gmail.com')
-        ->subject('Policy pre evaluation result')
+        ->from(config('mail.from.address'))
+        ->subject(config('mail.subject'))
         ->markdown('mail')
         ->with($this->data);
     }
