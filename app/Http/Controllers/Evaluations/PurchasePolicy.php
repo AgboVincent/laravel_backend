@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Evaluations\PurchasedPolicy;
 use App\Models\Evaluations\PreEvaluationsModel;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PurchasePolicy extends Controller
 {
@@ -34,8 +35,12 @@ class PurchasePolicy extends Controller
          $policy->user = $user;
          array_push($output,  $policy);
         }
-        
-        return $output;
+        $total = count($output);
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $perPage = 10;
+        $currentItems = array_slice(array_reverse($output), $perPage * ($currentPage - 1), $perPage);
+        $paginator = new LengthAwarePaginator($currentItems, $total, $perPage, $currentPage);
+        return $paginator;
     }
 
     public function updateUserPolicyStatus(Request $request, PurchasedPolicy $purchasedPolicies)

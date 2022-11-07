@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Evaluations\PreEvaluationsModel;
+use App\Http\Resources\PaginatedResource;
 
 class PreEvaluations extends Controller
 {
@@ -16,8 +17,8 @@ class PreEvaluations extends Controller
      */
     public function index(PreEvaluationsModel $data)
     {
-        $data = $data->query()->get();
-        return $data;
+        $data = $data->query()->firstOrFail();
+        return $data->orderBy('id', 'DESC')->paginate(10);
     }
 
     /**
