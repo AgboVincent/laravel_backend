@@ -19,6 +19,8 @@ use App\Http\Controllers\Evaluations\PreEvaluationTypes;
 use App\Http\Controllers\Evaluations\GetPolicies;
 use App\Http\Controllers\Evaluations\PurchasePolicy;
 use App\Http\Controllers\Evaluations\EmailUser;
+use App\Http\Controllers\Collection\CollectionFiles;
+use App\Http\Controllers\Collection\SubmitClaims;
 
 Route::prefix('authentication')->group(function (Router $auth) {
     $auth->post('login', Login::class)
@@ -71,6 +73,10 @@ Route::post('validate/detect', [PreEvaluationTypes::class, 'mlValidate']);
 Route::post('policy/select', [PurchasePolicy::class, 'chosePolicy']);
 
 Route::get('user/{email}', [PurchasePolicy::class, 'getUserPolicyStatus']);
+
+Route::post('upload/claims', [CollectionFiles::class, 'store']);
+
+Route::post('submit/claims', [SubmitClaims::class, 'submit']);
 
 Route::get('configurations', \App\Http\Controllers\Company\Configurations\ConfigurationList::class)
     ->middleware('auth');
