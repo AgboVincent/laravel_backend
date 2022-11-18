@@ -57,4 +57,12 @@ class PurchasePolicy extends Controller
         $output = PurchasedPolicy::where('pre_evaluation_id', $result->id)->firstOrFail();
         return $output;
     }
+
+    public function getUserPolicyList(Request $request)
+    {
+        $result = PreEvaluationsModel::where('email', '=', $request['email'])->firstOrFail();
+        $output = PurchasedPolicy::where('pre_evaluation_id', $result->id)->get();
+        return $output;
+    }
+
 }

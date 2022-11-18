@@ -21,6 +21,7 @@ use App\Http\Controllers\Evaluations\PurchasePolicy;
 use App\Http\Controllers\Evaluations\EmailUser;
 use App\Http\Controllers\Collection\CollectionFiles;
 use App\Http\Controllers\Collection\SubmitClaims;
+use App\Http\Controllers\Collection\GetCollection;
 
 Route::prefix('authentication')->group(function (Router $auth) {
     $auth->post('login', Login::class)
@@ -74,6 +75,8 @@ Route::post('policy/select', [PurchasePolicy::class, 'chosePolicy']);
 
 Route::get('user/{email}', [PurchasePolicy::class, 'getUserPolicyStatus']);
 
+Route::get('policy/list/{email}', [PurchasePolicy::class, 'getUserPolicyList']);
+
 Route::post('upload/claims', [CollectionFiles::class, 'store']);
 
 Route::post('submit/claims', [SubmitClaims::class, 'submit']);
@@ -118,6 +121,8 @@ Route::prefix('admin')
             $admin->get('purchase/policy', [PurchasePolicy::class, 'getPurchasePolicies']);
             $admin->put('status/update', [PurchasePolicy::class, 'updateUserPolicyStatus']);
             $admin->post('policy/mail', EmailUser::class); 
+            $admin->get('collection', [GetCollection::class, 'claims']);
+            $admin->get('collection/{id}', [GetCollection::class, 'getClaim']);
 
         });
         $group->post('policies/{policy}/claims', \App\Http\Controllers\Company\Claims\CreateNewClaim::class)
