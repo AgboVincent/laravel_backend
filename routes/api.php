@@ -81,6 +81,8 @@ Route::post('upload/claims', [CollectionFiles::class, 'store']);
 
 Route::post('submit/claims', [SubmitClaims::class, 'submit']);
 
+Route::post('add/quotes', [SubmitClaims::class, 'addQuotes']);
+
 Route::get('configurations', \App\Http\Controllers\Company\Configurations\ConfigurationList::class)
     ->middleware('auth');
 

@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Collections\ClaimsSubmission;
 use App\Models\Collections\CollectionFile;
 use App\Models\Evaluations\PreEvaluationsModel;
-use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Evaluations\PurchasedPolicy;
+use App\Services\CollectionService;
 
 class GetCollection extends Controller
 {
-    public function claims(Request $request, ClaimsSubmission $claims)
+    public function claims(Request $request, CollectionService $result)
     {
-        $allClaims = $claims->query()->get();
+        $allClaims = ClaimsSubmission::query()->get();
         $user = PreEvaluationsModel::query()->get();
         $purchasePolicies = PurchasedPolicy::query()->get();
         $output = [];
@@ -25,12 +25,7 @@ class GetCollection extends Controller
           $claim->policy = $policy->purchased_policy;
           array_push($output,  $claim);
         }
-        $total = count($output);
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 10;
-        $currentItems = array_slice(array_reverse($output), $perPage * ($currentPage - 1), $perPage);
-        $paginator = new LengthAwarePaginator($currentItems, $total, $perPage, $currentPage);
-       return $paginator;
+       return $result->paginate($output);
     }
 
     public function getClaim(Request $request, ClaimsSubmission $claims)
@@ -43,8 +38,5 @@ class GetCollection extends Controller
         $claim->uploads = $files;
         $claim->policy = $policy->purchased_policy;
         return $claim;
-
-
-
     }
 }
