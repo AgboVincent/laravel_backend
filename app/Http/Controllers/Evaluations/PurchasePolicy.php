@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Evaluations\PurchasedPolicy;
 use App\Models\Evaluations\PreEvaluationsModel;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Services\CollectionService;
 
 class PurchasePolicy extends Controller
 {
@@ -58,11 +59,9 @@ class PurchasePolicy extends Controller
         return $output;
     }
 
-    public function getUserPolicyList(Request $request)
+    public function getUserPolicyList(Request $request, CollectionService $result)
     {
-        $result = PreEvaluationsModel::where('email', '=', $request['email'])->firstOrFail();
-        $output = PurchasedPolicy::where('pre_evaluation_id', $result->id)->get();
-        return $output;
+        return $result->getUserPolicyList($request);
     }
 
 }

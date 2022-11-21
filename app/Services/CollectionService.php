@@ -63,4 +63,11 @@ class CollectionService
         }
 
     }
+
+    public static function getUserPolicyList($request)
+    {
+        $result = PreEvaluationsModel::where('email', '=', $request['email'])->firstOrFail();
+        $output = PurchasedPolicy::where('pre_evaluation_id', $result->id)->get();
+        return $output;
+    }
 }
