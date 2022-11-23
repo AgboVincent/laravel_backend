@@ -70,4 +70,12 @@ class CollectionService
         $output = PurchasedPolicy::where('pre_evaluation_id', $result->id)->get();
         return $output;
     }
+
+    public static function updateClaimStatus($request)
+    {
+        $result = ClaimsSubmission::where('id', '=', $request['id'])->update([
+            'status' => $request['status']
+       ]);
+       return $result;
+    }
 }

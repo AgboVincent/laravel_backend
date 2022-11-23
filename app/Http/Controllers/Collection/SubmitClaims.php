@@ -28,7 +28,8 @@ class SubmitClaims extends Controller
             'accident_id'=> $request['accident_id'],
             'pre_evaluation_id'=> $request['id'],
             'purchased_policy_id'=> $request['policy_id'],
-            'description'=> $request['description']
+            'description'=> $request['description'],
+            'status' => 'Pending'
         ]);
 
         return $claim;
@@ -38,5 +39,10 @@ class SubmitClaims extends Controller
     public function addQuotes(Request $request, CollectionService $quote)
     {
         return $quote->addQuotes($request);
+    }
+
+    public function updateClaimStatus (Request $request, CollectionService $status)
+    {
+        return $status->updateClaimStatus($request);
     }
 }

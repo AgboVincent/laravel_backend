@@ -16,7 +16,8 @@ class ClaimsSubmission extends Model
         'purchased_policy_id',
         'landmard',
         'accident_id',
-        'description'
+        'description',
+        'status'
     ];
     protected $table = 'collections';
 }

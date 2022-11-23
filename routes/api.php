@@ -125,6 +125,7 @@ Route::prefix('admin')
             $admin->post('policy/mail', EmailUser::class); 
             $admin->get('collection', [GetCollection::class, 'claims']);
             $admin->get('collection/{id}', [GetCollection::class, 'getClaim']);
+            $admin->put('claim/status/update', [SubmitClaims::class, 'updateClaimStatus']);
 
         });
         $group->post('policies/{policy}/claims', \App\Http\Controllers\Company\Claims\CreateNewClaim::class)
