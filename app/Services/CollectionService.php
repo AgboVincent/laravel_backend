@@ -6,6 +6,7 @@ use App\Models\Collections\CollectionFile;
 use App\Models\Evaluations\PreEvaluationsModel;
 use App\Models\Evaluations\PurchasedPolicy;
 use App\Models\Collections\QuoteItem;
+use Carbon\Carbon;
 
 class CollectionService
 {
@@ -41,11 +42,17 @@ class CollectionService
     {
         $claim = ClaimsSubmission::where('id',  $request['id'])->first();
         $user = PreEvaluationsModel::where('id', $claim['pre_evaluation_id'])->first();
-        $files = CollectionFile::where('pre_evaluation_id', '=', $claim['pre_evaluation_id'])->get();
+        $files = CollectionFile::where('pre_evaluation_id', '=', $claim['pre_evaluation_id'])
+                               ->where('created_at', $claim['created_at'])
+                               ->get();
         $policy = PurchasedPolicy::where('pre_evaluation_id', $claim['pre_evaluation_id'])->first();
+        $quotes = QuoteItem::where('pre_evaluation_id', '=', $claim['pre_evaluation_id'])
+                              ->where('created_at', $claim['created_at'])
+                              ->get();
         $claim->user = $user;
         $claim->uploads = $files;
         $claim->policy = $policy->purchased_policy;
+        $claim->quotes = $quotes;
         return $claim;
 
     }
