@@ -83,6 +83,8 @@ Route::post('submit/claims', [SubmitClaims::class, 'submit']);
 
 Route::post('add/quotes', [SubmitClaims::class, 'addQuotes']);
 
+Route::post('detect/single', [SubmitClaims::class, 'mlValidateClaimsUpload']);
+
 Route::get('configurations', \App\Http\Controllers\Company\Configurations\ConfigurationList::class)
     ->middleware('auth');
 

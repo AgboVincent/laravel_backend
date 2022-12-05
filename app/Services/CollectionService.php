@@ -6,6 +6,8 @@ use App\Models\Collections\CollectionFile;
 use App\Models\Evaluations\PreEvaluationsModel;
 use App\Models\Evaluations\PurchasedPolicy;
 use App\Models\Collections\QuoteItem;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Config;
 
 class CollectionService
 {
@@ -83,5 +85,51 @@ class CollectionService
             'status' => $request['status']
        ]);
        return $result;
+    }
+
+    public static function mlValidateClaimsUpload($request)
+    { 
+        $output = [];
+        $data = $request->all();
+        foreach($data as $id => $value){
+            $output[$id] = $value;
+        }
+        $response = Http::post(config('ml.url'), $output );
+        return $response;
+    }
+
+    public static function submitClaim($request)
+    {
+        $request->validate([
+            'date' => 'required|string',
+            'time' => 'required|string',
+            'location' => 'required|string',
+            'landmark' => 'required|string',
+            'accident_id' => 'required|int',
+            'description' => 'required|string',
+            'damages' => 'array|required'
+        ]);
+
+        $damages = [];
+        $data = $request['damages'];
+        for($i = 0; $i < count($data); $i++){
+            $damages[$i+1] = $data[$i];
+        }
+
+       $claim =  ClaimsSubmission::create([
+            'date'=> $request['date'],
+            'time'=> $request['time'],
+            'location'=> $request['location'],
+            'landmark'=> $request['landmark'],
+            'accident_id'=> $request['accident_id'],
+            'pre_evaluation_id'=> $request['id'],
+            'purchased_policy_id'=> $request['policy_id'],
+            'description'=> $request['description'],
+            'status' => 'Pending',
+            'damages' => $damages
+        ]);
+
+        return $claim;
+
     }
 }

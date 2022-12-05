@@ -9,31 +9,9 @@ use App\Services\CollectionService;
 
 class SubmitClaims extends Controller
 {
-    public function submit(Request $request, ClaimsSubmission $data)
+    public function submit(Request $request, CollectionService $claim)
     {
-        $request->validate([
-            'date' => 'required|string',
-            'time' => 'required|string',
-            'location' => 'required|string',
-            'landmark' => 'required|string',
-            'accident_id' => 'required|int',
-            'description' => 'required|string'
-        ]);
-
-       $claim = $data->create([
-            'date'=> $request['date'],
-            'time'=> $request['time'],
-            'location'=> $request['location'],
-            'landmark'=> $request['landmark'],
-            'accident_id'=> $request['accident_id'],
-            'pre_evaluation_id'=> $request['id'],
-            'purchased_policy_id'=> $request['policy_id'],
-            'description'=> $request['description'],
-            'status' => 'Pending'
-        ]);
-
-        return $claim;
- 
+        return $claim->submitClaim($request);
     }
 
     public function addQuotes(Request $request, CollectionService $quote)
@@ -44,5 +22,10 @@ class SubmitClaims extends Controller
     public function updateClaimStatus (Request $request, CollectionService $status)
     {
         return $status->updateClaimStatus($request);
+    }
+
+    public function mlValidateClaimsUpload(Request $request, CollectionService $claimsUpload)
+    {
+        return $claimsUpload->mlValidateClaimsUpload($request);
     }
 }

@@ -17,7 +17,11 @@ class ClaimsSubmission extends Model
         'landmard',
         'accident_id',
         'description',
-        'status'
+        'status',
+        'damages'
     ];
     protected $table = 'collections';
+    protected $casts = [
+        'damages' => 'array'
+    ];
 }
