@@ -14,7 +14,7 @@ class ClaimsSubmission extends Model
         'time',
         'location',
         'purchased_policy_id',
-        'landmard',
+        'landmark',
         'accident_id',
         'description',
         'status',

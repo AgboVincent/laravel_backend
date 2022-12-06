@@ -44,7 +44,7 @@ class CollectionService
         $claim = ClaimsSubmission::where('id',  $request['id'])->first();
         $user = PreEvaluationsModel::where('id', $claim['pre_evaluation_id'])->first();
         $files = CollectionFile::where('pre_evaluation_id', '=', $claim['pre_evaluation_id'])
-                               ->where('created_at', $claim['created_at'])
+                               ->whereDate('created_at', '=', $claim['created_at']->toDateString())
                                ->get();
         $policy = PurchasedPolicy::where('pre_evaluation_id', $claim['pre_evaluation_id'])->first();
         $quotes = QuoteItem::where('pre_evaluation_id', '=', $claim['pre_evaluation_id'])
