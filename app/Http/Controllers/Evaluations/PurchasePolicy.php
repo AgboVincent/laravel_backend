@@ -24,24 +24,9 @@ class PurchasePolicy extends Controller
         return $policy;
     }
 
-    public function getPurchasePolicies(Request $request, PurchasedPolicy $policy)
+    public function getPurchasePolicies(Request $request, CollectionService $result)
     {
-        $purchasePolicies = PurchasedPolicy::query()->get();
-        $user = PreEvaluationsModel::query()->get();
-        $output = [];
-        foreach($purchasePolicies as $purchasePolicy){
-        $policy = $policy->where('id', $purchasePolicy['id'])->first();
-        $user = $user->where('id',  $purchasePolicy['pre_evaluation_id'])->first();
-        
-         $policy->user = $user;
-         array_push($output,  $policy);
-        }
-        $total = count($output);
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 10;
-        $currentItems = array_slice(array_reverse($output), $perPage * ($currentPage - 1), $perPage);
-        $paginator = new LengthAwarePaginator($currentItems, $total, $perPage, $currentPage);
-        return $paginator;
+        return $result->paginate($result->getPurchasePolicies($request));
     }
 
     public function updateUserPolicyStatus(Request $request, PurchasedPolicy $purchasedPolicies)

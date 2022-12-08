@@ -8,6 +8,7 @@ use App\Models\Evaluations\PurchasedPolicy;
 use App\Models\Collections\QuoteItem;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Config;
+use App\Models\Evaluations\NewPolicy;
 
 class CollectionService
 {
@@ -131,5 +132,27 @@ class CollectionService
 
         return $claim;
 
+    }
+
+    public static function getPurchasePolicies($request)
+    {
+        $purchasePolicies = PurchasedPolicy::query()->get();
+        $user = PreEvaluationsModel::query()->get();
+        $output = [];
+        foreach($purchasePolicies as $purchasePolicy){
+        $policy = PurchasedPolicy::where('id', $purchasePolicy['id'])->first();
+        $user = $user->where('id',  $purchasePolicy['pre_evaluation_id'])->first();
+        $newPolicy = NewPolicy::where('id', $policy['policy_id'])->first();
+        $policyItem = NewPolicy::where('id', $policy['policy_id'])
+                     ->firstOrFail()
+                     ->policyItem()
+                     ->get(['name', 'is_covered']);
+        
+         $policy->user = $user;
+         $policy->new_policy = $newPolicy;
+         $policy->new_policy->items = $policyItem;
+         array_push($output,  $policy);
+        }
+        return $output;
     }
 }
