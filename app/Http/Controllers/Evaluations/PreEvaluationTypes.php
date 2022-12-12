@@ -10,6 +10,7 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use App\Models\Evaluations\PreEvaluationsModel;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Config;
+use App\Models\Evaluations\DetectedDamages;
 
 class PreEvaluationTypes extends Controller
 {
@@ -46,7 +47,9 @@ class PreEvaluationTypes extends Controller
     {
        $result = $type->where('pre_evaluation_id', '=', $request['id'])->get();
        $user = PreEvaluationsModel::where('id', '=',  $request['id'])->first();
+       $damages = DetectedDamages::where('pre_evaluation_id', $request['id'])->first();
        $user->uploads = $result;
+       $user->damages = $damages;
        return $user;
     }
 
