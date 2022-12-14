@@ -102,8 +102,12 @@ class PreEvaluationService
         }
         else{
             $output = $result;
-        }       
-        return $output;
+        } 
+        $user = PreEvaluationsModel::where('id', '=',  $request['id'])->first();
+        $damages = DetectedDamages::where('pre_evaluation_id', $request['id'])->first();
+        $user->uploads =  $output;
+        $user->damages = $damages;
+        return $user;      
     }
 
 }

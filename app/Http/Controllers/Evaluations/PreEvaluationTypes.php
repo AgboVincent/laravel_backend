@@ -46,12 +46,7 @@ class PreEvaluationTypes extends Controller
 
     public function getFiles(Request $request, PreEvaluationService $data)
     { 
-       $uploads = $data->getVettedUploads($request);
-       $user = PreEvaluationsModel::where('id', '=',  $request['id'])->first();
-       $damages = DetectedDamages::where('pre_evaluation_id', $request['id'])->first();
-       $user->uploads =  $uploads ;
-       $user->damages = $damages;
-       return $user;
+       return $data->getVettedUploads($request);
     }
 
     public function mlValidate(Request $request)
