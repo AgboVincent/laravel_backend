@@ -2,6 +2,8 @@
 
 use App\Models\Evaluations\PreEvaluationsModel;
 use App\Models\Evaluations\DetectedDamages;
+use App\Models\Evaluations\VettedUploads;
+use App\Models\Evaluations\PreEvaluationFile;
 
 class PreEvaluationService
 {
@@ -58,7 +60,7 @@ class PreEvaluationService
         }
 
         $right = [];
-        $rightDamage = $request['rear'];
+        $rightDamage = $request['right'];
         for($i = 0; $i < count($rightDamage); $i++){
             $right[$i+1] = $rightDamage[$i];
         }
@@ -71,6 +73,37 @@ class PreEvaluationService
             'right' => $right
         ]);
 
+    }
+
+    public static function storeVettedUploads($request)
+    {
+        $uploads = [];
+        $data = $request['uploads'];
+        for($i = 0; $i < count($data); $i++){
+            $uploads[$i]['url'] = $data[$i];
+        }
+
+        VettedUploads::create([
+            'pre_evaluation_id' => $request['id'],
+            'uploads' => $uploads
+        ]);
+    }
+
+    public static function getVettedUploads($request)
+    { 
+        $output = [];
+        $uploads = VettedUploads::where('pre_evaluation_id', '=', $request['id'])->first();
+        $result = PreEvaluationFile::where('pre_evaluation_id', '=', $request['id'])->get();
+        if($uploads != null){
+            foreach($uploads['uploads'] as $upload){
+                $data = $result->where('url', $upload['url'])->first();
+                array_push($output,  $data);
+            }
+        }
+        else{
+            $output = $result;
+        }       
+        return $output;
     }
 
 }

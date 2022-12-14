@@ -87,6 +87,8 @@ Route::post('detect/single', [SubmitClaims::class, 'mlValidateClaimsUpload']);
 
 Route::post('detected/damages', [PreEvaluations::class, 'detectedDamages']);
 
+Route::post('uploads/vetted', [PreEvaluations::class, 'storeVettedUploads']);
+
 Route::get('configurations', \App\Http\Controllers\Company\Configurations\ConfigurationList::class)
     ->middleware('auth');
 

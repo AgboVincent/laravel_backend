@@ -11,6 +11,7 @@ use App\Models\Evaluations\PreEvaluationsModel;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Config;
 use App\Models\Evaluations\DetectedDamages;
+use App\Services\PreEvaluationService;
 
 class PreEvaluationTypes extends Controller
 {
@@ -43,12 +44,12 @@ class PreEvaluationTypes extends Controller
         }
     }
 
-    public function getFiles(Request $request, PreEvaluationFile $type)
-    {
-       $result = $type->where('pre_evaluation_id', '=', $request['id'])->get();
+    public function getFiles(Request $request, PreEvaluationService $data)
+    { 
+       $uploads = $data->getVettedUploads($request);
        $user = PreEvaluationsModel::where('id', '=',  $request['id'])->first();
        $damages = DetectedDamages::where('pre_evaluation_id', $request['id'])->first();
-       $user->uploads = $result;
+       $user->uploads =  $uploads ;
        $user->damages = $damages;
        return $user;
     }

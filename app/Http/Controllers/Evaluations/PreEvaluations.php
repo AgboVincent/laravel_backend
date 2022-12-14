@@ -27,4 +27,8 @@ class PreEvaluations extends Controller
        return $data->detectedDamages($request);
     }
     
+    public function storeVettedUploads(Request $request, PreEvaluationService $data)
+    {
+       return $data->storeVettedUploads($request);
+    }
 }
