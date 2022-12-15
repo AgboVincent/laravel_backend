@@ -75,7 +75,7 @@ class PreEvaluationService
 
     }
 
-    public static function storeVettedUploads($request)
+    public function storeVettedUploads($request)
     {
         $uploads = [];
         $data = $request['uploads'];
@@ -89,7 +89,7 @@ class PreEvaluationService
         ]);
     }
 
-    public static function getVettedUploads($request)
+    public function getVettedUploads($request)
     { 
         $output = [];
         $uploads = VettedUploads::where('pre_evaluation_id', '=', $request['id'])->first();

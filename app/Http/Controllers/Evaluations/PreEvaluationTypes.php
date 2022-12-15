@@ -44,8 +44,9 @@ class PreEvaluationTypes extends Controller
         }
     }
 
-    public function getFiles(Request $request, PreEvaluationService $data)
+    public function getFiles(Request $request)
     { 
+       $data = new PreEvaluationService(); 
        return $data->getVettedUploads($request);
     }
 
