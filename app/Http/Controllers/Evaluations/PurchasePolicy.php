@@ -24,9 +24,9 @@ class PurchasePolicy extends Controller
         return $policy;
     }
 
-    public function getPurchasePolicies(CollectionService $result)
+    public function getPurchasePolicies(CollectionService $result, Request $request)
     {
-        return $result->paginate($result->getPurchasePolicies());
+        return $result->paginate($result->getPurchasePolicies($request));
     }
 
     public function updateUserPolicyStatus(Request $request, PurchasedPolicy $purchasedPolicies)

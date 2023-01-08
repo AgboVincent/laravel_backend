@@ -11,9 +11,17 @@ use App\Services\PreEvaluationService;
 
 class PreEvaluations extends Controller
 {
-    public function index(PreEvaluationsModel $data)
+    public function index(PreEvaluationsModel $data, Request $request)
     {
-        $data = $data->query()->firstOrFail();
+        $data = $data->query();
+        $query = $request['query'];
+        $date = $request['date'];
+        if($query){
+           $data->where('email', 'Like', '%' . $query . '%');
+        }
+        if($date){
+            $data->whereBetween('created_at', [$request['startDate'], $request['endDate']]);
+        }
         return $data->orderBy('id', 'DESC')->paginate(10);
     }
     

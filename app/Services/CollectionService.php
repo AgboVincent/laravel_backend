@@ -24,7 +24,7 @@ class CollectionService
         
     }
     
-    public static function claims()
+    public static function claims($request)
     {
         $allClaims = ClaimsSubmission::query()->get();
         $user = PreEvaluationsModel::query()->get();
@@ -36,6 +36,23 @@ class CollectionService
           $claim->user = $user;
           $claim->policy = $policy->purchased_policy;
           array_push($output,  $claim);
+        }
+        if($request['query']){  
+            $query = $request['query'];
+            $output = 
+                    collect($output)->filter(function ($item) use ($query) {
+                         return stristr($item->user->email, $query);
+                    });
+            return $output->all();                                      
+        }
+        if($request['status']){
+            $output = collect($output)
+                     ->where('status', $request['status'])
+                     ->toArray();
+        }
+        if($request['date']){
+            $output = collect($output)->whereBetween('created_at', [$request['startDate'], $request['endDate']]);
+            return $output->all();
         }
         return $output;
     }
@@ -134,7 +151,7 @@ class CollectionService
 
     }
 
-    public static function getPurchasePolicies()
+    public static function getPurchasePolicies($request)
     {
         $purchasePolicies = PurchasedPolicy::query()->get();
         $user = PreEvaluationsModel::query()->get();
@@ -152,6 +169,19 @@ class CollectionService
             $policy->new_policy = $newPolicy;
             $policy->new_policy->items = $policyItem;
             array_push($output,  $policy);
+        }
+        if($request['query']){  
+            $query = $request['query'];
+            $output = 
+                    collect($output)->filter(function ($item) use ($query) {
+                         return stristr($item->user->email, $query);
+                    });
+            return $output->all();                                      
+        }
+        if($request['status']){
+            $output = collect($output)
+                     ->where('evaluation_status', $request['status'])
+                     ->toArray();
         }
         return $output;
     }
