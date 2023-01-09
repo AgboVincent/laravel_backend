@@ -24,8 +24,9 @@ class PurchasePolicy extends Controller
         return $policy;
     }
 
-    public function getPurchasePolicies(CollectionService $result, Request $request)
+    public function getPurchasePolicies(Request $request)
     {
+        $result = new CollectionService();
         return $result->paginate($result->getPurchasePolicies($request));
     }
 

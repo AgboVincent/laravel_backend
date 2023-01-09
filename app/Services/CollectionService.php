@@ -24,7 +24,7 @@ class CollectionService
         
     }
     
-    public static function claims($request)
+    public function claims($request)
     {
         $allClaims = ClaimsSubmission::query()->get();
         $user = PreEvaluationsModel::query()->get();
@@ -151,7 +151,7 @@ class CollectionService
 
     }
 
-    public static function getPurchasePolicies($request)
+    public function getPurchasePolicies($request)
     {
         $purchasePolicies = PurchasedPolicy::query()->get();
         $user = PreEvaluationsModel::query()->get();
