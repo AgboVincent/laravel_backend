@@ -8,9 +8,8 @@ use App\Services\CollectionService;
 
 class GetCollection extends Controller
 {
-    public function claims(Request $request)
+    public function claims(Request $request, CollectionService $result)
     {    
-       $result = new CollectionService();
        return $result->paginate($result->claims($request));
     }
 

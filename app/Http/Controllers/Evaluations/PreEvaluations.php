@@ -11,18 +11,9 @@ use App\Services\PreEvaluationService;
 
 class PreEvaluations extends Controller
 {
-    public function index(PreEvaluationsModel $data, Request $request)
+    public function index(PreEvaluationService $data, Request $request)
     {
-        $data = $data->query();
-        $query = $request['query'];
-        $date = $request['date'];
-        if($query){
-           $data->where('email', 'Like', '%' . $query . '%');
-        }
-        if($date){
-            $data->whereBetween('created_at', [$request['startDate'], $request['endDate']]);
-        }
-        return $data->orderBy('id', 'DESC')->paginate(10);
+        return $data->preEvalationData($request);
     }
     
     public function store(Request $request, PreEvaluationService $data)

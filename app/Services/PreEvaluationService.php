@@ -110,4 +110,18 @@ class PreEvaluationService
         return $user;      
     }
 
+    public function preEvalationData($request)
+    {
+        $data = PreEvaluationsModel::query();
+        $query = $request['query'];
+        $date = $request['date'];
+        if($query){
+           $data->where('email', 'Like', '%' . $query . '%');
+        }
+        if($date){
+            $data->whereBetween('created_at', [$request['startDate'], $request['endDate']]);
+        }
+        return $data->orderBy('id', 'DESC')->paginate(10);
+    }
+
 }
