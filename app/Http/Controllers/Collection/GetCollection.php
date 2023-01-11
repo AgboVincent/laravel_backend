@@ -17,4 +17,9 @@ class GetCollection extends Controller
     {
         return $claim->getClaim($request);
     }
+
+    public function claimsOverview(CollectionService $claimOverview)
+    {
+        return $claimOverview->claimsOverview();
+    }
 }

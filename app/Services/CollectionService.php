@@ -185,4 +185,14 @@ class CollectionService
         }
         return $output;
     }
+
+    public function claimsOverview()
+    {
+        $allClaims = ClaimsSubmission::query()->get();
+        return [
+            'total_claims' => $allClaims->count(),
+            'processed_claims' => $allClaims->where('status', "Approved")->count(),
+            'pending_claims' => $allClaims->where('status', "Pending")->count()
+        ];
+    }
 }
