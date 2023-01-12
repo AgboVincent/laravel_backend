@@ -21,7 +21,9 @@ class PreEvaluationsModel extends Model
         'year',
         'phone',
         'vehicle_regno',
-        'engine_no'
+        'engine_no',
+        'address',
+        'usage'
     ];
 
     /**

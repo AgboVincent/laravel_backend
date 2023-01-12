@@ -20,6 +20,8 @@ class PreEvaluationService
             'phone' => 'required|string|min:11|max:11',
             'vehicle_regno' => 'required|string',
             'engine_no' => 'required|string',
+            'address' => 'required|string',
+            'usage' => 'required|string',
         ]);
 
        $user = PreEvaluationsModel::create([
@@ -32,7 +34,9 @@ class PreEvaluationService
             'color'=> $request['color'],
             'phone'=> $request['phone'],
             'vehicle_regno'=> $request['vehicle_regno'],
-            'engine_no'=> $request['engine_no']
+            'engine_no'=> $request['engine_no'],
+            'address'=> $request['address'],
+            'usage'=> $request['usage']
         ]);
 
         return $user->id;

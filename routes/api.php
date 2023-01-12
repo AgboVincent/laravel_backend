@@ -130,9 +130,9 @@ Route::prefix('admin')
             $admin->put('status/update', [PurchasePolicy::class, 'updateUserPolicyStatus']);
             $admin->post('policy/mail', EmailUser::class); 
             $admin->get('collection', [GetCollection::class, 'claims']);
+            $admin->get('collection/overview', [GetCollection::class, 'claimsOverview']);
             $admin->get('collection/{id}', [GetCollection::class, 'getClaim']);
             $admin->put('claim/status/update', [SubmitClaims::class, 'updateClaimStatus']);
-            $admin->get('collection/overview', [GetCollection::class, 'claimsOverview']);
 
         });
         $group->post('policies/{policy}/claims', \App\Http\Controllers\Company\Claims\CreateNewClaim::class)
